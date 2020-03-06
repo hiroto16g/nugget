@@ -1,6 +1,6 @@
 <template>
     <div class="input-bar">
-        <input type="text" :placeholder="placeholder" :value="value">
+        <input type="text" :placeholder="placeholder" :value="value" @input="$emit('input', $event.target.value)">
     </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
         value: {
             type: String,
             require: false,
-        }
+        },
     }
 }
 </script>

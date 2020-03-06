@@ -1,6 +1,6 @@
 <template>
     <div class="thumbnail">
-        <router-link to="/">
+        <router-link :to="{ name: 'home', params: { id: this.id }}">
             <img :src="src">
             <div class="title">
                 {{ title }}
@@ -46,6 +46,11 @@
                 type: String,
                 require: true,
                 default: 'ここにはスライドのタイトルが入ります'
+            },
+            id: {
+                type: String,
+                require: true,
+                default: '',
             }
         }
     }

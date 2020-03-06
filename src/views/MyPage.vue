@@ -2,18 +2,17 @@
     <div class="my-page">
         <div class="user-info">
             <div class="top">
-                <AvatarImage></AvatarImage>
+                <AvatarImage id="avatar-img"></AvatarImage>
                 <router-link to="/edit-profile">
                     <TextButton name="プロフィールを変更"></TextButton>
                 </router-link>
             </div>
             <div class="middle">
-                <div class="accont-name">のび太さんのエッジ</div>
-                <div class="user-id">@nobitasedge</div>
+                <div class="accont-name" id="account-name"></div>
+                <div class="user-id" id="user-id"></div>
             </div>
             <div class="bottom">
-                <div class="bio">
-                    プログラミングとかの入門書って絶対入門じゃないよね。「素人質問で申し訳ないのですが」と同じだよね
+                <div class="bio" id="bio">
                 </div>
                 <IconButton icon="mdi-chevron-down"></IconButton>
             </div>
@@ -101,6 +100,7 @@
     import AvatarImage from '@/components/AvatarImage.vue'
     import TextButton from '@/components/TextButton.vue'
     import IconButton from '@/components/IconButton.vue'
+    import axios from 'axios'
 
     export default {
         components: {
@@ -109,5 +109,17 @@
             IconButton
         }
     }
+    //仮データ
+    const formData = new FormData();
+    formData.append('UserId', 'test2');
 
+    axios
+    .post('http://localhost:8080/my-page-json', formData)
+    .then(function (response) {
+        var user = response.data.user;
+        document.getElementById('account-name').innerText = user.username;
+        document.getElementById('user-id').innerText = user.userid;
+        document.getElementById('bio').innerText = user.selfintro;
+        document.getElementById('avatar-img').src = user.icon;
+    })
 </script>

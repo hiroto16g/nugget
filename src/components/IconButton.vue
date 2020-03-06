@@ -1,5 +1,5 @@
 <template>
-    <div class="icon-button">
+    <div class="icon-button" @click="click">
         <span class="mdi" :class="icon"></span>
         <span class="text">{{ name }}</span>
         <span class="text">{{ value }}</span>
@@ -22,6 +22,10 @@
         letter-spacing: 0.08em;
     }
 
+    .icon-button-selected {
+        color: #33CC33;
+    }
+
 </style>
 
 
@@ -40,6 +44,11 @@
             value: {
                 type: Number,
                 require: false
+            }
+        },
+        methods: {
+            click: function() {
+                this.$emit('ibClick')
             }
         }
     }

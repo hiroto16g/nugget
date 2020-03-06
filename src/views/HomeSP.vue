@@ -3,7 +3,7 @@
         <div class="slide-wrapper">
             <SlideShow :src="slideSrc[slideCount%2]"></SlideShow>
             <div class="icon-wrapper">
-                <IconButton :icon="like.icon" :value="like.value" ></IconButton>
+                <IconButton :icon="like.icon" :value="like.value" @ibClick='toggleLike' :class="{'icon-button-selected': isLike}"></IconButton>
                 <IconButton :icon="share.icon" :name="share.name"></IconButton>
                 <IconButton :icon="comments.icon" :value="comments.value"></IconButton>
             </div>
@@ -27,7 +27,8 @@
         </div>
         <div class="comment-wrapper">
             <div class="wrapper-name">コメント</div>
-            <InputBar placeholder="コメントを投稿"></InputBar>
+            <InputBar placeholder="コメントを投稿" v-model="newComment"></InputBar>
+            <button @click="postComment">送信</button>
             <div class="comment" v-for="(ci, i) in commentInfo" :key="i">
                 <div class="left">
                     <AvatarImage :src="ci.commentatorImage"></AvatarImage>
@@ -184,7 +185,7 @@
     }
 </style>
 
-
+<script src="js/vue.js"></script>
 <script>
     // @ is an alias to /src
     import IconButton from '@/components/IconButton.vue'
@@ -193,6 +194,7 @@
     import Thumbnail from '@/components/Thumbnail.vue'
     import InputBar from '@/components/InputBar.vue'
     import SlideShow from '@/components/SlideShow.vue'
+    import axios from 'axios'
 
     export default {
         name: 'home_sp',
@@ -208,12 +210,10 @@
             return {
                 slideCount: 0,
                 slideSrc: [
-                    require('../assets/猫は液体なのか.mp4'),
-                    require('../assets/動画.mp4')
                 ],
                 like: {
                     icon: 'mdi-thumb-up-outline',
-                    value: 1234
+                    value: null
                 },
                 share: {
                     icon: 'mdi-link',
@@ -221,16 +221,19 @@
                 },
                 comments: {
                     icon: 'mdi-comment-processing-outline',
-                    value: 1234
+                    value: null
                 },
                 slideInfo: {
-                    title: '猫は液体なのか？物理学の盲点',
+                    title: null,
                     nagenusiImage: 'https://cdn.vuetifyjs.com/images/john.jpg',
-                    nagenusiName: '働きすぎたT細胞'
+                    nagenusiName: null,
+                    nagenusiId: null
                 },
-                isntFollow: true,
-                fbText: 'フォローする',
+                isLike: null,
+                isntFollow: null,
+                fbText: null,
                 thumbSrc: [
+                    /*
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります'
@@ -243,27 +246,143 @@
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります'
                     },
+                    */
                 ],
                 commentInfo: [
-                    {
-                        commentatorImage: "https://cdn.vuetifyjs.com/images/john.jpg",
-                        commentatorName: '食べられそうなラー油',
-                        comment: '辛いそうで辛くない、ちょっと辛いコメント'
-                    }
-                ]
+                ], 
+                contentId: null,
+                newComment: "",
             }
         },
         methods: {
+            //ジーニアス切り替え
+            toggleLike: function() {
+                var self = this;
+                var formData = new FormData();
+                formData.append('ContentId', self.contentId);
+                formData.append('UserId', 'test2');
+
+                if (this.isLike == false) {
+                    axios
+                    .post('http://localhost:8080/add-genius', formData)
+                    .then(function(){
+                        self.like.value = Number(self.like.value) + 1;
+                        self.isLike = !self.isLike;
+                    });
+                } else {
+                    axios
+                    .post('http://localhost:8080/remove-genius', formData)
+                    .then(function(){
+                        self.like.value = Number(self.like.value) - 1;
+                        self.isLike = !self.isLike;
+                    });
+                }
+            },
+            //フォロー切り替え
             toggleFollow: function() {
+                var self = this;
+                var formData = new FormData();
+                formData.append('PosterId', self.slideInfo.nagenusiId);
+                formData.append('UserId', 'test2');
+
                 this.isntFollow = !this.isntFollow
 
                 if (this.isntFollow) {
-                    this.fbText = 'フォローする'
+                    axios
+                    .post('http://localhost:8080/cancel-follow-json', formData)
+                    .then(function(){
+                        self.fbText = 'フォローする'
+                    });
                 } else {
-                    this.fbText = 'フォロー中'
+                    axios
+                    .post('http://localhost:8080/follow-json', formData)
+                    .then(function(){
+                        self.fbText = 'フォロー中'
+                    });
                 }
+            },
+            //コメント送信
+            postComment: function(){
+                var self = this;
+
+                //仮データ
+                var formData = new FormData();
+                formData.append('ContentId', self.contentId);
+                formData.append('UserId', 'test2');
+                formData.append("Text", self.newComment);
+
+                axios
+                .post('http://localhost:8080/post-comment', formData)
+                .then(function(response){
+                    var comment = response.data.detail;
+                    //追加コメントの表示
+                    self.commentInfo.unshift({
+                        commentatorImage: comment.icon,
+                        commentatorName: comment.username,
+                        comment: comment.text,
+                    });
+                    //コメント総数の加算
+                    self.comments.value++;
+                });
             }
+        },
+        mounted () {
+
+            var self = this;
+
+            //仮データ
+            var formData = new FormData();
+            //formData.append('ContentId', '1');
+            formData.append('ContentId', this.$route.params.id);
+            formData.append('UserId', 'test2');
+
+            //コンテンツ取得
+            axios
+            .post('http://localhost:8080/watch-content-json', formData)
+            .then(function (response) {
+                var content = response.data.content;
+                self.slideSrc[0] = content.contentpath;
+                self.like.value = content.genius;
+                self.comments.value = content.commentcount;
+                self.slideInfo.title = content.title;
+                self.slideInfo.nagenusiId = content.posterid;
+                self.slideInfo.nagenusiName = content.postername;
+                self.slideInfo.nagenusiImage = content.postericon;
+                
+                response.data.recommend.forEach(function(tmpContent){
+                    self.thumbSrc.push({
+                        src:tmpContent.thumbnailpath, 
+                        title:tmpContent.title,
+                    });
+                });
+
+                self.isLike = response.data.isgenius;
+
+                self.isntFollow = !response.data.isfollow;
+                if (self.isntFollow) {
+                    self.fbText = 'フォローする'
+                } else {
+                    self.fbText = 'フォロー中'
+                }
+
+                self.contentId = content.contentid;
+            })
+
+            //コメント取得
+            axios
+            .post('http://localhost:8080/get-comments', formData)
+            .then(function (response) {
+                var list = response.data.list;
+
+                list.forEach(function(detail){
+                    self.commentInfo.push({
+                        commentatorImage: detail.icon,
+                        commentatorName: detail.username,
+                        comment: detail.text,
+                    });
+                }); 
+            })
         }
     }
-
+    
 </script>
