@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MyPage from '../views/MyPage.vue'
+import LogIn from '../views/LogIn.vue'
 import EditProfile from '../views/rank1/EditProfile.vue'
 
 Vue.use(VueRouter)
@@ -24,6 +25,11 @@ const routes = [
         path: '/mypage',
         name: 'mypage',
         component: MyPage
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: LogIn
     },
     {
         path: '/edit-profile',

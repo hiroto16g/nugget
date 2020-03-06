@@ -4,7 +4,9 @@
                 <video :src="src" :key="keyValue" v-toggleplay="play" controls playsinline webkit-playsinline autoplay muted></video>
         </transition>
         <div class="overlay" v-show="!play">
+            <IconButton class="left" icon="mdi-chevron-left"></IconButton>
             <IconButton icon="mdi-play"></IconButton>
+            <IconButton class="right" icon="mdi-chevron-right"></IconButton>
         </div>
         <div class="control-panel" @click="play=!play"></div>
     </div>
@@ -33,6 +35,8 @@
         
         video {
             display: block;
+            width: 100vw;
+            height: calc(100vw * 4 / 3);
         }
         
         .overlay {
@@ -45,6 +49,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            
+            .left {
+                margin-right: auto;
+            }
+            
+            .right {
+                margin-left: auto;
+            }
             
             .icon-button {
                 color: rgba(255, 255, 255, 0.9);

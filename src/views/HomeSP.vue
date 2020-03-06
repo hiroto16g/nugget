@@ -1,7 +1,7 @@
 <template>
     <div class="home-sp container">
         <div class="slide-wrapper">
-            <SlideShow :src="slideSrc[slideCount%2]"></SlideShow>
+            <VideoShow :src="slideSrc[slideCount%2]"></VideoShow>
             <div class="icon-wrapper">
                 <IconButton :icon="like.icon" :value="like.value" @ibClick='toggleLike' :class="{'icon-button-selected': isLike}"></IconButton>
                 <IconButton :icon="share.icon" :name="share.name"></IconButton>
@@ -50,11 +50,6 @@
             margin-bottom: 10px;
             display: inline-block;
             text-align: center;
-
-            video {
-                width: 100vw;
-                height: calc(100vw * 4 / 3);
-            }
 
             .icon-wrapper {
                 font-size: 12px;
@@ -193,8 +188,8 @@
     import AvatarImage from '@/components/AvatarImage.vue'
     import Thumbnail from '@/components/Thumbnail.vue'
     import InputBar from '@/components/InputBar.vue'
-    import SlideShow from '@/components/SlideShow.vue'
     import axios from 'axios'
+    import VideoShow from '@/components/VideoShow.vue'
 
     export default {
         name: 'home_sp',
@@ -204,7 +199,7 @@
             AvatarImage,
             Thumbnail,
             InputBar,
-            SlideShow
+            VideoShow
         },
         data() {
             return {
