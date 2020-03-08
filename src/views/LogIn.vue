@@ -6,7 +6,10 @@
         </div>
         <img src="@/assets/login-dog.png" alt="">
         <div class="buttons">
-            <TextButton class="with-color" name="アカウントを作る"></TextButton>
+            <router-link to="/make-account">
+                <TextButton class="with-color" name="アカウントを作る"></TextButton>
+            </router-link>
+            
             <TextButton name="ログインする"></TextButton>
         </div>
     </div>
@@ -35,9 +38,13 @@
             
             .text-button {
                 display: block;
-                width: 50vw;
+                width: 55vw;
                 padding: 2vw 0;
                 margin: 5vw auto 0;
+                
+                &.with-color {
+                    color: white;
+                }
             }
         }
     }

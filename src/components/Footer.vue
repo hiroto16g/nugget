@@ -7,7 +7,7 @@
             <router-link to="/search">
                 <IconButton :icon="search.icon" :name="search.name"></IconButton>
             </router-link>
-            <router-link to="/mypage">
+            <router-link to="/my-page">
                 <IconButton :icon="mypage.icon" :name="mypage.name"></IconButton>
             </router-link>
         </div>

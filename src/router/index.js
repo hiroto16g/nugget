@@ -3,7 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MyPage from '../views/MyPage.vue'
 import LogIn from '../views/LogIn.vue'
+
 import EditProfile from '../views/rank1/EditProfile.vue'
+import MakeAccount from '../views/rank1/MakeAccount.vue'
 
 Vue.use(VueRouter)
 
@@ -22,19 +24,24 @@ const routes = [
         component: () => import( /* webpackChunkName: "about" */ '../views/Search.vue')
     },
     {
-        path: '/mypage',
-        name: 'mypage',
+        path: '/my-page',
+        name: 'my-page',
         component: MyPage
     },
     {
-        path: '/login',
-        name: 'login',
+        path: '/log-in',
+        name: 'log-in',
         component: LogIn
     },
     {
         path: '/edit-profile',
         name: 'edit-profile',
         component: EditProfile
+    },
+    {
+        path: '/make-account',
+        name: 'make-account',
+        component: MakeAccount
     }
 ]
 

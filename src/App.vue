@@ -39,6 +39,10 @@
         .container {
             width: 100vw;
         }
+        
+        a {
+            text-decoration: none;
+        }
     }
 
 </style>

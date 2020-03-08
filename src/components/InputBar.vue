@@ -8,14 +8,11 @@
 <style lang="scss">
     .input-bar {
         input {
-            height: 30px;
-            width: 300px;
             color: #888888;
             background-color: #F0F0F0;
             border: none;
             border-radius: 10px;
             padding-left: 10px;
-            font-size: 15px;
         }
     }
 </style>

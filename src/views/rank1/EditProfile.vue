@@ -30,15 +30,6 @@
                         <InputBar v-model="openValue.name"></InputBar>
                     </div>
                 </div>
-                <div class="user-id content">
-                    <div class="left">
-                        ユーザーID
-                    </div>
-                    <div class="right">
-                       <span>@</span>
-                       <InputBar v-model="openValue.userID"></InputBar>
-                    </div>
-                </div>
                 <div class="bio content">
                     <div class="left">
                         自己紹介
@@ -118,22 +109,6 @@
                         }
                     }
                 }
-                
-                &:nth-child(3) .right {
-                    margin-left: auto;
-                    display: flex;
-                    
-                    span {
-                        margin-top: 9px;
-                        margin-right: 5px;
-                    }
-                    
-                    .input-bar {
-                        input {
-                            width: calc(100vw - 3vw * 2 - 20vw - 3vw - 5.3vw);
-                        }
-                    }
-                }
             }
         }
     }
@@ -156,7 +131,6 @@
             return {
                 openValue: {
                     name: null,
-                    userID: null,
                     bio: null,
                 },
                 privateValue: {
