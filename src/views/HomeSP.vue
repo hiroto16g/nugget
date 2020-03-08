@@ -27,8 +27,7 @@
         </div>
         <div class="comment-wrapper">
             <div class="wrapper-name">コメント</div>
-            <InputBar placeholder="コメントを投稿" v-model="newComment"></InputBar>
-            <button @click="postComment">送信</button>
+            <InputBar placeholder="コメントを投稿" v-model="newComment" @enter="postComment"></InputBar>
             <div class="comment" v-for="(ci, i) in commentInfo" :key="i">
                 <div class="left">
                     <AvatarImage :src="ci.commentatorImage"></AvatarImage>
@@ -188,8 +187,8 @@
     import AvatarImage from '@/components/AvatarImage.vue'
     import Thumbnail from '@/components/Thumbnail.vue'
     import InputBar from '@/components/InputBar.vue'
-    import axios from 'axios'
     import VideoShow from '@/components/VideoShow.vue'
+    import axios from 'axios'
 
     export default {
         name: 'home_sp',
@@ -318,6 +317,8 @@
                     });
                     //コメント総数の加算
                     self.comments.value++;
+                    //入力中のコメントを初期化
+                    self.newComment = null;
                 });
             }
         },
@@ -327,7 +328,6 @@
 
             //仮データ
             var formData = new FormData();
-            //formData.append('ContentId', '1');
             formData.append('ContentId', this.$route.params.id);
             formData.append('UserId', 'test2');
 

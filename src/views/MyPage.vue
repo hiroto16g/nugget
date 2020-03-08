@@ -2,7 +2,7 @@
     <div class="my-page">
         <div class="user-info">
             <div class="top">
-                <AvatarImage id="avatar-img"></AvatarImage>
+                <AvatarImage :src="icon"></AvatarImage>
                 <router-link to="/edit-profile">
                     <TextButton name="プロフィールを変更"></TextButton>
                 </router-link>
@@ -115,23 +115,33 @@
         },
         data() {
             return {
+                /*
                 userName: 'のび太さんのエッジ',
                 userID: 'nobitasedge',
                 bio: 'プログラミングとかの入門書って絶対入門じゃないよね。「素人質問で申し訳ないのですが」と同じだよねああああああああああああああああああああああああああああああああああああああああああああああああ'
+                */
+               icon:null,
+               userName:null,
+               userID:null,
+               bio:null,
             }
+        },
+        mounted(){
+            var self = this;
+
+            //仮データ
+            const formData = new FormData();
+            formData.append('UserId', 'test2');
+
+            axios
+            .post('http://localhost:8080/my-page-json', formData)
+            .then(function (response) {
+                var user = response.data.user;
+                self.icon = user.icon;
+                self.userName = user.username;
+                self.userID = user.userid;
+                self.bio = user.selfintro;
+            })
         }
     }
-    //仮データ
-    const formData = new FormData();
-    formData.append('UserId', 'test2');
-
-    axios
-    .post('http://localhost:8080/my-page-json', formData)
-    .then(function (response) {
-        var user = response.data.user;
-        document.getElementById('account-name').innerText = user.username;
-        document.getElementById('user-id').innerText = user.userid;
-        document.getElementById('bio').innerText = user.selfintro;
-        document.getElementById('avatar-img').src = user.icon;
-    })
 </script>

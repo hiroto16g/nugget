@@ -7,7 +7,7 @@
             <div class="title">
                 プロフィールを変更
             </div>
-            <div class="save">
+            <div class="save" @click="changeProfile">
                 保存
             </div>
         </div>
@@ -18,7 +18,8 @@
                         画像
                     </div>
                     <div class="right">
-
+                        <AvatarImage :src="icon.src"></AvatarImage>
+                        <InputImage @iiChange="onFileChange"></InputImage>
                     </div>
                 </div>
                 <div class="name content">
@@ -26,7 +27,7 @@
                         名前
                     </div>
                     <div class="right">
-                        <InputBar :value="openValue.name"></InputBar>
+                        <InputBar v-model="openValue.name"></InputBar>
                     </div>
                 </div>
                 <div class="user-id content">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="right">
                        <span>@</span>
-                       <InputBar :value="openValue.userID"></InputBar>
+                       <InputBar v-model="openValue.userID"></InputBar>
                     </div>
                 </div>
                 <div class="bio content">
@@ -43,7 +44,7 @@
                         自己紹介
                     </div>
                     <div class="right">
-                        <InputBar :value="openValue.bio"></InputBar>
+                        <InputBar v-model="openValue.bio"></InputBar>
                     </div>
                 </div>
             </div>
@@ -53,7 +54,7 @@
                         メール
                     </div>
                     <div class="right">
-                        <InputBar :value="privateValue.mail"></InputBar>
+                        <InputBar v-model="privateValue.mail"></InputBar>
                     </div>
                 </div>
             </div>
@@ -63,7 +64,7 @@
 
 
 <style lang="scss">
-    .edit-profile {
+    .edit-profile {        
         .top {
             padding: 10px 3vw;
             display: flex;
@@ -139,25 +140,83 @@
 
 </style>
 
-
 <script>
+    import AvatarImage from '@/components/AvatarImage.vue'
     import InputBar from '@/components/InputBar.vue'
+    import InputImage from '@/components/InputImage.vue'
+    import axios from 'axios'
 
     export default {
         components: {
-            InputBar
+            AvatarImage,
+            InputBar,
+            InputImage,
         },
         data() {
             return {
                 openValue: {
-                    name: '名前',
-                    userID: 'user-id',
-                    bio: '自己紹介文',
+                    name: null,
+                    userID: null,
+                    bio: null,
                 },
                 privateValue: {
-                    mail: 'メールアドレス'
-                }
+                    mail: null
+                },
+                icon:{
+                    data: new File([], null) ,
+                    src: null,
+                },
             }
+        },
+        methods:{
+            //画像を選択
+            onFileChange: function(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                this.createImage(files[0]);
+                this.icon.data = files[0];
+            },
+            // アップロードした画像を表示
+            createImage: function(file) {
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    this.icon.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            //プロフィールを変更
+            changeProfile: function(){
+                var self = this;
+
+                var formData = new FormData();
+                formData.append("UserId", 'test2');//仮データ
+                formData.append("Icon", self.icon.data);
+                formData.append("UserName", self.openValue.name);
+                formData.append("SelfIntro", self.openValue.bio);
+                formData.append("Email", self.privateValue.mail);
+                axios
+                    .post('http://localhost:8080/change-profile-json', formData)
+                    .then(function () {
+                        self.$router.push('/mypage')
+                    })
+            }
+        },
+        mounted: function(){
+            var self = this;
+
+            //仮データ
+            var formData = new FormData();
+            formData.append('UserId', 'test2');
+
+            //プロフィール取得
+            axios
+            .post('http://localhost:8080/edit-profile-json', formData)
+            .then(function (response) {
+                self.icon.src = response.data.icon;
+                self.openValue.name = response.data.username;
+                self.openValue.bio = response.data.selfintro;
+
+                self.privateValue.mail = response.data.email; 
+            })
         }
     }
 

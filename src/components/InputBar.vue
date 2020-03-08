@@ -1,6 +1,6 @@
 <template>
     <div class="input-bar">
-        <input type="text" :placeholder="placeholder" :value="value" @input="$emit('input', $event.target.value)">
+        <input type="text" :placeholder="placeholder" :value="value" @input="$emit('input', $event.target.value)" @keydown.enter="$emit('enter', $event.target.value)">
     </div>
 </template>
 
