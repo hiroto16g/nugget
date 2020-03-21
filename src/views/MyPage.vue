@@ -2,6 +2,7 @@
     <div class="my-page">
         <div class="user-info">
             <div class="top">
+                <router-link to="/log-in">ログイン</router-link>
                 <AvatarImage :src="icon"></AvatarImage>
                 <router-link to="/edit-profile">
                     <TextButton name="プロフィールを変更"></TextButton>

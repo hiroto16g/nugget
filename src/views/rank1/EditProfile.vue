@@ -2,7 +2,7 @@
     <div class="edit-profile">
         <div class="top">
             <div class="cancel">
-                <router-link to="/mypage">キャンセル</router-link>
+                <router-link to="/my-page">キャンセル</router-link>
             </div>
             <div class="title">
                 プロフィールを変更
@@ -170,7 +170,7 @@
                 axios
                     .post('http://localhost:8080/change-profile-json', formData)
                     .then(function () {
-                        self.$router.push('/mypage')
+                        self.$router.push('/my-page')
                     })
             }
         },
