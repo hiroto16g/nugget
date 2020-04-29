@@ -1,6 +1,10 @@
 <template>
     <div class="input-bar">
+<<<<<<< HEAD
         <input type="text" :placeholder="placeholder" :value="value" @input="$emit('input', $event.target.value)" @keydown.enter="$emit('enter', $event.target.value)">
+=======
+        <input type="text" :placeholder="placeholder" v-model="inputValue" @input="update">
+>>>>>>> upstream/master
     </div>
 </template>
 
@@ -8,11 +12,32 @@
 <style lang="scss">
     .input-bar {
         input {
-            color: #888888;
+            color: $normal-color;
             background-color: #F0F0F0;
             border: none;
             border-radius: 10px;
             padding-left: 10px;
+            
+            &::placeholder {
+                color: $light-color;
+            }
+        }
+    }
+    
+    @media screen and (max-width: 767px) {
+        .input-bar {
+            input {
+                color: $normal-color;
+                background-color: $input;
+                border: none;
+                border-radius: 10px;
+                padding-left: 3vw;
+                font-size: 3.6vw;
+
+                &::placeholder {
+                    color: $light-color;
+                }
+            }
         }
     }
 </style>
@@ -29,6 +54,24 @@ export default {
             type: String,
             require: false,
         },
+<<<<<<< HEAD
+=======
+        name: {
+            type: String,
+            require: false,
+        }
+    },
+    data() {
+        return {
+            mutationName: 'update_' + this.name,
+            inputValue: this.value
+        }
+    },
+    methods: {
+        update() {
+            this.$store.commit(this.mutationName, this.inputValue)
+        }
+>>>>>>> upstream/master
     }
 }
 </script>

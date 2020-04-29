@@ -4,8 +4,8 @@
             <router-link to="/">
                 <IconButton :icon="home.icon" :name="home.name"></IconButton>
             </router-link>
-            <router-link to="/search">
-                <IconButton :icon="search.icon" :name="search.name"></IconButton>
+            <router-link to="/trend">
+                <IconButton :icon="trend.icon" :name="trend.name"></IconButton>
             </router-link>
             <router-link to="/my-page">
                 <IconButton :icon="mypage.icon" :name="mypage.name"></IconButton>
@@ -74,9 +74,9 @@
                     icon: 'mdi-home',
                     name: 'ホーム'
                 },
-                search: {
+                trend: {
                     icon: 'mdi-magnify',
-                    name: 'さがす'
+                    name: 'トレンド'
                 },
                 mypage: {
                     icon: 'mdi-account',

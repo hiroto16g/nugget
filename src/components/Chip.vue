@@ -8,16 +8,19 @@
 
 
 <style lang="scss">
-    .chip {
-        height: 25px;
-        font-size: 12px;
-        padding: 0 12px;
-        border: solid thin #ccc;
-        border-radius: 13px;
-        white-space: nowrap;
-        vertical-align: middle;
-        display: flex;
-        align-items: center;
+    @media screen and (max-width: 767px) {
+        .chip {
+            height: 25px;
+            font-size: 3.4vw;
+            padding: 0.7vw 3.5vw 0.3vw;
+            border: solid thin #ccc;
+            border-radius: 20px;
+            white-space: nowrap;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            color: $normal-color;
+        }
     }
 </style>
 

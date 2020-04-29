@@ -1,14 +1,16 @@
 <template>
     <div class="video">
         <transition name="slide">
-                <video :src="src" :key="keyValue" v-toggleplay="play" controls playsinline webkit-playsinline autoplay muted></video>
+            <video :src="src" ref="video" controls playsinline webkit-playsinline autoplay muted></video>
         </transition>
         <div class="overlay" v-show="!play">
             <IconButton class="left" icon="mdi-chevron-left"></IconButton>
             <IconButton icon="mdi-play"></IconButton>
             <IconButton class="right" icon="mdi-chevron-right"></IconButton>
         </div>
-        <div class="control-panel" @click="play=!play"></div>
+        <div class="prev control-panel" @click="toPrev"></div>
+        <div class="play control-panel" @click="togglePlay"></div>
+        <div class="next control-panel" @click="toNext"></div>
     </div>
 </template>
 
@@ -70,9 +72,22 @@
         .control-panel {
             position: absolute;
             top: 0;
-            left: 20vw;
-            height: calc(100vw * 4 / 3);
-            width: 60vw;
+            height: calc(100vw * 4 / 3 - 23vw);
+            
+            &.prev {
+                width: 20vw;
+                left: 0;
+            }
+            
+            &.play {
+                width: 60vw;
+                left: 20vw;
+            }
+            
+            &.next {
+                width: 20vw;
+                right: 0;
+            }
         }
     }
 </style>
@@ -100,9 +115,23 @@
                 play: true
             }
         },
-        directives: {
-            toggleplay(el, binding) {
-                binding.value ? el.play() : el.pause();
+        methods: {
+            togglePlay() {
+                var video = this.$refs.video
+                
+                if (video.paused) {
+                    video.play()
+                } else {
+                    video.pause()
+                }
+                
+                this.play = !this.play
+            },
+            toPrev() {
+                this.$store.commit('prev_slide')
+            },
+            toNext() {
+                this.$store.commit('next_slide')
             }
         }
     }

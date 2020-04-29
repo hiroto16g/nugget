@@ -1,12 +1,12 @@
 <template>
-    <div class="make-account">
+    <div class="log-in">
         <div class="top">
-            アカウントの作成
+            ログイン
         </div>
         <div class="contents">
-            <div class="name content">
+            <div class="id content">
                 <div class="title">
-                    表示名
+                    ユーザーID
                 </div>
                 <div class="input">
                     <input type="text">
@@ -22,38 +22,23 @@
                     <div class="td-button" @click="toggleDisplay">{{ tdText }}</div>
                 </div>
             </div>
-            <div class="pass-confirm content">
-                <div class="title">
-                    パスワード（確認用）
-                </div>
-                <div class="input">
-                    <input :type="passwordType">
-                    <div class="td-button" @click="toggleDisplay">{{ tdText }}</div>
-                </div>
-            </div>
-            <div class="mail-address content">
-                <div class="title">
-                    メールアドレス
-                </div>
-                <div class="input">
-                    <input type="email">
-                </div>
-            </div>
-        </div>
-        <div class="note">
-            ユーザーIDはアカウント作成後に自動で振り分けられます
         </div>
         <div class="submit">
             <router-link to="/my-page">
-                <TextButton name="アカウントを作る" class="with-color"></TextButton>
+                <TextButton name="ログインする" class="with-color"></TextButton>
             </router-link>
+        </div>
+        <div class="forgot">
+            <a href="">
+                パスワードを忘れた場合はこちら
+            </a>
         </div>
     </div>
 </template>
 
 
 <style lang="scss">
-    .make-account {
+    .log-in {
         color: #4d4d4d;
 
         .top {
@@ -64,7 +49,7 @@
         }
 
         .contents {
-            margin: 10vw 3vw 0;
+            margin: 20vw 3vw 0;
 
             .content {
                 width: 100%;
@@ -95,21 +80,29 @@
                 }
             }
         }
-        
-        .note {
-            font-size: 3.6vw;
-            padding: 10vw 3vw;
-        }
-        
+
         .submit {
             text-align: center;
-            
+            margin-top: 20vw;
+
             .text-button {
                 padding: 3vw 10vw;
-                
+
                 &.with-color {
                     color: #fbfbfb;
                 }
+            }
+        }
+        
+        .forgot {
+            font-size: 3.6vw;
+            margin-top: 10vw;
+            text-align: center;
+            
+            a {
+                border-bottom: solid thin $light-color;
+                color: $light-color;
+                padding-bottom: 0.2vw;
             }
         }
     }
@@ -141,7 +134,7 @@
                     this.passwordType = 'password'
                     this.tdText = '表示'
                 }
-             }
+            }
         }
     }
 

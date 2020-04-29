@@ -1,5 +1,5 @@
 <template>
-    <div class="log-in">
+    <div class="not-log-in">
         <div class="explain">
             まだログインしていないため<br>
             マイページがありません
@@ -9,15 +9,16 @@
             <router-link to="/make-account">
                 <TextButton class="with-color" name="アカウントを作る"></TextButton>
             </router-link>
-            
-            <TextButton name="ログインする"></TextButton>
+            <router-link to="/log-in">
+                <TextButton name="ログインする"></TextButton>
+            </router-link>
         </div>
     </div>
 </template>
 
 
 <style lang="scss">
-    .log-in {
+    .not-log-in {
         .explain {
             font-size: 5vw;
             text-align: center;
@@ -41,6 +42,7 @@
                 width: 55vw;
                 padding: 2vw 0;
                 margin: 5vw auto 0;
+                color: $normal-color;
                 
                 &.with-color {
                     color: white;

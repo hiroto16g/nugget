@@ -14,9 +14,10 @@
         <div class="edit">
             <div class="open">
                 <div class="image content">
-                    <div class="left">
-                        画像
+                    <div class="user-image">
+                        <AvatarImage></AvatarImage>
                     </div>
+<<<<<<< HEAD
                     <div class="right">
                         <AvatarImage :src="icon.src"></AvatarImage>
                         <InputImage @iiChange="onFileChange"></InputImage>
@@ -37,16 +38,31 @@
                     <div class="right">
                         <InputBar v-model="openValue.bio"></InputBar>
                     </div>
+=======
+                    <div class="input">
+<!--                        <input type="file">-->
+                    </div>
+                </div>
+                <div class="name content">
+                    <input type="text" v-model="openValue.name">
+                </div>
+                <div class="bio content">
+                    <textarea rows="3" placeholder="自己紹介" v-model="openValue.bio"></textarea>
+>>>>>>> upstream/master
                 </div>
             </div>
             <div class="private">
                 <div class="mail content">
+<<<<<<< HEAD
                     <div class="left">
                         メール
                     </div>
                     <div class="right">
                         <InputBar v-model="privateValue.mail"></InputBar>
                     </div>
+=======
+                    <input type="text" v-model="privateValue.mail">
+>>>>>>> upstream/master
                 </div>
             </div>
         </div>
@@ -57,30 +73,29 @@
 <style lang="scss">
     .edit-profile {        
         .top {
-            padding: 10px 3vw;
+            padding: 3.6vw 3vw 3vw;
             display: flex;
             justify-content: center;
-            font-size: 15px;
-            background-color: #fafafa;
-            border-bottom: solid thin #ccc;
+            font-size: 4vw;
+            background: $tabbar;
+            border-bottom: solid thin $border;
+            color: $normal-color;
 
             .cancel {
                 width: 25vw;
                 text-align: left;
                 
                 a {
-                    text-decoration: none;
-                    color: #888;
+                    color: $light-color;
                 }
             }
 
             .title {
-                width: calc(100vw - 25vw * 2 - 3vw * 2);
+                width: calc(100vw - (25vw + 3vw) * 2);
                 text-align: center;
             }
 
             .save {
-                margin-left: auto;
                 width: 25vw;
                 text-align: right;
             }
@@ -88,26 +103,30 @@
 
         .edit {
             margin: 0 3vw;
-            font-size: 12px;
+            font-size: 5vw;
 
             .content {
-                width: 100%;
-                padding: 5px 0;
-                display: flex;
-                border-bottom: solid thin #ccc;
-
-                .left {
-                    width: 20vw;
-                    margin-right: 3vw;
-                    margin-top: 8px;
+                width: calc(100vw - 3vw * 2);
+                
+                &.image {
+                    margin: 10vw 0 7vw;
                 }
-
-                .right {
-                    .input-bar {
-                        input {
-                            width: calc(100vw - 3vw * 2 - 20vw - 3vw);
-                        }
+                
+                .user-image {
+                    text-align: center;
+                    img {
+                        width: 22vw;
                     }
+                }
+                
+                input,
+                textarea {
+                    border: none;
+                    border-bottom: solid thin #ccc;
+                    width: calc(100% - 3vw * 2);
+                    font-size: 4.5vw;
+                    padding: 3.6vw 3vw 3vw;
+                    margin-bottom: 0.3vw;
                 }
             }
         }
@@ -117,6 +136,7 @@
 
 <script>
     import AvatarImage from '@/components/AvatarImage.vue'
+<<<<<<< HEAD
     import InputBar from '@/components/InputBar.vue'
     import InputImage from '@/components/InputImage.vue'
     import axios from 'axios'
@@ -126,10 +146,17 @@
             AvatarImage,
             InputBar,
             InputImage,
+=======
+
+    export default {
+        components: {
+            AvatarImage
+>>>>>>> upstream/master
         },
         data() {
             return {
                 openValue: {
+<<<<<<< HEAD
                     name: null,
                     bio: null,
                 },
@@ -172,6 +199,14 @@
                     .then(function () {
                         self.$router.push('/my-page')
                     })
+=======
+                    name: '名前',
+                    bio: '',
+                },
+                privateValue: {
+                    mail: 'nugget@gmail.com'
+                }
+>>>>>>> upstream/master
             }
         },
         mounted: function(){
