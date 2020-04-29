@@ -2,12 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MyPage from '../views/MyPage.vue'
-import NotLogIn from '../views/NotLogIn.vue'
+import LogIn from '../views/LogIn.vue'
 
 import EditProfile from '../views/rank1/EditProfile.vue'
 import MakeAccount from '../views/rank1/MakeAccount.vue'
-import LogIn from '../views/rank1/LogIn.vue'
-import TaggedScreen from '../views/rank1/TaggedScreen.vue'
 
 Vue.use(VueRouter)
 
@@ -18,12 +16,12 @@ const routes = [
         component: Home
     },
     {
-        path: '/trend',
-        name: 'trend',
+        path: '/search',
+        name: 'search',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import( /* webpackChunkName: "about" */ '../views/Trend.vue')
+        component: () => import( /* webpackChunkName: "about" */ '../views/Search.vue')
     },
     {
         path: '/my-page',
@@ -31,9 +29,9 @@ const routes = [
         component: MyPage
     },
     {
-        path: '/not-log-in',
-        name: 'not-log-in',
-        component: NotLogIn
+        path: '/log-in',
+        name: 'log-in',
+        component: LogIn
     },
     {
         path: '/edit-profile',
@@ -44,16 +42,6 @@ const routes = [
         path: '/make-account',
         name: 'make-account',
         component: MakeAccount
-    },
-    {
-        path: '/log-in',
-        name: 'log-in',
-        component: LogIn
-    },
-    {
-        path: '/tagged-screen',
-        name: 'tagged-screen',
-        component: TaggedScreen
     }
 ]
 

@@ -1,24 +1,19 @@
 <template>
     <div class="home-sp container">
         <div class="slide-wrapper">
-            <VideoShow :src="info[count%2].src"></VideoShow>
+            <VideoShow :src="slideSrc[slideCount%2]"></VideoShow>
             <div class="icon-wrapper">
-<<<<<<< HEAD
                 <IconButton :icon="like.icon" :value="like.value" @ibClick='toggleLike' :class="{'icon-button-selected': isLike}"></IconButton>
                 <IconButton :icon="share.icon" :name="share.name"></IconButton>
                 <IconButton :icon="comments.icon" :value="comments.value"></IconButton>
-=======
-                <IconButton class="like" :icon="like.icon" :value="info[count%2].n_likes" @click="clickEval"></IconButton>
-                <IconButton class="comment" :icon="comments.icon" :value="info[count%2].n_comments"></IconButton>
-                <IconButton class="share" :icon="share.icon" :name="share.name"></IconButton>
->>>>>>> upstream/master
             </div>
+            <button @click="slideCount++">a</button>
         </div>
         <div class="slide-info-wrapper">
-            <div class="title">{{ info[count].title }}</div>
+            <div class="title">{{ slideInfo.title }}</div>
             <div class="account-info">
-                <AvatarImage :src="info[count].image"></AvatarImage>
-                <div class="account-name">{{ info[count].name }}</div>
+                <AvatarImage :src="slideInfo.nagenusiImage"></AvatarImage>
+                <div class="account-name">{{ slideInfo.nagenusiName }}</div>
                 <TextButton :class="{'with-color': isntFollow}" @tbClick='toggleFollow' :name="fbText"></TextButton>
             </div>
         </div>
@@ -32,11 +27,7 @@
         </div>
         <div class="comment-wrapper">
             <div class="wrapper-name">コメント</div>
-<<<<<<< HEAD
             <InputBar placeholder="コメントを投稿" v-model="newComment" @enter="postComment"></InputBar>
-=======
-            <InputBar placeholder="コメントを投稿" name="comment"></InputBar>
->>>>>>> upstream/master
             <div class="comment" v-for="(ci, i) in commentInfo" :key="i">
                 <div class="left">
                     <AvatarImage :src="ci.commentatorImage"></AvatarImage>
@@ -52,7 +43,7 @@
 
 
 <style lang="scss">
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 480px) {
         .slide-wrapper {
             width: 100vw;
             margin-bottom: 10px;
@@ -60,20 +51,21 @@
             text-align: center;
 
             .icon-wrapper {
-                font-size: 3.4vw;
-                margin: 3.4vw 0 2vw;
+                font-size: 12px;
+                height: 60px;
+                margin-top: 12px;
                 color: #888;
 
                 .icon-button {
                     width: 25vw;
                     vertical-align: top;
 
-                    &.share .mdi {
-                        margin-bottom: -0.6vw;
+                    &:nth-child(2) .mdi {
+                        margin-bottom: -2px;
                     }
                     
-                    &.comment {
-                        margin-top: 0.1vw;
+                    &:nth-child(3) {
+                        margin-top: 1px;
                     }
                 }
             }
@@ -159,15 +151,7 @@
             
             .input-bar {
                 width: 310px;
-                margin: 0 auto 7vw;
-                
-                input {
-                    padding: 3vw;
-                    width: calc(100% - 3vw * 2);
-                    background: none;
-                    border: solid thin $border;
-                    -webkit-appearance: none;
-                }
+                margin: 0 auto 4vw;
             }
             
             .comment {
@@ -218,25 +202,18 @@
         },
         data() {
             return {
-<<<<<<< HEAD
                 slideCount: 0,
                 slideSrc: [
                 ],
                 like: {
                     icon: 'mdi-thumb-up-outline',
                     value: null
-=======
-                info: this.$store.state.homeSlides,
-                like: {
-                    icon: 'mdi-thumb-up-outline'
->>>>>>> upstream/master
                 },
                 share: {
                     icon: 'mdi-link',
                     name: '共有'
                 },
                 comments: {
-<<<<<<< HEAD
                     icon: 'mdi-comment-processing-outline',
                     value: null
                 },
@@ -245,9 +222,6 @@
                     nagenusiImage: 'https://cdn.vuetifyjs.com/images/john.jpg',
                     nagenusiName: null,
                     nagenusiId: null
-=======
-                    icon: 'mdi-comment-processing-outline'
->>>>>>> upstream/master
                 },
                 isLike: null,
                 isntFollow: null,
@@ -269,27 +243,12 @@
                     */
                 ],
                 commentInfo: [
-<<<<<<< HEAD
                 ], 
                 contentId: null,
                 newComment: "",
-=======
-                    {
-                        commentatorImage: "https://cdn.vuetifyjs.com/images/john.jpg",
-                        commentatorName: '食べられそうなラー油',
-                        comment: '辛そうで辛くない、ちょっと辛いコメント'
-                    }
-                ]
->>>>>>> upstream/master
-            }
-        },
-        computed: {
-            count() {
-                return this.$store.state.slideCount
             }
         },
         methods: {
-<<<<<<< HEAD
             //ジーニアス切り替え
             toggleLike: function() {
                 var self = this;
@@ -320,9 +279,6 @@
                 formData.append('PosterId', self.slideInfo.nagenusiId);
                 formData.append('UserId', 'test2');
 
-=======
-            toggleFollow() {
->>>>>>> upstream/master
                 this.isntFollow = !this.isntFollow
 
                 if (this.isntFollow) {

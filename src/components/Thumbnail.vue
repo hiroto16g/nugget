@@ -31,29 +31,6 @@
             }
         } 
     }
-    
-    @media screen and (max-width: 767px) {
-        .thumbnail {
-            width: 36vw;
-            float: left;
-
-            a {
-                text-decoration: none;
-
-                img {
-                    width: 36vw;
-                    height: 48vw;
-                    border-radius: 5px;
-                    object-fit: cover;
-                }
-
-                .title {
-                    font-size: 3.6vw;
-                    color: $normal-color;
-                }
-            } 
-        }
-    }
 </style>
 
 
