@@ -65,6 +65,8 @@
 <script>
     import TrendNormal from '@/views/TrendNormal.vue'
     import SearchModal from '@/views/SearchModal.vue'
+    
+    /* eslint-disable no-console */
 
     export default {
         name: 'trend',
@@ -92,6 +94,15 @@
             },
             input_keyword() {
                 this.$store.commit('trend/display_pred', this.keywords)
+            }
+        },
+        mounted(){
+            if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                var now_category = this.$store.state.trend.now_category;
+                //統合モード
+                this.$store.dispatch('trend/get_user_recommend', now_category);
+                this.$store.dispatch('trend/get_popular', now_category);
+                this.$store.dispatch('trend/get_rapid_rise', now_category);
             }
         }
     }

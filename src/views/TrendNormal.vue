@@ -26,7 +26,7 @@
                 </div>
                 <div class="thumbnails">
                     <div v-for="(t, j) in r.thumbSrc" :key="j" class="item">
-                        <Thumbnail :src="t.src" :title="t.title"></Thumbnail>
+                        <Thumbnail :src="t.src" :title="t.title" :content_id="t.content_id"></Thumbnail>
                     </div>
                 </div>
             </div>
@@ -110,10 +110,28 @@
         },
         methods: {
             clickCategory(category) {
-                this.$store.commit('trend/switch_category', category)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('trend/get_user_recommend', category);
+                    this.$store.dispatch('trend/get_popular', category);
+                    this.$store.dispatch('trend/get_rapid_rise', category);
+
+                    this.$store.commit('trend/switch_category', category)
+                }
+                else{
+                    //その他
+                    this.$store.commit('trend/switch_category', category)
+                }
             },
             clickTag(tag) {
-                this.$store.commit('trend/search_by_tag', tag)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('trend/search_by_tag', tag);
+                }
+                else{
+                    //その他
+                    this.$store.commit('trend/search_by_tag', tag)
+                }
             }
         }
     }

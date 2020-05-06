@@ -15,7 +15,12 @@ export default new Vuex.Store({
             name: '',
             id: '',
             image: ''
-        }
+        },
+        config: {
+            SYSTEM_MODE_FRONTEND: 1,
+            SYSTEM_MODE_BOTH: 2,
+            RUN_SYSTEM_MODE: 2,
+        },
     },
     mutations: {},
     actions: {},

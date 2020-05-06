@@ -245,16 +245,34 @@
         },
         methods: {
             click_follow() {
-                if (this.$store.state.userInfo.log_in) {
-                    this.$store.commit('home/toggle_follow')
-                    this.fbText = this.followed ? 'フォロー中' : 'フォローする'
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('home/toggle_follow');
+                } else{
+                    //その他
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.commit('home/toggle_follow')
+                        this.fbText = this.followed ? 'フォロー中' : 'フォローする'
+                    }
                 }
             },
             change_comment() {
-                this.$store.commit('home/post_comment', this.comment)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('home/post_comment', this.comment);
+                } else{
+                    //その他
+                    this.$store.commit('home/post_comment', this.comment)
+                }
             },
             click_like() {
-                this.$store.commit('home/click_like')
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('home/click_like');
+                } else{
+                    //その他
+                    this.$store.commit('home/click_like');
+                }
             }
         }
     }

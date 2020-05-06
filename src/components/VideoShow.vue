@@ -79,6 +79,8 @@
 
 <script>
     import IconButton from '@/components/IconButton.vue'
+
+    /* eslint-disable no-console */
     
     export default {
         components: {
@@ -112,10 +114,32 @@
                 this.play = !this.play
             },
             toPrev() {
-                this.$store.commit('home/prev_slide')
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    var video_count = this.$store.state.home.video_count;
+                    var videos = this.$store.state.home.videos;
+                    var prev_content_id = videos[(video_count - 1)].content_id;
+                    
+                    this.$store.dispatch('home/init_comment', prev_content_id);
+                    this.$store.commit('home/prev_slide')
+                } else{
+                    //その他
+                    this.$store.commit('home/prev_slide')
+                }
             },
             toNext() {
-                this.$store.commit('home/next_slide')
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    var video_count = this.$store.state.home.video_count;
+                    var videos = this.$store.state.home.videos;
+                    var next_content_id = videos[(video_count + 1)].content_id;
+
+                    this.$store.dispatch('home/init_comment', next_content_id);
+                    this.$store.commit('home/next_slide');
+                } else{
+                    //その他
+                    this.$store.commit('home/next_slide')
+                }
             }
         }
     }
