@@ -21,8 +21,13 @@ export default new Vuex.Store({
             SYSTEM_MODE_BOTH: 2,
             RUN_SYSTEM_MODE: 2,
         },
+        clicked_userID: ''
     },
-    mutations: {},
+    mutations: {
+        click_user(state, userID) {
+            state.clicked_userID = userID
+        }
+    },
     actions: {},
     modules: {
         home,

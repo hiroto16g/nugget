@@ -1,7 +1,7 @@
 <template>
     <div id="footer">
-        <div class="link" v-for="(i, j) in icons" :key="j" @click="click_icon(i.name)">
-            <router-link :to="i.url" :class="{clicked: i.name == clicked}">
+        <div class="link" v-for="(i, j) in icons" :key="j" @[get_event(i)]="click_mypage">
+            <router-link :to="i.url">
                 <IconButton :icon="i.icon" :name="i.name"></IconButton>
             </router-link>
         </div>
@@ -74,9 +74,9 @@
         components: {
             IconButton
         },
-        data() {
-            return {
-                icons: [
+        computed: {
+            icons() {
+                return [
                     {
                         url: '/',
                         icon: 'mdi-home',
@@ -88,17 +88,19 @@
                         name: 'トレンド'
                     },
                     {
-                        url: '/my-page',
+                        url: this.$store.state.userInfo.log_in ? '/my-page/' + this.$store.state.userInfo.id : 'not-log-in',
                         icon: 'mdi-account',
                         name: 'マイページ'
                     }
-                ],
-                clicked: 'ホーム'
+                ]
             }
         },
         methods: {
-            click_icon(name) {
-                this.clicked = name
+            get_event(icon) {
+                return icon.name == 'マイページ' ? 'click' : ''
+            },
+            click_mypage() {
+                this.$store.commit('click_user', this.$store.state.userInfo.id)
             }
         }
     }

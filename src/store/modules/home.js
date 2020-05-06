@@ -13,11 +13,11 @@ export default {
         comment: '',
         videos: [
             {
-                content_id: '',
+                videoID: '',
+                userID: 'tsibo',
                 src: require('../../assets/猫は液体なのか.mp4'),
                 title: '猫は液体なのか？物理学の盲点',
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',
-                poster_id: '',
                 name: '働きすぎたT細胞',
                 n_likes: 1234,
                 n_comments: 1234,
@@ -28,12 +28,12 @@ export default {
                 }
             },
             {
-                content_id: '',
+                videoID: '',
+                userID: 'tsibo',
                 src: require('../../assets/動画.mp4'),
                 title: '0は自然数ということにしたい',
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',
-                poster_id: '',
-                name: '働きすぎたT細胞',
+                name: '働かないB細胞',
                 n_likes: 4321,
                 n_comments: 4321,
                 this_audience: {
@@ -47,7 +47,14 @@ export default {
             {
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 name: '食べられそうなラー油',
-                comment: '辛そうで辛くない、ちょっと辛いコメント'
+                comment: '辛そうで辛くない、ちょっと辛いコメント',
+                id: 'karame'
+            },
+            {
+                image: 'https://cdn.vuetifyjs.com/images/john.jpg',
+                name: '食べられそうなラー油',
+                comment: '辛そうで辛くない、ちょっと辛いコメント',
+                id: 'karame'
             }
         ],
         recommend_thumbs: [
@@ -104,10 +111,10 @@ export default {
         post_comment(context, comment){
             var videos = context.state.videos;
             var video_count = context.state.video_count;
-            var content_id = videos[video_count].content_id;
+            var videoID = videos[video_count].videoID;
             //POSTデータ
             var formData = new FormData();
-            formData.append('ContentId', content_id);
+            formData.append('ContentId', videoID);
             formData.append('UserId', user_id);
             formData.append("Text", comment);
             //コメントの取得
@@ -125,11 +132,11 @@ export default {
         click_like(context){
             var videos = context.state.videos;
             var video_count = context.state.video_count;
-            var content_id = videos[video_count].content_id;
+            var videoID = videos[video_count].videoID;
             var liked = videos[video_count].this_audience.liked;
             //POSTデータ
             var formData = new FormData();
-            formData.append('ContentId', content_id);
+            formData.append('ContentId', videoID);
             formData.append('UserId', user_id);
             //コールバック転送データ
             var payload = {
@@ -155,11 +162,11 @@ export default {
         toggle_follow(context){
             var videos = context.state.videos;
             var video_count = context.state.video_count;
-            var poster_id = videos[video_count].poster_id;
+            var userID = videos[video_count].userID;
             var followed = videos[video_count].this_audience.followed;
             //POSTデータ
             var formData = new FormData();
-            formData.append('PosterId', poster_id);
+            formData.append('PosterId', userID);
             formData.append('UserId', user_id);
             //コールバック転送データ
             var payload = {
@@ -196,11 +203,11 @@ export default {
                 //表示動画
                 videos.push(
                     {
-                        content_id: contentData.content.contentid,
+                        videoID: contentData.content.contentid,
                         src: contentData.content.contentpath,
                         title: contentData.content.title,
                         image: contentData.content.postericon,
-                        poster_id: contentData.content.posterid,
+                        userID: contentData.content.posterid,
                         name: contentData.content.postername,
                         n_likes: contentData.content.genius,
                         n_comments: contentData.content.commentcount,

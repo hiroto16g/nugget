@@ -49,7 +49,7 @@
                 .item {
                     height: 3vw;
                     font-size: 3.4vw;
-                    padding: 0.7vw 5vw 0.3vw;
+                    padding: 0.7vw 5.5vw 0.3vw;
                     white-space: nowrap;
                     vertical-align: middle;
                     display: flex;

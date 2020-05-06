@@ -12,8 +12,12 @@
         <div class="slide-info-wrapper">
             <div class="title">{{ video.title }}</div>
             <div class="account-info">
-                <AvatarImage :src="video.image"></AvatarImage>
-                <div class="account-name">{{ video.name }}</div>
+                <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)">
+                    <AvatarImage :src="video.image"></AvatarImage>
+                </router-link>
+                <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)">
+                    <div class="account-name">{{ video.name }}</div>
+                </router-link>
                 <TextButton :class="{'with-color': !video.this_audience.followed}" @tbClick='click_follow' :name="fbText"></TextButton>
             </div>
         </div>
@@ -32,10 +36,14 @@
             <textarea class="input-comment" placeholder="コメントを投稿" @change="change_comment" v-model="comment"></textarea>
             <div class="comment" v-for="(c, i) in comments" :key="i">
                 <div class="left">
-                    <AvatarImage :src="c.image"></AvatarImage>
+                    <router-link :to="'/my-page/' + c.id" @click.native="click_user(c.id)">
+                        <AvatarImage :src="c.image"></AvatarImage>
+                    </router-link>
                 </div>
                 <div class="right">
-                    <div class="commentator">{{ c.name }}</div>
+                    <router-link :to="'/my-page/' + c.id" @click.native="click_user(c.id)">
+                        <div class="commentator">{{ c.name }}</div>
+                    </router-link>
                     <div class="text">{{ c.comment }}</div>
                 </div>
             </div>
@@ -88,7 +96,7 @@
 
             .account-info {
                 img {
-                    width: 40px;
+                    width: 10vw;
                     margin-right: 10px;
                     border-radius: 50%;
                     float: left;
@@ -175,6 +183,7 @@
             
             .comment {
                 display: flex;
+                margin-bottom: 5vw;
                 
                 .avatar-image {
                     width: 35px;
@@ -184,13 +193,14 @@
                     margin-left: 2vw;
                     
                     .commentator {
-                        font-size: 12px;
+                        font-size: 3.4vw;
                         color: #888;
                         margin-bottom: 1.5vw;
                     }
                     
                     .text {
-                        font-size: 15px;
+                        font-size: 3.6vw;
+                        color: $normal-color;
                     }
                 }
             }
@@ -252,7 +262,7 @@
                     //その他
                     if (this.$store.state.userInfo.log_in) {
                         this.$store.commit('home/toggle_follow')
-                        this.fbText = this.followed ? 'フォロー中' : 'フォローする'
+                        this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
                     }
                 }
             },
@@ -273,6 +283,10 @@
                     //その他
                     this.$store.commit('home/click_like');
                 }
+                this.$store.commit('home/click_like')
+            },
+            click_user(userID) {
+                this.$store.commit('click_user', userID)
             }
         }
     }

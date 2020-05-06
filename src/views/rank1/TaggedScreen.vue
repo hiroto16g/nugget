@@ -1,8 +1,8 @@
 <template>
     <div class="tagged-screen">
         <div class="head">
-            <div class="back">
-                <router-link to="/my-page">戻る</router-link>
+            <div class="back" @click="click_back">
+                戻る
             </div>
             <div class="title">
                 ＃ {{ tag }}
@@ -38,17 +38,14 @@
             .back {
                 position: absolute;
                 left: 3vw;
-
-                a {
-                    color: $light-color;
-                }
+                color: $light-color;
             }
 
             .title {
                 text-align: center;
             }
         }
-        
+
         .thumbnail-wrapper {
             .recommend-name {
                 margin: 8vw 0 1.5vw 3vw;
@@ -61,14 +58,15 @@
 
 <script>
     import Thumbnail from '@/components/Thumbnail.vue'
-    
+
     export default {
         components: {
             Thumbnail
         },
         data() {
             return {
-                recommends: [{
+                recommends: [
+                    {
                         head: 'おすすめ',
                         thumbSrc: [{
                                 src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
@@ -122,6 +120,11 @@
         computed: {
             tag() {
                 return this.$store.state.trend.search_tag
+            }
+        },
+        methods: {
+            click_back() {
+                this.$router.go(-1)
             }
         }
     }

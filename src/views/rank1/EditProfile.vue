@@ -1,13 +1,13 @@
 <template>
     <div class="edit-profile">
         <div class="top">
-            <div class="cancel">
-                <router-link to="/my-page">キャンセル</router-link>
+            <div class="cancel" @click="click_cancel">
+                キャンセル
             </div>
             <div class="title">
                 プロフィールを変更
             </div>
-            <div class="save">
+            <div class="save" @click="click_save">
                 保存
             </div>
         </div>
@@ -52,10 +52,7 @@
             .cancel {
                 width: 25vw;
                 text-align: left;
-                
-                a {
-                    color: $light-color;
-                }
+                color: $light-color;
             }
 
             .title {
@@ -119,6 +116,14 @@
                 privateValue: {
                     mail: 'nugget@gmail.com'
                 }
+            }
+        },
+        methods: {
+            click_cancel() {
+                this.$router.go(-1)
+            },
+            click_save() {
+                this.$router.go(-1)
             }
         }
     }

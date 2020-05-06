@@ -9,6 +9,7 @@ import EditProfile from '../views/rank1/EditProfile.vue'
 import MakeAccount from '../views/rank1/MakeAccount.vue'
 import LogIn from '../views/rank1/LogIn.vue'
 import TaggedScreen from '../views/rank1/TaggedScreen.vue'
+import MyPageChild from '../views/rank1/MyPageChild.vue'
 
 Vue.use(VueRouter)
 
@@ -29,7 +30,13 @@ const routes = [
     {
         path: '/my-page',
         name: 'my-page',
-        component: MyPage
+        component: MyPage,
+        children: [
+            {
+                path: ':id',
+                component: MyPageChild
+            }
+        ]
     },
     {
         path: '/not-log-in',
