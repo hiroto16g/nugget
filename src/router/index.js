@@ -10,6 +10,7 @@ import MakeAccount from '../views/rank1/MakeAccount.vue'
 import LogIn from '../views/rank1/LogIn.vue'
 import TaggedScreen from '../views/rank1/TaggedScreen.vue'
 import MyPageChild from '../views/rank1/MyPageChild.vue'
+import ThanksMakeAccount from '../views/rank1/ThanksMakeAccount.vue'
 
 Vue.use(VueRouter)
 
@@ -67,13 +68,21 @@ const routes = [
         path: '/error-page',
         name: 'error-page',
         component: ErrorPage
+    },
+    {
+        path: '/thanks_mkacc',
+        name: 'thanks_mkacc',
+        component: ThanksMakeAccount
     }
 ]
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
+    routes,
+    scrollBehavior () {
+        return { x: 0, y: 0 }
+    }
 })
 
 export default router

@@ -18,7 +18,6 @@
 
     #router-view {
         margin: auto;
-        margin-bottom: 80px;
     }
 
     @media screen and (min-width: 768px) {
@@ -42,6 +41,10 @@
         
         a {
             text-decoration: none;
+        }
+        
+        #router-view {
+            margin-bottom: 35vw;
         }
     }
 

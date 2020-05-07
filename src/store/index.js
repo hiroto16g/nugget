@@ -5,6 +5,7 @@ import home from './modules/home'
 import trend from './modules/trend'
 import mypage from './modules/mypage'
 import common from './modules/common'
+import make_account from './modules/make_account'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,7 @@ export default new Vuex.Store({
         userInfo: {
             log_in: false,
             name: '',
-            id: '',
+            id: 'nobita',
             image: ''
         },
         config: {
@@ -33,6 +34,7 @@ export default new Vuex.Store({
         home,
         trend,
         mypage,
-        common
+        common,
+        mkacc: make_account
     }
 })

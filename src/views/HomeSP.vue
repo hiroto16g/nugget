@@ -3,25 +3,43 @@
         <div class="slide-wrapper">
             <VideoShow :src="video.src"></VideoShow>
             <div class="icon-wrapper">
-                <IconButton class="like" :icon="icons.like.icon" :value="video.n_likes" @ib_click="click_like" :class="{'with-color': video.this_audience.liked}" ></IconButton>
+                <IconButton class="like" :icon="icons.like.icon" :value="video.n_likes" @ib_click="click_like" :class="{'with-color': video.this_audience.liked}"></IconButton>
                 <IconButton class="comment" :icon="icons.comments.icon" :value="video.n_comments"></IconButton>
                 <IconButton class="share" :icon="icons.share.icon" :name="icons.share.name"></IconButton>
             </div>
         </div>
-        
+
         <div class="slide-info-wrapper">
-            <div class="title">{{ video.title }}</div>
+            <div class="title" @click="click_detail_btn">
+                {{ video.title }}
+                <IconButton class="detail-btn" icon="mdi-chevron-down"></IconButton>
+            </div>
+            <div class="views">
+                再生回数：{{ video.n_views }} 回
+            </div>
             <div class="account-info">
                 <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)">
                     <AvatarImage :src="video.image"></AvatarImage>
                 </router-link>
-                <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)">
-                    <div class="account-name">{{ video.name }}</div>
+                <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)" class="account-name">
+                    {{ video.name }}
                 </router-link>
                 <TextButton :class="{'with-color': !video.this_audience.followed}" @tbClick='click_follow' :name="fbText"></TextButton>
             </div>
+            <div class="video-detail" :class="{show: show_detail}">
+                <div class="tag-wrapper">
+                    <div class="tags">
+                        <div class="tag" v-for="(t, i) in video.tags" :key="i" @click="click_tag(t)">
+                            {{ t }}
+                        </div>
+                    </div>
+                </div>
+                <div class="text">
+                    {{ video.text }}
+                </div>
+            </div>
         </div>
-        
+
         <div class="thumbnail-wrapper">
             <div class="wrapper-name">おすすめ</div>
             <div class="thumbnails">
@@ -30,7 +48,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="comment-wrapper">
             <div class="wrapper-name">コメント</div>
             <textarea class="input-comment" placeholder="コメントを投稿" @change="change_comment" v-model="comment"></textarea>
@@ -72,7 +90,7 @@
                     &.share .mdi {
                         margin-bottom: -0.6vw;
                     }
-                    
+
                     &.comment {
                         margin-top: 0.1vw;
                     }
@@ -82,60 +100,114 @@
 
         .slide-info-wrapper {
             width: 94vw;
-            height: 100px;
             margin: 0 3vw;
             display: inline-block;
-            border-bottom: solid 1px #ccc;
+            border-bottom: solid thin $border;
 
             .title {
-                font-size: 20px;
-                margin-bottom: 10px;
+                font-size: 4.5vw;
+                margin-bottom: 0vw;
                 letter-spacing: 0.06em;
                 color: $normal-color;
+                width: 86vw;
+                position: relative;
+                
+                .detail-btn {
+                    position: absolute;
+                    right: -8vw;
+                    top: -0.9vw;
+
+                    .mdi {
+                        color: $light-color;
+                    }
+                }
+            }
+
+            .views {
+                font-size: 3.2vw;
+                color: $light-color;
+                margin-bottom: 5vw;
             }
 
             .account-info {
+                display: flex;
+                align-items: center;
+                padding-bottom: 3vw;
+
                 img {
                     width: 10vw;
-                    margin-right: 10px;
+                    margin: 0 1.5vw 0 0;
                     border-radius: 50%;
-                    float: left;
                 }
 
                 .account-name {
-                    font-size: 12px;
+                    font-size: 3.2vw;
                     letter-spacing: 0.03em;
-                    float: left;
                     color: $normal-color;
+                    align-self: end;
                 }
 
                 .text-button {
-                    width: 110px;
-                    font-size: 12px;
-                    padding: 4px 5px;
-                    float: right;
-                    margin-top: 7px;
+                    width: 28vw;
+                    font-size: 3vw;
+                    padding: 1.5vw 0;
+                    margin-left: auto;
+
+                    &.with-color {
+                        color: white;
+                    }
+                }
+            }
+
+            .video-detail {
+                display: none;
+                
+                &.show {
+                    display: block;
                 }
 
-                .with-color {
-                    color: #fdfdfd;
+                .tag-wrapper {
+                    .tags {
+                        font-size: 3.2vw;
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 5vw;
+
+                        .tag {
+                            border: solid thin $border;
+                            align-items: center;
+                            line-height: 1;
+                            padding: 2vw 3vw 1.5vw;
+                            border-radius: 4vw;
+                            margin: 0 0.5vw 1vw 0;
+                            color: $normal-color;
+                        }
+                    }
+                }
+
+                .text {
+                    font-size: 3.6vw;
+                    color: $normal-color;
+                    margin: 5vw 0;
+                    line-height: 1.7;
+                    letter-spacing: 0.08em;
                 }
             }
         }
-        
+
         .thumbnail-wrapper {
             padding: 5vw 0;
-            
+
             .wrapper-name {
                 font-size: 4vw;
                 margin: 0 0 3vw 3vw;
                 color: $normal-color;
             }
-            
+
             .thumbnails {
                 overflow-x: scroll;
                 display: flex;
-                
+
                 .thumbnail {
                     margin-left: 1vw;
                 }
@@ -144,24 +216,25 @@
                     &:nth-child(1) {
                         margin-left: 5vw;
                     }
-                    
+
                     &:last-child {
                         padding-right: 5vw;
                     }
                 }
             }
         }
-        
+
         .comment-wrapper {
             margin: 0 3vw;
             padding: 5vw 0;
             border-top: solid thin #ccc;
-            
+
             .wrapper-name {
                 margin-bottom: 3vw;
                 color: $normal-color;
                 font-size: 4vw;
             }
+
             .input-comment {
                 width: 65vw;
                 display: block;
@@ -173,31 +246,31 @@
                 height: 1em;
                 color: $normal-color;
                 line-height: 1.7;
-                
+
                 &::placeholder {
                     font-size: 3.4vw;
                     color: $light-color;
                     line-height: 1;
                 }
             }
-            
+
             .comment {
                 display: flex;
                 margin-bottom: 5vw;
-                
+
                 .avatar-image {
                     width: 35px;
                 }
-                
+
                 .right {
                     margin-left: 2vw;
-                    
+
                     .commentator {
                         font-size: 3.4vw;
                         color: #888;
                         margin-bottom: 1.5vw;
                     }
-                    
+
                     .text {
                         font-size: 3.6vw;
                         color: $normal-color;
@@ -206,6 +279,7 @@
             }
         }
     }
+
 </style>
 
 
@@ -241,7 +315,8 @@
                     }
                 },
                 fbText: 'フォローする',
-                comment: ''
+                comment: '',
+                show_detail: false
             }
         },
         computed: {
@@ -287,6 +362,13 @@
             },
             click_user(userID) {
                 this.$store.commit('click_user', userID)
+            },
+            click_detail_btn() {
+                this.show_detail = !this.show_detail
+            },
+            click_tag(tag) {
+                this.$store.commit('trend/search_by_tag', tag)
+                this.$router.push('tagged-screen')
             }
         }
     }

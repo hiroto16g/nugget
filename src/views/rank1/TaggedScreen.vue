@@ -1,23 +1,19 @@
 <template>
     <div class="tagged-screen">
-        <div class="head">
-            <div class="back" @click="click_back">
-                戻る
-            </div>
-            <div class="title">
-                ＃ {{ tag }}
+        <div class="fixed">
+            <div class="head">
+                <div class="back" @click="click_back">
+                    戻る
+                </div>
+                <div class="title">
+                    ＃ {{ tag }}
+                </div>
             </div>
         </div>
-        <div class="thumbnail-wrapper">
+
+        <div class="thumbnails">
             <div v-for="(r, i) in recommends" :key="i">
-                <div class="recommend-name">
-                    {{ r.head }}
-                </div>
-                <div class="thumbnails">
-                    <div v-for="(t, j) in r.thumbSrc" :key="j" class="item">
-                        <Thumbnail :src="t.src" :title="t.title"></Thumbnail>
-                    </div>
-                </div>
+                <img class="image" :src="r.image" alt="">
             </div>
         </div>
     </div>
@@ -26,29 +22,44 @@
 
 <style lang="scss">
     .tagged-screen {
-        .head {
-            padding: 3.6vw 3vw 3vw;
-            display: flex;
-            justify-content: center;
-            font-size: 4vw;
-            background: $tabbar;
-            border-bottom: solid thin $border;
-            color: $normal-color;
+        .fixed {
+            .head {
+                padding: 3.6vw 3vw 3vw;
+                display: flex;
+                justify-content: center;
+                font-size: 4vw;
+                background: $tabbar;
+                border-bottom: solid thin $border;
+                color: $normal-color;
+                position: fixed;
+                width: 94vw;
+                top: 0;
 
-            .back {
-                position: absolute;
-                left: 3vw;
-                color: $light-color;
-            }
+                .back {
+                    position: absolute;
+                    left: 3vw;
+                    color: $light-color;
+                }
 
-            .title {
-                text-align: center;
+                .title {
+                    text-align: center;
+                }
             }
         }
 
-        .thumbnail-wrapper {
-            .recommend-name {
-                margin: 8vw 0 1.5vw 3vw;
+
+        .thumbnails {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 15vw 0 30vw;
+
+            .image {
+                width: calc(100vw / 2.02);
+                height: calc(100vw / 2.02 / 3 * 4);
+                object-fit: cover;
+                display: block;
+                margin-bottom: 0.8vw;
             }
         }
     }
@@ -57,62 +68,89 @@
 
 
 <script>
-    import Thumbnail from '@/components/Thumbnail.vue'
-
     export default {
-        components: {
-            Thumbnail
-        },
         data() {
             return {
                 recommends: [
                     {
-                        head: 'おすすめ',
-                        thumbSrc: [{
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                            {
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                            {
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                        ]
+                        image: require('@/assets/thumbs/3d.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
                     },
                     {
-                        head: '人気',
-                        thumbSrc: [{
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                            {
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                            {
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                        ]
+                        image: require('@/assets/thumbs/biseki.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
                     },
                     {
-                        head: '急上昇',
-                        thumbSrc: [{
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                            {
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                            {
-                                src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                                title: 'ここにはスライドのタイトルが入ります'
-                            },
-                        ]
+                        image: require('@/assets/thumbs/flow.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/kondo.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/napo.jpg'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/neko.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/saigo.jpg'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/shizensu.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/sonshi.jpg'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/yousho.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/3d.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/biseki.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/flow.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/kondo.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/napo.jpg'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/neko.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/saigo.jpg'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/shizensu.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/sonshi.jpg'),
+                        title: 'ここにはスライドのタイトルが入ります'
+                    },
+                    {
+                        image: require('@/assets/thumbs/yousho.png'),
+                        title: 'ここにはスライドのタイトルが入ります'
                     },
                 ]
             }
