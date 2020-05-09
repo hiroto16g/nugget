@@ -1,15 +1,15 @@
 <template>
-    <div class="log-in">
+    <div class="log-in" :class="{submitting: submitting}">
         <div class="top">
             ログイン
         </div>
         <div class="contents">
             <div class="id content">
                 <div class="title">
-                    ユーザーID
+                    メールアドレス
                 </div>
                 <div class="input">
-                    <input type="text">
+                    <input type="text" v-model="$store.state.login.inputs.mail_address">
                 </div>
             </div>
 
@@ -18,15 +18,18 @@
                     パスワード
                 </div>
                 <div class="input">
-                    <input :type="passwordType">
-                    <div class="td-button" @click="toggleDisplay">{{ tdText }}</div>
+                    <input :type="passwordType" v-model="$store.state.login.inputs.password">
+                    <div class="td-button" @click="toggleDisplay">
+                        {{ tdText }}
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="error-text">
+            {{ login_state.error_text }}
+        </div>
         <div class="submit">
-            <router-link to="/my-page">
-                <TextButton name="ログインする" class="with-color"></TextButton>
-            </router-link>
+            <TextButton name="ログインする" class="with-color" @click.native="click_submit"></TextButton>
         </div>
         <div class="forgot">
             <a href="">
@@ -39,13 +42,17 @@
 
 <style lang="scss">
     .log-in {
-        color: #4d4d4d;
+        color: $normal-color;
+        
+        &.submitting {
+            display: none;
+        }
 
         .top {
             background: #fafafa;
             padding: 5vw 3vw;
             font-size: 4vw;
-            border-bottom: solid thin #ccc;
+            border-bottom: solid thin $border;
         }
 
         .contents {
@@ -64,7 +71,7 @@
                     position: relative;
 
                     input {
-                        border: solid thin #4d4d4d;
+                        border: solid thin $normal-color;
                         border-radius: 1vw;
                         padding: 3vw 3vw 2.8vw;
                         width: calc(100% - 3vw * 2);
@@ -78,6 +85,18 @@
                         right: 3vw;
                     }
                 }
+            }
+        }
+        
+        .error-text {
+            margin: 10vw 4vw 0;
+            text-align: center;
+            font-size: 3.2vw;
+            color: $attention-color;
+            display: none;
+            
+            &.error {
+                display: block;
             }
         }
 
@@ -95,12 +114,12 @@
         }
         
         .forgot {
-            font-size: 3.6vw;
+            font-size: 3.2vw;
             margin-top: 10vw;
             text-align: center;
             
             a {
-                border-bottom: solid thin $light-color;
+                border-bottom: solid thin $border;
                 color: $light-color;
                 padding-bottom: 0.2vw;
             }
@@ -119,20 +138,38 @@
         },
         data() {
             return {
-                isDisplay: false,
                 passwordType: 'password',
-                tdText: '表示'
+                tdText: '表示',
+            }
+        },
+        computed: {
+            login_state() {
+                return this.$store.state.login
+            },
+            submitting() {
+                return this.$store.state.login.submitting
             }
         },
         methods: {
             toggleDisplay() {
-                this.isDisplay = !this.isDisplay
-                if (this.isDisplay) {
+                if (this.passwordType == 'password') {
                     this.passwordType = 'text'
                     this.tdText = '非表示'
                 } else {
                     this.passwordType = 'password'
                     this.tdText = '表示'
+                }
+            },
+            click_submit() {
+                this.$store.commit('login/click_submit')
+            }
+        },
+        watch: {
+            submitting(new_val) {
+                if (!new_val) {
+                    if (this.login_state.error_text) {
+                        this.$router.push('my-page/' + this.$store.state.userInfo.id)
+                    }
                 }
             }
         }

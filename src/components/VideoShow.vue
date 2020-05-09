@@ -1,13 +1,15 @@
 <template>
     <div class="video">
         <transition name="slide">
-            <video :src="src" ref="video" controls playsinline webkit-playsinline autoplay muted></video>
+            <video :src="src" ref="video" @ended="end_video" controls playsinline webkit-playsinline autoplay muted></video>
         </transition>
-        <div class="overlay" v-show="!play">
-            <IconButton class="left" icon="mdi-chevron-left"></IconButton>
-            <IconButton icon="mdi-play"></IconButton>
-            <IconButton class="right" icon="mdi-chevron-right"></IconButton>
-        </div>
+        <transition name="t-overlay" @appear="appear_method">
+            <div class="overlay" v-show="!play">
+                <IconButton class="left" icon="mdi-chevron-left"></IconButton>
+                <IconButton icon="mdi-play"></IconButton>
+                <IconButton class="right" icon="mdi-chevron-right"></IconButton>
+            </div>
+        </transition>
         <div class="prev control-panel" @click="toPrev"></div>
         <div class="play control-panel" @click="togglePlay"></div>
         <div class="next control-panel" @click="toNext"></div>
@@ -18,62 +20,73 @@
 <style lang="scss">
     .video {
         position: relative;
-        
+
         video {
             display: block;
             width: 100vw;
             height: calc(100vw * 4 / 3);
         }
         
+        .t-overlay-enter-active {
+            transition: all 0.2s ease;
+            opacity: 1;
+        }
+        
+        .t-overlay-leave-active {
+            transition: all 0.2s ease;
+            opacity: 0;
+        }
+
         .overlay {
             position: absolute;
-            top: 0;
+            top: 15vw;
             left: 0;
-            height: calc(100vw * 4 / 3 - 23vw);
+            height: 90vw;
             width: 100vw;
-            background: linear-gradient(rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 0));
             display: flex;
             align-items: center;
             justify-content: center;
-            
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(100, 100, 100, 0.2), rgba(0, 0, 0, 0));
+
             .left {
                 margin-right: auto;
             }
-            
+
             .right {
                 margin-left: auto;
             }
-            
+
             .icon-button {
-                color: rgba(255, 255, 255, 0.9);
-                
                 .mdi {
                     font-size: 15vw;
+                    text-shadow: 10px $normal-color;
+                    color: white;
                 }
             }
         }
-        
+
         .control-panel {
             position: absolute;
-            top: 0;
-            height: calc(100vw * 4 / 3 - 23vw);
-            
+            top: 15vw;
+            height: 90vw;
+
             &.prev {
                 width: 20vw;
                 left: 0;
             }
-            
+
             &.play {
                 width: 60vw;
                 left: 20vw;
             }
-            
+
             &.next {
                 width: 20vw;
                 right: 0;
             }
         }
     }
+
 </style>
 
 
@@ -98,20 +111,18 @@
         },
         data() {
             return {
-                play: true
+                play: false
             }
         },
         methods: {
             togglePlay() {
-                var video = this.$refs.video
-                
-                if (video.paused) {
-                    video.play()
+                if (this.$refs.video.paused) {
+                    this.$refs.video.play()
                 } else {
-                    video.pause()
+                    this.$refs.video.pause()
                 }
-                
-                this.play = !this.play
+
+                this.play = !this.$refs.video.paused
             },
             toPrev() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
@@ -146,7 +157,18 @@
                     //その他
                     this.$store.commit('home/next_slide')
                 }
+            },
+            for_appear() {
+                this.play = true
+            },
+            appear_method() {
+                setTimeout(this.for_appear, 700)
+            },
+            end_video() {
+                this.$refs.video.currentTime = 0
+                this.$refs.video.play()
             }
         }
     }
+
 </script>

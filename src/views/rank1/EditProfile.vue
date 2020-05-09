@@ -87,7 +87,7 @@
                 input,
                 textarea {
                     border: none;
-                    border-bottom: solid thin #ccc;
+                    border-bottom: solid thin $border;
                     width: calc(100% - 3vw * 2);
                     font-size: 4.5vw;
                     padding: 3.6vw 3vw 3vw;

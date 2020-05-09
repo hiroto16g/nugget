@@ -11,9 +11,9 @@
             <div class="main">
                 {{ user_info.mail_address }} にメールをお送りいたしました
             </div>
-            <div class="fix help">
+            <a class="fix help" href="">
                 修正はこちら
-            </div>
+            </a>
         </div>
         
         <div class="mail-check text">
@@ -21,9 +21,9 @@
                 <span class="top">届いたメールを確認して<br></span>
                 <span class="bottom">サクッと知識を身につけましょう！</span>
             </div>
-            <div class="dont-receive help">
+            <a class="dont-receive help" href="">
                 届かない場合はこちら
-            </div>
+            </a>
         </div>
     </div>
 </template>
@@ -52,6 +52,8 @@
             .help {
                 font-size: 3.2vw;
                 margin-top: 1.5vw;
+                color: $light-color;
+                border-bottom: solid thin $border;
             }
         }
         
@@ -65,7 +67,7 @@
             }
             
             &.bottom {
-                padding: 2vw 4vw 2vw;
+                padding: 3vw 4vw 2.5vw;
                 border-radius: 1.5vw;
                 margin-bottom: 1vw;
             }

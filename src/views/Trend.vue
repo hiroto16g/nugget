@@ -2,7 +2,7 @@
     <div class="trend">
         <div class="search-wrapper" :class="{'search': search_flag}">
             <div class="head">
-                <input type="text" class="input-keywords" placeholder="キーワードで検索" @click="click_search" v-model="keywords" @input="input_keyword">
+                <input type="search" inputmode="search" class="input-keywords" placeholder="キーワードで検索" @click="click_search" v-model="keywords" @input="input_keyword">
                 <div class="cancel" @click="clickCancel" v-if="search_flag">
                     キャンセル
                 </div>
@@ -26,7 +26,7 @@
                 
                 .input-keywords {
                     display: block;
-                    width: 65vw;
+                    width: 70vw;
                     margin-left: 3vw;
                     padding: 3vw;
                     border: none;
@@ -40,7 +40,7 @@
                         color: $light-color
                     }
 
-                    &[type="text"]:focus {
+                    &[type="search"]:focus {
                         border: none;
                         outline: none;
                     }

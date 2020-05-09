@@ -6,6 +6,7 @@ import trend from './modules/trend'
 import mypage from './modules/mypage'
 import common from './modules/common'
 import make_account from './modules/make_account'
+import login from './modules/login'
 
 Vue.use(Vuex)
 
@@ -35,6 +36,7 @@ export default new Vuex.Store({
         trend,
         mypage,
         common,
-        mkacc: make_account
+        mkacc: make_account,
+        login
     }
 })

@@ -53,14 +53,14 @@
 
     @media screen and (min-height: 701px) {
         #footer {
-            height: 55px;
+            height: 8vh;
             height: calc(55px + env(safe-area-inset-bottom));
         }
     }
 
     @media screen and (max-height: 700px) {
         #footer {
-            height: 50px;
+            height: 7vh;
         }
     }
 

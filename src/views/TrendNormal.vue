@@ -38,7 +38,6 @@
 <style lang="scss">
     .trend-normal {
         .categories {
-            padding-top: 2.5vw;
             overflow-x: scroll;
             display: flex;
             background: $tabbar;
@@ -47,15 +46,11 @@
                 display: inline-block;
 
                 .item {
-                    height: 3vw;
                     font-size: 3.4vw;
-                    padding: 0.7vw 5.5vw 0.3vw;
+                    padding: 2vw 5.5vw;
                     white-space: nowrap;
                     vertical-align: middle;
-                    display: flex;
-                    align-items: center;
                     color: $normal-color;
-                    padding-bottom: 2.5vw;
                     border-bottom: solid thin $border;
 
                     &.choiced {

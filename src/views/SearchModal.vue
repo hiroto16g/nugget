@@ -52,8 +52,11 @@
             
             .word {
                 padding: 2vw 8vw;
-                color: $normal-color;
                 font-size: 4vw;
+                
+                a {
+                    color: $normal-color;
+                }
             }
         }
     }

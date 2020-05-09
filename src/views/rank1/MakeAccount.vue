@@ -12,7 +12,7 @@
                 <div class="input">
                     <input type="text" v-model="$store.state.mkacc.inputs.name">
                 </div>
-                <div class="error-text" :class="{error: is_error}">
+                <div class="error-text">
                     {{ error_texts.name }}
                 </div>
             </div>
@@ -22,28 +22,13 @@
                     パスワード
                 </div>
                 <div class="input">
-                    <input :type="password_info[0].type" v-model="$store.state.mkacc.inputs.password">
-                    <div class="td-button" @click="toggleDisplay(0)">
-                        {{ password_info[0].text }}
+                    <input :type="password_type" v-model="$store.state.mkacc.inputs.password">
+                    <div class="td-button" @click="toggleDisplay">
+                        {{ db_text }}
                     </div>
                 </div>
                 <div class="hint">
                     半角英数字で8文字以上にしてください
-                </div>
-            </div>
-
-            <div class="pass-confirm content">
-                <div class="title">
-                    パスワード（確認用）
-                </div>
-                <div class="input">
-                    <input :type="password_info[1].type" v-model="$store.state.mkacc.inputs.confirm">
-                    <div class="td-button" @click="toggleDisplay(1)">
-                        {{ password_info[1].text }}
-                    </div>
-                </div>
-                <div class="error-text" :class="{error: is_error}">
-                    {{ error_texts.confirm }}
                 </div>
             </div>
 
@@ -54,7 +39,7 @@
                 <div class="input">
                     <input type="email" v-model="$store.state.mkacc.inputs.mail_address">
                 </div>
-                <div class="error-text" :class="{error: is_error}">
+                <div class="error-text">
                     {{ error_texts.mail }}
                 </div>
             </div>
@@ -120,14 +105,9 @@
                 }
 
                 .error-text {
-                    display: none;
                     font-size: 3.2vw;
                     margin-top: 1vw;
                     color: $attention-color;
-
-                    &.error {
-                        display: block;
-                    }
                 }
             }
         }
@@ -162,15 +142,8 @@
         },
         data() {
             return {
-                password_info: [{
-                        type: 'password',
-                        text: '表示'
-                    },
-                    {
-                        type: 'password',
-                        text: '表示'
-                    }
-                ]
+                password_type: 'password',
+                db_text: '表示'
             }
         },
         computed: {
@@ -182,13 +155,13 @@
             }
         },
         methods: {
-            toggleDisplay(i) {
-                if (this.password_info[i].type == 'password') {
-                    this.password_info[i].type = 'text'
-                    this.password_info[i].text = '非表示'
+            toggleDisplay() {
+                if (this.password_type == 'password') {
+                    this.password_type = 'text'
+                    this.db_text = '非表示'
                 } else {
-                    this.password_info[i].type = 'password'
-                    this.password_info[i].text = '表示'
+                    this.password_.type = 'password'
+                    this.db_text = '表示'
                 }
             },
             click_submit_btn() {
