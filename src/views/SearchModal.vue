@@ -71,7 +71,13 @@
         },
         methods: {
             clickTag(tag) {
-                this.$store.commit('trend/search_by_tag', tag)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.commit('trend/search_by_tag', tag);
+                }
+                else{
+                    this.$store.commit('trend/search_by_tag', tag)
+                }
             }
         }
     }

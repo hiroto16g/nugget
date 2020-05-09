@@ -87,6 +87,12 @@
         methods: {
             click_search() {
                 this.$store.commit('trend/will_search')
+
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('trend/get_search_history');
+                }
+
             },
             clickCancel() {
                 this.$store.commit('trend/cancel_search')
@@ -98,8 +104,8 @@
         },
         mounted(){
             if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
-                var now_category = this.$store.state.trend.now_category;
                 //統合モード
+                var now_category = this.$store.state.trend.now_category;
                 this.$store.dispatch('trend/get_user_recommend', now_category);
                 this.$store.dispatch('trend/get_popular', now_category);
                 this.$store.dispatch('trend/get_rapid_rise', now_category);

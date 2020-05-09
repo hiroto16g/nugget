@@ -153,10 +153,27 @@ export default {
                 context.commit('get_rapid_rise', payload);
             });
         },
+        //検索履歴の取得
+        get_search_history(context){
+            //POSTデータ
+            var formData = new FormData();
+            formData.append('UserId', user_id);
+            //検索履歴の取得
+            axios
+            .post('http://localhost:8080/get-search-history', formData)
+            .then(function (response) {
+                var payload = {
+                    data:response.data,
+                }
+                //検索履歴のセット
+                context.commit('get_search_history', payload);
+            });
+        },
         //タグ検索
         search_by_tag(context, tag){
             //POSTデータ
             var formData = new FormData();
+            formData.append('UserId', user_id);
             formData.append('Tag', tag);
             //タグ検索
             axios
@@ -212,6 +229,16 @@ export default {
                 );
             });
             state.recommends[2].thumbSrc = thumbSrc;
+        },
+        //検索履歴のセット
+        get_search_history(state, payload){
+            var history = [];
+            payload.data.forEach(function(search_history){
+                history.push(
+                    search_history.word,
+                );
+            });
+            state.history = history;
         },
         determine_keywords(state, keywords) {
             state.keywords = keywords

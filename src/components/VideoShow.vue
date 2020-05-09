@@ -118,10 +118,13 @@
                     //統合モード
                     var video_count = this.$store.state.home.video_count;
                     var videos = this.$store.state.home.videos;
-                    var prev_content_id = videos[(video_count - 1)].content_id;
+                    if(!(typeof videos[(video_count - 1)] === "undefined")){
+                        //前の動画が存在する時
+                        var prev_content_id = videos[(video_count - 1)].videoID;
                     
-                    this.$store.dispatch('home/init_comment', prev_content_id);
-                    this.$store.commit('home/prev_slide')
+                        this.$store.dispatch('home/init_comment', prev_content_id);
+                        this.$store.commit('home/prev_slide')
+                    }
                 } else{
                     //その他
                     this.$store.commit('home/prev_slide')
@@ -132,10 +135,13 @@
                     //統合モード
                     var video_count = this.$store.state.home.video_count;
                     var videos = this.$store.state.home.videos;
-                    var next_content_id = videos[(video_count + 1)].content_id;
+                    if(!(typeof videos[(video_count + 1)] === "undefined")){
+                        //次の動画が存在する時
+                        var next_content_id = videos[(video_count + 1)].videoID;
 
-                    this.$store.dispatch('home/init_comment', next_content_id);
-                    this.$store.commit('home/next_slide');
+                        this.$store.dispatch('home/init_comment', next_content_id);
+                        this.$store.commit('home/next_slide');
+                    }
                 } else{
                     //その他
                     this.$store.commit('home/next_slide')
