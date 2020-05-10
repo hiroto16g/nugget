@@ -65,6 +65,7 @@
 
             .wrapper-name {
                 margin: 0 0 1vw 3vw;
+                color: $normal-color;
             }
 
             .tags {

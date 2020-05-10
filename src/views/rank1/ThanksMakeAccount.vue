@@ -11,9 +11,9 @@
             <div class="main">
                 {{ user_info.mail_address }} にメールをお送りいたしました
             </div>
-            <a class="fix help" href="">
-                修正はこちら
-            </a>
+            <router-link class="fix help" to="/make-account">
+                入力情報を修正する
+            </router-link>
         </div>
         
         <div class="mail-check text">
@@ -21,9 +21,9 @@
                 <span class="top">届いたメールを確認して<br></span>
                 <span class="bottom">サクッと知識を身につけましょう！</span>
             </div>
-            <a class="dont-receive help" href="">
-                届かない場合はこちら
-            </a>
+            <div class="resend help" @click="click_resend">
+                もう一度送信する
+            </div>
         </div>
     </div>
 </template>
@@ -81,6 +81,11 @@
         computed: {
             user_info() {
                 return this.$store.state.mkacc.inputs
+            }
+        },
+        methods: {
+            click_resend() {
+                alert('メールを送信しました！\n届かない場合はメールアドレスや迷惑設定を確認してください')
             }
         }
     }

@@ -106,6 +106,7 @@
 
             .text-button {
                 padding: 3vw 10vw;
+                border-radius: 7vw;
 
                 &.with-color {
                     color: #fbfbfb;

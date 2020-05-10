@@ -12,7 +12,7 @@
         </div>
 
         <div class="thumbnails">
-            <div v-for="(r, i) in recommends" :key="i">
+            <div v-for="(r, i) in $store.state.tagged_screen.recommends" :key="i">
                 <img class="image" :src="r.image" alt="">
             </div>
         </div>
@@ -69,92 +69,6 @@
 
 <script>
     export default {
-        data() {
-            return {
-                recommends: [
-                    {
-                        image: require('@/assets/thumbs/3d.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/biseki.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/flow.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/kondo.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/napo.jpg'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/neko.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/saigo.jpg'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/shizensu.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/sonshi.jpg'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/yousho.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/3d.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/biseki.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/flow.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/kondo.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/napo.jpg'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/neko.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/saigo.jpg'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/shizensu.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/sonshi.jpg'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                    {
-                        image: require('@/assets/thumbs/yousho.png'),
-                        title: 'ここにはスライドのタイトルが入ります'
-                    },
-                ]
-            }
-        },
         computed: {
             tag() {
                 return this.$store.state.trend.search_tag

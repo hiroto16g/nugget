@@ -10,7 +10,7 @@
                     表示名
                 </div>
                 <div class="input">
-                    <input type="text" v-model="$store.state.mkacc.inputs.name">
+                    <input type="text" class="ep__name" @keyup="keyup_name">
                 </div>
                 <div class="error-text">
                     {{ error_texts.name }}
@@ -93,8 +93,10 @@
                     .td-button {
                         font-size: 3.5vw;
                         position: absolute;
-                        top: 3.5vw;
+                        top: 0.5vw;
                         right: 3vw;
+                        color: $normal-color;
+                        padding: 3vw 0;
                     }
                 }
 
@@ -122,6 +124,7 @@
 
             .text-button {
                 padding: 3vw 10vw;
+                border-radius: 7vw;
 
                 &.with-color {
                     color: #fbfbfb;
@@ -143,7 +146,8 @@
         data() {
             return {
                 password_type: 'password',
-                db_text: '表示'
+                db_text: '表示',
+                name: ''
             }
         },
         computed: {
@@ -160,11 +164,16 @@
                     this.password_type = 'text'
                     this.db_text = '非表示'
                 } else {
-                    this.password_.type = 'password'
+                    this.password_type = 'password'
                     this.db_text = '表示'
                 }
             },
+            keyup_name() {
+                this.name = document.getElementsByClassName('ep__name')[0].value
+            },
             click_submit_btn() {
+                this.$store.state.mkacc.inputs.name = this.name
+                
                 if (this.is_error) {
                     const duration = 100;
                     const interval = 10;

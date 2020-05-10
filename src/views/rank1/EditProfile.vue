@@ -21,16 +21,16 @@
 <!--                        <input type="file">-->
                     </div>
                 </div>
-                <div class="name content">
-                    <input type="text" v-model="openValue.name">
+                <div class="content">
+                    <input class="name" type="text" @keyup="keyup_name">
                 </div>
-                <div class="bio content">
-                    <textarea rows="3" placeholder="自己紹介" v-model="openValue.bio"></textarea>
+                <div class="content">
+                    <textarea class="bio" rows="3" placeholder="自己紹介" @keyup="keyup_bio"></textarea>
                 </div>
             </div>
             <div class="private">
-                <div class="mail content">
-                    <input type="text" v-model="privateValue.mail">
+                <div class="content">
+                    <input class="mail" type="email" @keyup="keyup_mail">
                 </div>
             </div>
         </div>
@@ -124,6 +124,15 @@
             },
             click_save() {
                 this.$router.go(-1)
+            },
+            keyup_name() {
+                this.openValue.name = document.getElementsByClassName('name')[0].value
+            },
+            keyup_bio() {
+                this.openValue.bio = document.getElementsByClassName('bio')[0].value
+            },
+            keyup_mail() {
+                this.privateValue.mail = document.getElementsByClassName('mail')[0].value
             }
         }
     }

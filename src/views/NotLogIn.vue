@@ -44,6 +44,7 @@
                 padding: 2vw 0;
                 margin: 5vw auto 0;
                 color: $normal-color;
+                border-radius: 7vw;
                 
                 &.with-color {
                     color: white;

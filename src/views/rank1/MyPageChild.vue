@@ -94,6 +94,7 @@
                     .text-button {
                         padding: 1vw 5vw;
                         font-size: 3.4vw;
+                        border-radius: 5vw;
                     }
                 }
             }

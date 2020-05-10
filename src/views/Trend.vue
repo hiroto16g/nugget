@@ -2,7 +2,7 @@
     <div class="trend">
         <div class="search-wrapper" :class="{'search': search_flag}">
             <div class="head">
-                <input type="search" inputmode="search" class="input-keywords" placeholder="キーワードで検索" @click="click_search" v-model="keywords" @input="input_keyword">
+                <input type="search" inputmode="search" class="input-keywords" placeholder="キーワードで検索" @click="click_search" @keyup="input_keyword">
                 <div class="cancel" @click="clickCancel" v-if="search_flag">
                     キャンセル
                 </div>
@@ -19,11 +19,11 @@
         .search-wrapper {
             padding-top: 5vw;
             background-color: #FAFAFA;
-            
+
             .head {
                 display: flex;
                 align-items: center;
-                
+
                 .input-keywords {
                     display: block;
                     width: 70vw;
@@ -44,21 +44,26 @@
                         border: none;
                         outline: none;
                     }
+                    
+                    &::-webkit-search-cancel-button {
+                        -webkit-appearance: none;
+                    }
                 }
-                
+
                 .cancel {
                     font-size: 3.6vw;
                     margin: 0 auto;
                     color: $light-color;
                 }
             }
-            
+
             &.search {
                 border-bottom: solid thin $border;
                 padding-bottom: 3vw;
             }
         }
     }
+
 </style>
 
 
@@ -95,11 +100,11 @@
 
             },
             clickCancel() {
+                document.getElementsByClassName('input-keywords')[0].value = ''
                 this.$store.commit('trend/cancel_search')
-                this.keywords = ''
             },
             input_keyword() {
-                this.$store.commit('trend/display_pred', this.keywords)
+                this.$store.commit('trend/display_pred', document.getElementsByClassName('input-keywords')[0].value)
             }
         },
         mounted(){

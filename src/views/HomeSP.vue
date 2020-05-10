@@ -4,7 +4,7 @@
             <VideoShow :src="video.src"></VideoShow>
             <div class="icon-wrapper">
                 <IconButton class="like" :icon="icons.like.icon" :value="video.n_likes" @ib_click="click_like" :class="{'with-color': video.this_audience.liked}"></IconButton>
-                <IconButton class="comment" :icon="icons.comments.icon" :value="video.n_comments"></IconButton>
+<!--                <IconButton class="comment" :icon="icons.comments.icon" :value="video.n_comments"></IconButton>-->
                 <IconButton class="share" :icon="icons.share.icon" :name="icons.share.name"></IconButton>
             </div>
         </div>
@@ -57,10 +57,12 @@
         </div>
 
         <div class="comment-wrapper">
-            <div class="wrapper-name">コメント</div>
+            <div class="wrapper-name">
+                コメント：{{ video.n_comments }}
+            </div>
             <div class="input-area" v-show="$store.state.userInfo.log_in">
                 <AvatarImage></AvatarImage>
-                <textarea class="input-comment" placeholder="コメントを投稿" v-model="comment"></textarea>
+                <textarea class="input-comment" placeholder="コメントを投稿" @keyup="keyup_comment"></textarea>
                 <IconButton :class="{'can-send': comment}" icon="mdi-send" @click.native="post_comment"></IconButton>
             </div>
             <div class="comment" v-for="(c, i) in comments" :key="i">
@@ -95,7 +97,8 @@
                 color: #888;
 
                 .icon-button {
-                    width: 25vw;
+/*                    width: 25vw;*/
+                    width: 35vw;
                     vertical-align: top;
 
                     &.share .mdi {
@@ -396,8 +399,8 @@
                     }
                 }
             },
-            /*↓のpost_commentに処理を移行
-            change_comment() {
+            /*
+            post_comment() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
                     this.$store.dispatch('home/post_comment', this.comment);
@@ -411,10 +414,18 @@
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
                     this.$store.dispatch('home/post_comment', this.comment);
+                    //コメント初期化
+                    this.comment = ''
+                    document.getElementsByClassName('input-comment')[0].value = ''
                 } else{
                     //その他
                     this.$store.commit('home/post_comment', this.comment)
+                    this.comment = ''
+                    document.getElementsByClassName('input-comment')[0].value = ''
                 }
+            },
+            keyup_comment() {
+                this.comment = document.getElementsByClassName('input-comment')[0].value
             },
             click_like() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){

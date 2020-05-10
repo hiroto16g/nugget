@@ -7,6 +7,7 @@ import mypage from './modules/mypage'
 import common from './modules/common'
 import make_account from './modules/make_account'
 import login from './modules/login'
+import tagged_screen from './modules/tagged_screen'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
             log_in: false,
             name: '',
             id: 'nobita',
-            image: ''
+            image: '',
+            mail_address: 'nugget@gmail.com'
         },
         config: {
             SYSTEM_MODE_FRONTEND: 1,
@@ -37,6 +39,7 @@ export default new Vuex.Store({
         mypage,
         common,
         mkacc: make_account,
-        login
+        login,
+        tagged_screen
     }
 })
