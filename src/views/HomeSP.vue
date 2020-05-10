@@ -396,7 +396,7 @@
                     }
                 }
             },
-            /*
+            /*↓のpost_commentに処理を移行
             change_comment() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード

@@ -13,9 +13,9 @@
             </div>
             <div class="tags">
                 <div v-for="(name, i) in $store.state.trend.choiced_tags" :key="i" class="tag" @click="clickTag(name)">
-                    <router-link to="/tagged-screen">
+                    <!--<router-link to="/tagged-screen">-->
                         <Chip :name="name"></Chip>
-                    </router-link>
+                    <!--</router-link>-->
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="thumbnails">
                     <div v-for="(t, j) in r.thumbSrc" :key="j" class="item">
-                        <Thumbnail :src="t.src" :title="t.title" :content_id="t.content_id"></Thumbnail>
+                        <Thumbnail :src="t.src" :title="t.title" :videoID="t.videoID"></Thumbnail>
                     </div>
                 </div>
             </div>
@@ -121,6 +121,7 @@
             clickTag(tag) {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
+                    this.$router.push('tagged-screen');
                     this.$store.dispatch('trend/search_by_tag', tag);
                 }
                 else{

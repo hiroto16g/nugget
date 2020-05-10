@@ -45,17 +45,17 @@ export default {
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                 ]
             },
@@ -65,17 +65,17 @@ export default {
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                      },
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                ]
              },
@@ -85,17 +85,17 @@ export default {
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                      },
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                     {
                         src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
                         title: 'ここにはスライドのタイトルが入ります',
-                        content_id: '',
+                        videoID: '',
                     },
                 ]
              }
@@ -196,7 +196,7 @@ export default {
                     {
                         src:tmpContent.thumbnailpath,
                         title:tmpContent.title,
-                        content_id:String(tmpContent.contentid),
+                        videoID:String(tmpContent.contentid),
                     }
                 );
             });
@@ -210,7 +210,7 @@ export default {
                     {
                         src:tmpContent.thumbnailpath,
                         title:tmpContent.title,
-                        content_id:String(tmpContent.contentid),
+                        videoID:String(tmpContent.contentid),
                     }
                 );
             });
@@ -224,7 +224,7 @@ export default {
                     {
                         src:tmpContent.thumbnailpath,
                         title:tmpContent.title,
-                        content_id:String(tmpContent.contentid),
+                        videoID:String(tmpContent.contentid),
                     }
                 );
             });
@@ -249,6 +249,20 @@ export default {
         },
         */
        search_by_tag(state, payload) {
+           /*
+            var recommends = [];
+            payload.data.forEach(function(tmpContent){
+                recommends.push(
+                    {
+                        image:tmpContent.thumbnailpath,
+                        title:tmpContent.title,
+                        videoID:String(tmpContent.contentid),
+                    }
+                );
+            });
+            state.recommends[2].thumbSrc = recommends;
+            */
+
             console.log(state);
             console.log(payload);
         },

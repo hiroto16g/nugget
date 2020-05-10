@@ -1,6 +1,6 @@
 <template>
     <div class="thumbnail">
-        <router-link :to="{ name: 'home', params: { content_id:this.content_id }}">
+        <router-link :to="{ name: 'home', params: { videoID:this.videoID }}">
             <img :src="src">
             <div class="title">
                 {{ title }}
@@ -70,7 +70,7 @@
                 require: true,
                 default: 'ここにはスライドのタイトルが入ります'
             },
-            content_id: {
+            videoID: {
                 type: String,
                 require: true,
                 default: '',

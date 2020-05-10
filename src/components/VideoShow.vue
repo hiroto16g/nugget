@@ -135,6 +135,7 @@
                     
                         this.$store.dispatch('home/init_comment', prev_content_id);
                         this.$store.commit('home/prev_slide')
+                        this.$store.dispatch('home/add_watch');
                     }
                 } else{
                     //その他
@@ -152,6 +153,7 @@
 
                         this.$store.dispatch('home/init_comment', next_content_id);
                         this.$store.commit('home/next_slide');
+                        this.$store.dispatch('home/add_watch');
                     }
                 } else{
                     //その他

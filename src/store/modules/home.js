@@ -83,10 +83,10 @@ export default {
     },
     actions:{
         //動画の取得
-        init_video(context, content_id){
+        init_video(context, videoID){
             //POSTデータ
             var formData = new FormData();
-            formData.append('ContentId', content_id);
+            formData.append('ContentId', videoID);
             formData.append('UserId', user_id);
             //動画の取得
             axios
@@ -97,13 +97,15 @@ export default {
                 }
                 //動画のセット
                 context.commit('init_video', payload);
+                //再生回数の加算
+                context.dispatch('add_watch');
             });
         },
         //コメントの取得
-        init_comment(context, content_id){
+        init_comment(context, videoID){
             //POSTデータ
             var formData = new FormData();
-            formData.append('ContentId', content_id);
+            formData.append('ContentId', videoID);
             formData.append('UserId', user_id);
             //コメントの取得
             axios
@@ -197,6 +199,26 @@ export default {
                 });
             }
         },
+        //視聴回数の加算
+        add_watch(context){
+            var videos = context.state.videos;
+            var video_count = context.state.video_count;
+            var videoID = videos[video_count].videoID;
+            //POSTデータ
+            var formData = new FormData();
+            formData.append('ContentId', videoID);
+            formData.append('UserId', user_id);
+            //コールバック転送データ
+            var payload = {
+                video_count: video_count,
+            }
+            //加算
+            axios
+                .post('http://localhost:8080/add-watch', formData)
+                .then(function(){
+                    context.commit('add_watch', payload);
+                });
+        },
     },
     mutations: {
         init_video(state, payload){
@@ -209,17 +231,26 @@ export default {
 
             var i = 0
             contentDataList.forEach(function(contentData){
+                //タグの抽出
+                var tagList = [];
+                contentData.tags.forEach(function(tagClass){
+                    tagList.push(tagClass.tag);
+                });
                 //表示動画
                 videos.push(
                     {
                         videoID: contentData.content.contentid,
                         src: contentData.content.contentpath,
                         title: contentData.content.title,
+                        category: contentData.content.category,
+                        tags: tagList,
+                        text: contentData.content.comment,
                         image: contentData.content.postericon,
                         userID: contentData.content.posterid,
                         name: contentData.content.postername,
                         n_likes: contentData.content.genius,
                         n_comments: contentData.content.commentcount,
+                        n_views: contentData.content.watch,
                         this_audience: {
                             looked: false,
                             liked: contentData.isgenius,
@@ -231,7 +262,7 @@ export default {
                    //サムネイル
                    recommend_thumbs.push(
                         {
-                            content_id: contentData.content.contentid,
+                            videoID: contentData.content.contentid,
                             src: contentData.content.thumbnailpath,
                             title: contentData.content.title,
                         }
@@ -240,6 +271,7 @@ export default {
 
                 i++;
             });
+            state.video_count = 0;
             state.videos = videos;
             state.recommend_thumbs = recommend_thumbs;
         },
@@ -323,6 +355,15 @@ export default {
                 } else {
                     state.videos[state.video_count].n_likes++
                 }
+            }
+        },
+        add_watch(state, payload){
+            if(this.state.config.RUN_SYSTEM_MODE == this.state.config.SYSTEM_MODE_BOTH){
+                //統合モード
+                var video_count = payload.video_count;
+                state.videos[video_count].n_views++;
+            } else{
+                //その他
             }
         }
     }
