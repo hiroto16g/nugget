@@ -2,7 +2,7 @@
     <div class="trend">
         <div class="search-wrapper" :class="{'search': search_flag}">
             <div class="head">
-                <input type="search" inputmode="search" class="input-keywords" placeholder="キーワードで検索" @click="click_search" @keyup="input_keyword">
+                <input type="search" inputmode="search" class="input-keywords" placeholder="キーワードで検索" @click="click_search" @keyup="input_keyword" @keyup.enter="enter_keyword">
                 <div class="cancel" @click="clickCancel" v-if="search_flag">
                     キャンセル
                 </div>
@@ -104,7 +104,22 @@
                 this.$store.commit('trend/cancel_search')
             },
             input_keyword() {
-                this.$store.commit('trend/display_pred', document.getElementsByClassName('input-keywords')[0].value)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('trend/display_pred', document.getElementsByClassName('input-keywords')[0].value);
+                } else{
+                    //その他
+                    this.$store.commit('trend/display_pred', document.getElementsByClassName('input-keywords')[0].value)
+                }
+            },
+            enter_keyword(){
+               if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$router.push('tagged-screen');
+                    this.$store.dispatch('tagged_screen/search_normal', document.getElementsByClassName('input-keywords')[0].value);
+                } else{
+                    //その他
+                } 
             }
         },
         mounted(){

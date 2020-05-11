@@ -51,7 +51,7 @@
             <div class="wrapper-name">おすすめ</div>
             <div class="thumbnails">
                 <div v-for="(t, i) in $store.state.home.recommend_thumbs" :key="i" class="item">
-                    <Thumbnail :src="t.src" :title="t.title"></Thumbnail>
+                    <Thumbnail :src="t.src" :title="t.title" @click.native="click_thumbnail(t.count)"></Thumbnail>
                 </div>
             </div>
         </div>
@@ -435,7 +435,6 @@
                     //その他
                     this.$store.commit('home/click_like');
                 }
-                this.$store.commit('home/click_like')
             },
             click_user(userID) {
                 this.$store.commit('click_user', userID)
@@ -450,6 +449,21 @@
             click_c_link(category) {
                 this.$router.push('trend')
                 this.$store.commit('trend/switch_category', category)
+            },
+            click_thumbnail(count){
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+
+                    //表示動画の指定
+                    this.$store.commit('home/click_thumbnail', count);
+                    //視聴回数の加算
+                    this.$store.dispatch('home/add_watch');
+                    //コメントの初期化
+                    var videoID = this.$store.state.home.videos[this.$store.state.home.video_count].videoID;
+                    this.$store.dispatch('home/init_comment', videoID);
+                } else{
+                    //その他
+                }
             }
         }
     }

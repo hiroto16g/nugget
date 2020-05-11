@@ -169,23 +169,24 @@ export default {
                 context.commit('get_search_history', payload);
             });
         },
-        //タグ検索
-        search_by_tag(context, tag){
+        //予想タグの取得
+        display_pred(context, keyword) {
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
-            formData.append('Tag', tag);
-            //タグ検索
+            formData.append('Keyword', keyword);
+            formData.append('Filter', 0);
+            //予想タグの取得
             axios
-            .post('http://localhost:8080/search-by-tag', formData)
+            .post('http://localhost:8080/search-tag', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
+                    keyword: keyword,
                 }
-                //タグ検索のセット
-                context.commit('search_by_tag', payload);
+                //予想タグのセット
+                context.commit('display_pred', payload);
             });
-        },
+        }
     },
     mutations: {
         //おすすめのセット
@@ -243,28 +244,8 @@ export default {
         determine_keywords(state, keywords) {
             state.keywords = keywords
         },
-        /*
-        search_by_tag(state, clicked_tag) {
+        search_by_tag(state, clicked_tag) {//未使用
             state.search_tag = clicked_tag
-        },
-        */
-       search_by_tag(state, payload) {
-           /*
-            var recommends = [];
-            payload.data.forEach(function(tmpContent){
-                recommends.push(
-                    {
-                        image:tmpContent.thumbnailpath,
-                        title:tmpContent.title,
-                        videoID:String(tmpContent.contentid),
-                    }
-                );
-            });
-            state.recommends[2].thumbSrc = recommends;
-            */
-
-            console.log(state);
-            console.log(payload);
         },
         cancel_search(state) {
             state.keywords = ''
@@ -276,8 +257,15 @@ export default {
         switch_category(state, category) {
             state.now_category = category
         },
-        display_pred(state, keywords) {
-            state.keywords = keywords
+        display_pred(state, payload) {
+            var pred_words = [];
+            payload.data.list.forEach(function(tag){
+                pred_words.push(tag.tag);
+            });
+            state.keywords = payload.keyword;
+            state.pred_words = pred_words;
+
+            //state.keywords = keywords
         }
     }
 }

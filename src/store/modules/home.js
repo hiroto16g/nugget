@@ -265,6 +265,7 @@ export default {
                             videoID: contentData.content.contentid,
                             src: contentData.content.thumbnailpath,
                             title: contentData.content.title,
+                            count: i,
                         }
                     )
                 }
@@ -365,6 +366,9 @@ export default {
             } else{
                 //その他
             }
+        },
+        click_thumbnail(state, count){
+            state.video_count = count;
         }
     }
 }

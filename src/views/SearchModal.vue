@@ -6,9 +6,9 @@
             </div>
             <div class="tags">
                 <div v-for="(name, i) in $store.state.trend.history" :key="i" class="tag" @click="clickTag(name)">
-                    <router-link to="/tagged-screen">
+                    <!--<router-link to="/tagged-screen">-->
                         <Chip :name="name"></Chip>
-                    </router-link>
+                    <!--</router-link>-->
                 </div>
             </div>
         </div>
@@ -76,7 +76,8 @@
             clickTag(tag) {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
-                    this.$store.commit('trend/search_by_tag', tag);
+                    this.$router.push('tagged-screen');
+                    this.$store.dispatch('tagged_screen/search_by_tag', tag);
                 }
                 else{
                     this.$store.commit('trend/search_by_tag', tag)

@@ -13,7 +13,9 @@
 
         <div class="thumbnails">
             <div v-for="(r, i) in $store.state.tagged_screen.recommends" :key="i">
-                <img class="image" :src="r.image" alt="">
+                <router-link :to="{ name: 'home', params: { videoID:r.videoID }}">
+                    <img class="image" :src="r.image" alt="">
+                </router-link>
             </div>
         </div>
     </div>

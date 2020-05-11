@@ -122,8 +122,9 @@
             clickTag(tag) {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
+                    
                     this.$router.push('tagged-screen');
-                    this.$store.dispatch('trend/search_by_tag', tag);
+                    this.$store.dispatch('tagged_screen/search_by_tag', tag);
                 }
                 else{
                     //その他
