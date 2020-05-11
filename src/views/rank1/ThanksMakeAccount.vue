@@ -54,6 +54,7 @@
                 margin-top: 1.5vw;
                 color: $light-color;
                 border-bottom: solid thin $border;
+                display: inline-block;
             }
         }
         

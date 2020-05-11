@@ -32,9 +32,9 @@
             <TextButton name="ログインする" class="with-color" @click.native="click_submit"></TextButton>
         </div>
         <div class="forgot">
-            <a href="">
+            <router-link to="/forgot-password">
                 パスワードを忘れた場合はこちら
-            </a>
+            </router-link>
         </div>
     </div>
 </template>

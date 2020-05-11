@@ -187,7 +187,7 @@
 
                     }, interval);
                 } else {
-                    this.$router.push('thanks_mkacc')
+                    this.$router.push('thanks-mkacc')
                 }
             }
         }

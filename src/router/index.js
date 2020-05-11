@@ -11,6 +11,7 @@ import LogIn from '../views/rank1/LogIn.vue'
 import TaggedScreen from '../views/rank1/TaggedScreen.vue'
 import MyPageChild from '../views/rank1/MyPageChild.vue'
 import ThanksMakeAccount from '../views/rank1/ThanksMakeAccount.vue'
+import ForgotPassword from '../views/rank1/ForgotPassword.vue'
 
 Vue.use(VueRouter)
 
@@ -70,9 +71,14 @@ const routes = [
         component: ErrorPage
     },
     {
-        path: '/thanks_mkacc',
-        name: 'thanks_mkacc',
+        path: '/thanks-mkacc',
+        name: 'thanks-mkacc',
         component: ThanksMakeAccount
+    },
+    {
+        component: ForgotPassword,
+        path: '/forgot-password',
+        name: 'forgot-password'
     }
 ]
 

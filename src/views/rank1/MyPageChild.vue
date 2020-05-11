@@ -311,9 +311,9 @@
             },
             contents() {
                 if (this.$store.state.userInfo.id == this.$store.state.clicked_userID) {
-                    return ['通知', '投稿', 'ジーニアス', '履歴', 'フォロー中', 'フォロワー']
+                    return ['通知', '投稿', 'なるほど', '履歴', 'フォロー中', 'フォロワー']
                 } else {
-                    return ['投稿', 'ジーニアス', 'フォロー中', 'フォロワー']
+                    return ['投稿', 'なるほど', 'フォロー中', 'フォロワー']
                 }
             },
         },
