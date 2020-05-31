@@ -6,9 +6,6 @@ export default {
         id: 'nobitasedge',
         bio: '「素人質問で申し訳ない」の対偶は「お灸をすえる玄人回答」',
         show_content: '通知',
-        contents: [
-            '通知', '投稿', 'ジーニアス', '履歴'
-        ],
         notif: [
             {
                 image: "https://cdn.vuetifyjs.com/images/john.jpg",

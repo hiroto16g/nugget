@@ -264,8 +264,10 @@ export default {
             });
             state.keywords = payload.keyword;
             state.pred_words = pred_words;
-
-            //state.keywords = keywords
+        },
+        //state.keywords = keywords
+        input_keywords(state, keywords) {
+            state.keywords = keywords
         }
     }
 }

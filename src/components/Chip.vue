@@ -22,6 +22,21 @@
             color: $normal-color;
         }
     }
+
+    @media screen and (min-width: 768px) {
+        .chip {
+            height: 25px;
+            font-size: 15px;
+            padding: 5px 15px 2px;
+            border: solid thin #ccc;
+            border-radius: 20px;
+            white-space: nowrap;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            color: $normal-color;
+        }
+    }
 </style>
 
 

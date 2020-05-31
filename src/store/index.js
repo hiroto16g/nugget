@@ -14,11 +14,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         userInfo: {
-            log_in: false,
-            name: '',
-            id: 'nobita',
+            log_in: true,
+            name: 'のび太さんのエッジ',
+            id: 'nobitasedge',
             image: '',
-            mail_address: 'nugget@gmail.com'
+            bio: '「素人質問で申し訳ない」の対偶は「お灸をすえる玄人回答」',
+            mail_address: 'info@nuggets.tokyo'
         },
         config: {
             SYSTEM_MODE_FRONTEND: 1,

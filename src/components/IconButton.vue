@@ -8,31 +8,38 @@
 
 
 <style lang="scss">
-    .icon-button {
-        text-align: center;
-        display: inline-block;
-        
-        .mdi {
-            display: block;
-            font-size: 7.5vw;
-            color: $light-color;
-        }
-        
-        .text {
-            letter-spacing: 0.08em;
-            color: $light-color;
-        }
-        
-        &.with-color {
+    @media screen and (max-width: 767px) {
+        .icon-button {
+            text-align: center;
+            display: inline-block;
+
             .mdi {
-                color: $brand-color;
+                display: block;
+                font-size: 7.5vw;
+                color: $light-color;
             }
 
             .text {
                 letter-spacing: 0.08em;
+                color: $light-color;
+            }
+
+            &.with-color {
+                .mdi {
+                    color: $brand-color;
+                }
+
+                .text {
+                    letter-spacing: 0.08em;
+                }
             }
         }
     }
+
+    @media screen and (min-width: 768px) {
+
+    }
+    
 </style>
 
 

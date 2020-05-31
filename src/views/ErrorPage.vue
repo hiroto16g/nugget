@@ -12,25 +12,32 @@
 
 
 <style lang="scss">
-    .error-page {
-        text-align: center;
-        
-        img {
-            margin: 20vh auto 0;
-            width: 50vw;
-        }
-        
-        .explain {
-            font-size: 5vw;
-            margin-top: 10vw;
-            color: $normal-color;
+    @media screen and (max-width: 767px) {
+        .error-page {
+            text-align: center;
+
+            img {
+                margin: 20vh auto 0;
+                width: 50vw;
+            }
+
+            .explain {
+                font-size: 5vw;
+                margin-top: 10vw;
+                color: $normal-color;
+            }
+
+            .next-action {
+                font-size: 3.4vw;
+                margin-top: 5vw;
+                color: $light-color;
+            }
         }
 
-        .next-action {
-            font-size: 3.4vw;
-            margin-top: 5vw;
-            color: $light-color;
-        }
+    }
+
+    @media screen and (min-width: 768px) {
+
     }
 </style>
 

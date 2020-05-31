@@ -11,27 +11,6 @@
 
 
 <style lang="scss">
-    .thumbnail {
-        width: 150px;
-        float: left;
-        
-        a {
-            text-decoration: none;
-            
-            img {
-                width: 150px;
-                height: 200px;
-                border-radius: 5px;
-                object-fit: cover;
-            }
-
-            .title {
-                font-size: 15px;
-                color: #4d4d4d;
-            }
-        } 
-    }
-    
     @media screen and (max-width: 767px) {
         .thumbnail {
             width: 36vw;
@@ -49,6 +28,26 @@
 
                 .title {
                     font-size: 3.6vw;
+                    color: $normal-color;
+                }
+            } 
+        }
+    }
+    
+    @media screen and (min-width: 768px) {
+        .thumbnail {
+            display: inline-block;
+
+            a {
+                text-decoration: none;
+
+                img {
+                    border-radius: 5px;
+                    object-fit: cover;
+                }
+
+                .title {
+                    font-size: 15px;
                     color: $normal-color;
                 }
             } 

@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-        <div class="tag-wrapper" v-if="$store.state.trend.now_category === 'おすすめ'">
+        <div class="tag-wrapper sp" v-if="$store.state.trend.now_category === 'おすすめ'">
             <div class="wrapper-name">
                 タグ
             </div>
@@ -36,57 +36,114 @@
 
 
 <style lang="scss">
-    .trend-normal {
-        .categories {
-            overflow-x: scroll;
-            display: flex;
-            background: $tabbar;
+    @media screen and (max-width: 767px) {
+        .trend-normal {
+            .categories {
+                overflow-x: scroll;
+                display: flex;
+                background: $tabbar;
 
-            .category {
-                display: inline-block;
+                .category {
+                    display: inline-block;
 
-                .item {
-                    font-size: 3.4vw;
-                    padding: 2vw 5.5vw;
-                    white-space: nowrap;
-                    vertical-align: middle;
-                    color: $normal-color;
-                    border-bottom: solid thin $border;
+                    .item {
+                        font-size: 3.4vw;
+                        padding: 2vw 5.5vw;
+                        white-space: nowrap;
+                        vertical-align: middle;
+                        color: $normal-color;
+                        border-bottom: solid thin $border;
 
-                    &.choiced {
-                        border-bottom: solid thin $brand-color;
+                        &.choiced {
+                            border-bottom: solid thin $brand-color;
+                        }
                     }
                 }
             }
-        }
 
-        .tag-wrapper {
-            margin-top: 8vw;
+            .tag-wrapper {
+                margin-top: 8vw;
 
-            .wrapper-name {
-                margin: 0 0 1vw 3vw;
-                color: $normal-color;
+                .wrapper-name {
+                    margin: 0 0 1vw 3vw;
+                    color: $normal-color;
+                }
+
+                .tags {
+                    margin: 0 3vw 0 6vw;
+                    overflow-x: scroll;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .tag {
+                        margin: 0 0.5vw 1vw 0;
+                        display: inline-block;
+                    }
+                }
+
             }
 
-            .tags {
-                margin: 0 3vw 0 6vw;
-                overflow-x: scroll;
-                display: flex;
-                flex-wrap: wrap;
+            .thumbnail-wrapper {
+                padding: 0 0 5vw;
 
-                .tag {
-                    margin: 0 0.5vw 1vw 0;
-                    display: inline-block;
+                .recommend-name {
+                    margin: 8vw 0 1.5vw 3vw;
                 }
             }
-
         }
 
-        .thumbnail-wrapper {
-            padding: 0 0 5vw;
+    }
 
-            .recommend-name {
-                margin: 8vw 0 1.5vw 3vw;
+    @media screen and (min-width: 768px) {
+        .trend-normal {
+            .categories {
+                display: inline-block;
+                font-size: 18px;
+                padding: 0 30px 0 30px;
+                margin-top: 43px;
+                
+                .item {
+                    padding: 5px 15px;
+                    display: inline-block;
+                    color: $light-color;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    margin: 5px 0;
+                    
+                    &.choiced {
+                        background: $brand-color;
+                        color: white;
+                    }
+                }
+            }
+            
+            .thumbnail-wrapper {
+                position: absolute;
+                top: 98px;
+                left: calc(8vw + 300px);
+                width: calc(65vw - 150px);
+                color: $normal-color;
+                
+                .recommend-name {
+                    font-size: 18px;
+                }
+                
+                .thumbnails {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 30px;
+                    
+                    .thumbnail {
+                        font-size: 15px;
+                        margin-bottom: 15px;
+                        
+                        img {
+                            width: calc((65vw - 150px) / 3.02);
+                            height: calc((65vw - 150px) / 3.02 / 3 * 4);
+                        }
+                    }
+                }
+                
             }
         }
     }

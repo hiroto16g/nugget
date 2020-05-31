@@ -18,73 +18,80 @@
 
 
 <style lang="scss">
-    .video {
-        position: relative;
+    @media screen and (max-width: 767px) {
+        .video {
+            position: relative;
 
-        video {
-            display: block;
-            width: 100vw;
-            height: calc(100vw * 4 / 3);
-        }
-        
-        .t-overlay-enter-active {
-            transition: all 0.2s ease;
-            opacity: 1;
-        }
-        
-        .t-overlay-leave-active {
-            transition: all 0.2s ease;
-            opacity: 0;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 15vw;
-            left: 0;
-            height: 90vw;
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(100, 100, 100, 0.2), rgba(0, 0, 0, 0));
-
-            .left {
-                margin-right: auto;
+            video {
+                display: block;
+                width: 100vw;
+                height: calc(100vw * 4 / 3);
             }
 
-            .right {
-                margin-left: auto;
+            .t-overlay-enter-active {
+                transition: all 0.2s ease;
+                opacity: 1;
             }
 
-            .icon-button {
-                .mdi {
-                    font-size: 15vw;
-                    text-shadow: 10px $normal-color;
-                    color: white;
+            .t-overlay-leave-active {
+                transition: all 0.2s ease;
+                opacity: 0;
+            }
+
+            .overlay {
+                position: absolute;
+                top: 15vw;
+                left: 0;
+                height: 90vw;
+                width: 100vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(rgba(0, 0, 0, 0), rgba(100, 100, 100, 0.2), rgba(0, 0, 0, 0));
+
+                .left {
+                    margin-right: auto;
+                }
+
+                .right {
+                    margin-left: auto;
+                }
+
+                .icon-button {
+                    .mdi {
+                        font-size: 15vw;
+                        text-shadow: 10px $normal-color;
+                        color: white;
+                    }
+                }
+            }
+
+            .control-panel {
+                position: absolute;
+                top: 15vw;
+                height: 90vw;
+
+                &.prev {
+                    width: 20vw;
+                    left: 0;
+                }
+
+                &.play {
+                    width: 60vw;
+                    left: 20vw;
+                }
+
+                &.next {
+                    width: 20vw;
+                    right: 0;
                 }
             }
         }
 
-        .control-panel {
-            position: absolute;
-            top: 15vw;
-            height: 90vw;
+    }
 
-            &.prev {
-                width: 20vw;
-                left: 0;
-            }
+    @media screen and (min-width: 768px) {
 
-            &.play {
-                width: 60vw;
-                left: 20vw;
-            }
-
-            &.next {
-                width: 20vw;
-                right: 0;
-            }
-        }
     }
 
 </style>

@@ -25,40 +25,47 @@
 
 
 <style lang="scss">
-    .search-modal {
-        .history-wrapper {
-            margin-top: 8vw;
+    @media screen and (max-width: 767px) {
+        .search-modal {
+            .history-wrapper {
+                margin-top: 8vw;
 
-            .wrapper-name {
-                margin: 0 0 1vw 3vw;
-                font-size: 3.6vw;
+                .wrapper-name {
+                    margin: 0 0 1vw 3vw;
+                    font-size: 3.6vw;
+                }
+
+                .tags {
+                    margin: 0 3vw 0 6vw;
+                    overflow-x: scroll;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .tag {
+                        margin: 0 0.5vw 1vw 0;
+                        display: inline-block;
+                    }
+                }
             }
 
-            .tags {
-                margin: 0 3vw 0 6vw;
-                overflow-x: scroll;
-                display: flex;
-                flex-wrap: wrap;
+            .pred-wrapper {
+                margin-top: 5vw;
 
-                .tag {
-                    margin: 0 0.5vw 1vw 0;
-                    display: inline-block;
+                .word {
+                    padding: 2vw 8vw;
+                    font-size: 4vw;
+
+                    a {
+                        color: $normal-color;
+                    }
                 }
             }
         }
-        
-        .pred-wrapper {
-            margin-top: 5vw;
-            
-            .word {
-                padding: 2vw 8vw;
-                font-size: 4vw;
-                
-                a {
-                    color: $normal-color;
-                }
-            }
-        }
+
+    }
+
+    @media screen and (min-width: 768px) {
+
     }
 
 </style>

@@ -6,22 +6,29 @@
 
 
 <style lang="scss">
-    .text-button {
-        text-align: center;
-        display: inline-block;
-        border: solid thin #ccc;
-        border-radius: 5px;
-        letter-spacing: 0.08em;
+    @media screen and (max-width: 767px) {
+        .text-button {
+            text-align: center;
+            display: inline-block;
+            border: solid thin #ccc;
+            border-radius: 5px;
+            letter-spacing: 0.08em;
 
-        &:hover {
-            cursor: pointer;
-        }
-        
-        &.with-color {
-            border: none;
-            background-color: #ffc814;
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.with-color {
+                border: none;
+                background-color: #ffc814;
+            }
         }
     }
+
+    @media screen and (min-width: 768px) {
+
+    }
+    
 </style>
 
 

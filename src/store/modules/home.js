@@ -16,7 +16,7 @@ export default {
                 videoID: '',
                 userID: 'tsibo',
                 category: '自然科学',
-                tags: ['物理', '定義', 'レオロジー', '非ニュートン流体', '猫'],
+                tags: ['物理', '定義', 'レオロジー', '非ニュートン流体', 'cat'],
                 src: require('../../assets/猫は液体なのか.mp4'),
                 title: '猫は液体なのか？物理学の盲点',
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',

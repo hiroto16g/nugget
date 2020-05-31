@@ -57,80 +57,87 @@
 
 
 <style lang="scss">
-    .make-account {
-        color: $normal-color;
+    @media screen and (max-width: 767px) {
+        .make-account {
+            color: $normal-color;
 
-        .top {
-            background: #fafafa;
-            padding: 5vw 3vw;
-            font-size: 4vw;
-            border-bottom: solid thin #ccc;
-        }
+            .top {
+                background: #fafafa;
+                padding: 5vw 3vw;
+                font-size: 4vw;
+                border-bottom: solid thin #ccc;
+            }
 
-        .contents {
-            margin: 10vw 3vw 0;
+            .contents {
+                margin: 10vw 3vw 0;
 
-            .content {
-                width: 100%;
-                margin-top: 7vw;
+                .content {
+                    width: 100%;
+                    margin-top: 7vw;
 
-                .title {
-                    margin-bottom: 0.7vw;
-                    font-size: 4vw;
-                }
-
-                .input {
-                    position: relative;
-
-                    input {
-                        border: solid thin $normal-color;
-                        border-radius: 1vw;
-                        padding: 3vw 3vw 2.8vw;
-                        width: calc(100% - 3vw * 2);
-                        font-size: 4.5vw;
+                    .title {
+                        margin-bottom: 0.7vw;
+                        font-size: 4vw;
                     }
 
-                    .td-button {
-                        font-size: 3.5vw;
-                        position: absolute;
-                        top: 0.5vw;
-                        right: 3vw;
-                        color: $normal-color;
-                        padding: 3vw 0;
+                    .input {
+                        position: relative;
+
+                        input {
+                            border: solid thin $normal-color;
+                            border-radius: 1vw;
+                            padding: 3vw 3vw 2.8vw;
+                            width: calc(100% - 3vw * 2);
+                            font-size: 4.5vw;
+                        }
+
+                        .td-button {
+                            font-size: 3.5vw;
+                            position: absolute;
+                            top: 0.5vw;
+                            right: 3vw;
+                            color: $normal-color;
+                            padding: 3vw 0;
+                        }
+                    }
+
+                    .hint {
+                        font-size: 3.2vw;
+                        margin-top: 1vw;
+                        color: $light-color;
+                    }
+
+                    .error-text {
+                        font-size: 3.2vw;
+                        margin-top: 1vw;
+                        color: $attention-color;
                     }
                 }
+            }
 
-                .hint {
-                    font-size: 3.2vw;
-                    margin-top: 1vw;
-                    color: $light-color;
-                }
+            .note {
+                font-size: 3.6vw;
+                padding: 10vw 3vw;
+            }
 
-                .error-text {
-                    font-size: 3.2vw;
-                    margin-top: 1vw;
-                    color: $attention-color;
+            .submit {
+                text-align: center;
+
+                .text-button {
+                    padding: 3vw 10vw;
+                    border-radius: 7vw;
+
+                    &.with-color {
+                        color: #fbfbfb;
+                    }
                 }
             }
         }
 
-        .note {
-            font-size: 3.6vw;
-            padding: 10vw 3vw;
-        }
+    }
 
-        .submit {
-            text-align: center;
+    @media screen and (min-width: 768px) {
 
-            .text-button {
-                padding: 3vw 10vw;
-                border-radius: 7vw;
-
-                &.with-color {
-                    color: #fbfbfb;
-                }
-            }
-        }
     }
 
 </style>

@@ -18,39 +18,46 @@
 
 
 <style lang="scss">
-    .not-log-in {
-        img {
-            display: block;
-            margin: 15vh auto 0;
-            width: 50vw;
-        }
-        
-        .explain {
-            font-size: 5vw;
-            text-align: center;
-            margin-top: 5vw;
-            color: $normal-color;
-        }
-        
-        .buttons {
-            position: absolute;
-            bottom: 12vh;
-            left: 0;
-            right: 0;
-            
-            .text-button {
+    @media screen and (max-width: 767px) {
+        .not-log-in {
+            img {
                 display: block;
-                width: 55vw;
-                padding: 2vw 0;
-                margin: 5vw auto 0;
+                margin: 15vh auto 0;
+                width: 50vw;
+            }
+
+            .explain {
+                font-size: 5vw;
+                text-align: center;
+                margin-top: 5vw;
                 color: $normal-color;
-                border-radius: 7vw;
-                
-                &.with-color {
-                    color: white;
+            }
+
+            .buttons {
+                position: absolute;
+                bottom: 12vh;
+                left: 0;
+                right: 0;
+
+                .text-button {
+                    display: block;
+                    width: 55vw;
+                    padding: 2vw 0;
+                    margin: 5vw auto 0;
+                    color: $normal-color;
+                    border-radius: 7vw;
+
+                    &.with-color {
+                        color: white;
+                    }
                 }
             }
         }
+
+    }
+
+    @media screen and (min-width: 768px) {
+
     }
 </style>
 

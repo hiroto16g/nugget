@@ -22,15 +22,15 @@
                     </div>
                 </div>
                 <div class="content">
-                    <input class="name" type="text" @keyup="keyup_name">
+                    <input class="name" type="text" @keyup="keyup_name" :value="name">
                 </div>
                 <div class="content">
-                    <textarea class="bio" rows="3" placeholder="自己紹介" @keyup="keyup_bio"></textarea>
+                    <textarea class="bio" rows="3" placeholder="自己紹介" @keyup="keyup_bio" :value="bio"></textarea>
                 </div>
             </div>
             <div class="private">
                 <div class="content">
-                    <input class="mail" type="email" @keyup="keyup_mail">
+                    <input class="mail" type="email" @keyup="keyup_mail" :value="mail">
                 </div>
             </div>
         </div>
@@ -39,62 +39,69 @@
 
 
 <style lang="scss">
-    .edit-profile {
-        .top {
-            padding: 3.6vw 3vw 3vw;
-            display: flex;
-            justify-content: center;
-            font-size: 4vw;
-            background: $tabbar;
-            border-bottom: solid thin $border;
-            color: $normal-color;
+    @media screen and (max-width: 767px) {
+        .edit-profile {
+            .top {
+                padding: 3.6vw 3vw 3vw;
+                display: flex;
+                justify-content: center;
+                font-size: 4vw;
+                background: $tabbar;
+                border-bottom: solid thin $border;
+                color: $normal-color;
 
-            .cancel {
-                width: 25vw;
-                text-align: left;
-                color: $light-color;
-            }
-
-            .title {
-                width: calc(100vw - (25vw + 3vw) * 2);
-                text-align: center;
-            }
-
-            .save {
-                width: 25vw;
-                text-align: right;
-            }
-        }
-
-        .edit {
-            margin: 0 3vw;
-            font-size: 5vw;
-
-            .content {
-                width: calc(100vw - 3vw * 2);
-                
-                &.image {
-                    margin: 10vw 0 7vw;
+                .cancel {
+                    width: 25vw;
+                    text-align: left;
+                    color: $light-color;
                 }
-                
-                .user-image {
+
+                .title {
+                    width: calc(100vw - (25vw + 3vw) * 2);
                     text-align: center;
-                    img {
-                        width: 22vw;
+                }
+
+                .save {
+                    width: 25vw;
+                    text-align: right;
+                }
+            }
+
+            .edit {
+                margin: 0 3vw;
+                font-size: 5vw;
+
+                .content {
+                    width: calc(100vw - 3vw * 2);
+
+                    &.image {
+                        margin: 10vw 0 7vw;
+                    }
+
+                    .user-image {
+                        text-align: center;
+                        img {
+                            width: 22vw;
+                        }
+                    }
+
+                    input,
+                    textarea {
+                        border: none;
+                        border-bottom: solid thin $border;
+                        width: calc(100% - 3vw * 2);
+                        font-size: 4.5vw;
+                        padding: 3.6vw 3vw 3vw;
+                        margin-bottom: 0.3vw;
                     }
                 }
-                
-                input,
-                textarea {
-                    border: none;
-                    border-bottom: solid thin $border;
-                    width: calc(100% - 3vw * 2);
-                    font-size: 4.5vw;
-                    padding: 3.6vw 3vw 3vw;
-                    margin-bottom: 0.3vw;
-                }
             }
         }
+
+    }
+
+    @media screen and (min-width: 768px) {
+
     }
 
 </style>
@@ -109,13 +116,9 @@
         },
         data() {
             return {
-                openValue: {
-                    name: '名前',
-                    bio: '',
-                },
-                privateValue: {
-                    mail: 'nugget@gmail.com'
-                }
+                name: this.$store.state.userInfo.name,
+                bio: this.$store.state.userInfo.bio,
+                mail: this.$store.state.userInfo.mail_address,
             }
         },
         methods: {
@@ -123,16 +126,19 @@
                 this.$router.go(-1)
             },
             click_save() {
+                this.$store.state.userInfo.name = this.name
+                this.$store.state.userInfo.bio = this.bio
+                this.$store.state.userInfo.mail = this.mail
                 this.$router.go(-1)
             },
             keyup_name() {
-                this.openValue.name = document.getElementsByClassName('name')[0].value
+                this.name = document.getElementsByClassName('name')[0].value
             },
             keyup_bio() {
-                this.openValue.bio = document.getElementsByClassName('bio')[0].value
+                this.bio = document.getElementsByClassName('bio')[0].value
             },
             keyup_mail() {
-                this.privateValue.mail = document.getElementsByClassName('mail')[0].value
+                this.mail = document.getElementsByClassName('mail')[0].value
             }
         }
     }

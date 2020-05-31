@@ -30,49 +30,56 @@
 
 
 <style lang="scss">
-    .thanks-make-account {
-        text-align: center;
-        padding: 20vh 5vw 0;
-        line-height: 1.7;
-        letter-spacing: 0.08em;
-        color: $normal-color;
-        
-        .welcome {
-            font-size: 5.5vw;
-            
-            .name span {
+    @media screen and (max-width: 767px) {
+        .thanks-make-account {
+            text-align: center;
+            padding: 20vh 5vw 0;
+            line-height: 1.7;
+            letter-spacing: 0.08em;
+            color: $normal-color;
+
+            .welcome {
+                font-size: 5.5vw;
+
+                .name span {
+                    font-size: 4.5vw;
+                }
+            }
+
+            .text {
                 font-size: 4.5vw;
+                margin-top: 7vw;
+
+                .help {
+                    font-size: 3.2vw;
+                    margin-top: 1.5vw;
+                    color: $light-color;
+                    border-bottom: solid thin $border;
+                    display: inline-block;
+                }
             }
-        }
-        
-        .text {
-            font-size: 4.5vw;
-            margin-top: 7vw;
-            
-            .help {
-                font-size: 3.2vw;
-                margin-top: 1.5vw;
-                color: $light-color;
-                border-bottom: solid thin $border;
+
+            .mail-check .main span {
+                background: $brand-color;
                 display: inline-block;
+
+                &.top {
+                    padding: 3vw 3vw 1vw;
+                    border-radius: 1.5vw 1.5vw 1vw 1vw;
+                }
+
+                &.bottom {
+                    padding: 3vw 4vw 2.5vw;
+                    border-radius: 1.5vw;
+                    margin-bottom: 1vw;
+                }
             }
         }
-        
-        .mail-check .main span {
-            background: $brand-color;
-            display: inline-block;
-            
-            &.top {
-                padding: 3vw 3vw 1vw;
-                border-radius: 1.5vw 1.5vw 1vw 1vw;
-            }
-            
-            &.bottom {
-                padding: 3vw 4vw 2.5vw;
-                border-radius: 1.5vw;
-                margin-bottom: 1vw;
-            }
-        }
+
+    }
+
+    @media screen and (min-width: 768px) {
+
     }
 </style>
 
