@@ -138,6 +138,7 @@
 
 <script>
     import TextButton from '@/components/TextButton.vue'
+    import axios from 'axios'
 
     export default {
         components: {
@@ -172,22 +173,39 @@
                 this.name = document.getElementsByClassName('ep__name')[0].value
             },
             click_submit_btn() {
-                this.$store.state.mkacc.inputs.name = this.name
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    
+                    //POSTデータ
+                    var formData = new FormData();
+                    formData.append('UserName', this.name);
+                    formData.append('Password', this.$store.state.mkacc.inputs.password);
+                    formData.append('Email', this.$store.state.mkacc.inputs.mail_address);
+                    //入力情報送信
+                    axios
+                    .post('http://localhost:8080/pre-make-account', formData)
+                    .then(function (response) {
+                        console.log(response);
+                    });
+                } else{
+                    //その他   
+                    this.$store.state.mkacc.inputs.name = this.name
                 
-                if (this.is_error) {
-                    const duration = 100;
-                    const interval = 10;
-                    const step = -window.scrollY / Math.ceil(duration / interval);
-                    const timer = setInterval(() => {
-                        window.scrollBy(0, step);
+                    if (this.is_error) {
+                        const duration = 100;
+                        const interval = 10;
+                        const step = -window.scrollY / Math.ceil(duration / interval);
+                        const timer = setInterval(() => {
+                            window.scrollBy(0, step);
 
-                        if (window.scrollY <= 0) {
-                            clearInterval(timer);
-                        }
+                            if (window.scrollY <= 0) {
+                                clearInterval(timer);
+                            }
 
-                    }, interval);
-                } else {
-                    this.$router.push('thanks-mkacc')
+                        }, interval);
+                    } else {
+                        this.$router.push('thanks-mkacc')
+                    }
                 }
             }
         }
