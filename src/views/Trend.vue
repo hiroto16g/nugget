@@ -110,7 +110,7 @@
                 document.getElementsByClassName('input-keywords')[0].value = ''
                 this.$store.commit('trend/cancel_search')
             },
-            input_keyword() {   //使わないかも・・・
+            input_keyword() {   //使わないかも・・・keyup_keywordに移植
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
                     this.$store.dispatch('trend/display_pred', document.getElementsByClassName('input-keywords')[0].value);
@@ -131,6 +131,7 @@
             keyup_keyword() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
+                    this.$store.dispatch('trend/display_pred', document.getElementsByClassName('input-keywords')[0].value);
                 } else{
                     //その他
                     this.$store.commit('trend/input_keywords', document.getElementsByClassName('input-keywords')[0].value)

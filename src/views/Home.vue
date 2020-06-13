@@ -37,11 +37,18 @@
           //コメントの初期化
           this.$store.dispatch('home/init_comment', newVideoID);
         } else{
-          //下のメニューから選んでホーム画面に来た時
-          //ホーム画面を更新しない時
+          if(videoID == null || videoID == ""){
+            //初期起動時
+            //ランダムな動画を取得して表示
+            this.$store.dispatch('home/init_random_video');
 
-          //前回表示していた動画のコメントをセット
-          this.$store.dispatch('home/init_comment', videoID);
+          }else{
+            //下のメニューから選んでホーム画面に来た時
+            //ホーム画面を更新しない
+
+            //前回表示していた動画のコメントをセット
+            this.$store.dispatch('home/init_comment', videoID);
+          }
         }
       }
     },

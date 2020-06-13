@@ -101,6 +101,22 @@ export default {
                 context.dispatch('add_watch');
             });
         },
+        //ランダム動画の取得
+        init_random_video(context){
+            //POSTデータ
+            var formData = new FormData();
+            formData.append('UserId', user_id);
+            //動画のID取得
+            axios
+            .post('http://localhost:8080/watch-random-content-json', formData)
+            .then(function (response) {
+                var videoID = response.data;
+                //動画の取得
+                context.dispatch('init_video', videoID);
+                //コメント取得
+                context.dispatch('init_comment', videoID);
+            });
+        },
         //コメントの取得
         init_comment(context, videoID){
             //POSTデータ
@@ -322,6 +338,7 @@ export default {
                         image: comment.icon,
                         name: comment.username,
                         comment: comment.text,
+                        id: comment.userid,
                     }
                 );
                 //コメント総数の加算

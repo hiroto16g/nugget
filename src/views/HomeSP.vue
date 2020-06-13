@@ -391,6 +391,7 @@
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
                     this.$store.dispatch('home/toggle_follow');
+                    this.fbText = this.video.this_audience.followed ? 'フォローする' : 'フォロー中'
                 } else{
                     //その他
                     if (this.$store.state.userInfo.log_in) {

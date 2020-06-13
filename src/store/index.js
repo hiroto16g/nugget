@@ -17,7 +17,7 @@ export default new Vuex.Store({
             log_in: true,
             name: 'のび太さんのエッジ',
             id: 'nobitasedge',
-            image: '',
+            image: 'https://cdn.vuetifyjs.com/images/john.jpg',
             bio: '「素人質問で申し訳ない」の対偶は「お灸をすえる玄人回答」',
             mail_address: 'info@nuggets.tokyo'
         },

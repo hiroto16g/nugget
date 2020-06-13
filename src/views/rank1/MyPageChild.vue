@@ -62,7 +62,7 @@
             <div class="thumbnail-wrapper" v-else>
                 <div class="thumbnails">
                     <div v-for="(t, i) in $store.state.mypage.thumbSrc" :key="i" class="item">
-                        <Thumbnail :src="t.src" :title="t.title"></Thumbnail>
+                        <Thumbnail :src="t.src" :title="t.title" :videoID="t.videoID"></Thumbnail>
                     </div>
                 </div>
             </div>
@@ -374,10 +374,22 @@
         },
         methods: {
             click_content(content_name) {
-                this.$store.commit('mypage/switch_content', content_name)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('mypage/switch_content', content_name)
+                }else{
+                    //その他
+                    this.$store.commit('mypage/switch_content', content_name)
+                }
             },
             click_f_btn(i) {
-                this.$store.commit('mypage/toggle_follow', i)
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('mypage/toggle_follow', i)
+                }else{
+                    //その他
+                    this.$store.commit('mypage/toggle_follow', i)
+                }
             },
 
             fb_text(following) {
@@ -391,6 +403,13 @@
         },
         created() {
             this.$store.commit('mypage/switch_content', this.contents[0])
+        },
+        mounted(){
+            if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                //統合モード
+                this.$store.dispatch('mypage/get_profile');
+                this.$store.dispatch('mypage/switch_content', "通知")
+            }
         }
     }
 

@@ -15,10 +15,11 @@
             <div class="open">
                 <div class="image content">
                     <div class="user-image">
-                        <AvatarImage></AvatarImage>
+                        <AvatarImage :src="icon.src"></AvatarImage>
                     </div>
                     <div class="input">
 <!--                        <input type="file">-->
+                        <InputImage @iiChange="onFileChange"></InputImage>
                     </div>
                 </div>
                 <div class="content">
@@ -109,16 +110,23 @@
 
 <script>
     import AvatarImage from '@/components/AvatarImage.vue'
+    import InputImage from '@/components/InputImage.vue'
+    import axios from 'axios'
 
     export default {
         components: {
-            AvatarImage
+            AvatarImage,
+            InputImage,
         },
         data() {
             return {
                 name: this.$store.state.userInfo.name,
                 bio: this.$store.state.userInfo.bio,
                 mail: this.$store.state.userInfo.mail_address,
+                icon:{
+                    data: new File([], null) ,
+                    src: this.$store.state.userInfo.image,
+                },
             }
         },
         methods: {
@@ -126,10 +134,29 @@
                 this.$router.go(-1)
             },
             click_save() {
-                this.$store.state.userInfo.name = this.name
-                this.$store.state.userInfo.bio = this.bio
-                this.$store.state.userInfo.mail = this.mail
-                this.$router.go(-1)
+                //仮置き
+                var user_id = 'snack-pesto-clots';
+
+                //POSTデータ
+                var formData = new FormData();
+                formData.append('UserId', user_id);
+                formData.append('UserName', this.name);
+                formData.append('SelfIntro', this.bio);
+                formData.append('Email', this.mail);
+                formData.append('Icon', this.icon.data);
+                var self = this;
+                //プロフィールの変更
+                axios
+                .post('http://localhost:8080/change-profile-json', formData)
+                .then(function (response) {
+                    console.log(response);
+                    
+                    self.$store.state.userInfo.name = self.name
+                    self.$store.state.userInfo.bio = self.bio
+                    self.$store.state.userInfo.mail = self.mail
+                    self.$store.state.userInfo.image = self.icon.src
+                    self.$router.go(-1)
+                });
             },
             keyup_name() {
                 this.name = document.getElementsByClassName('name')[0].value
@@ -139,7 +166,21 @@
             },
             keyup_mail() {
                 this.mail = document.getElementsByClassName('mail')[0].value
-            }
+            },
+            //画像を選択
+            onFileChange: function(e) {
+                var files = e.target.files || e.dataTransfer.files;
+                this.createImage(files[0]);
+                this.icon.data = files[0];
+            },
+            // アップロードした画像を表示
+            createImage: function(file) {
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    this.icon.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
         }
     }
 
