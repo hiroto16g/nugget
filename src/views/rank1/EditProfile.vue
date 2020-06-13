@@ -102,7 +102,60 @@
     }
 
     @media screen and (min-width: 768px) {
+        .edit-profile {
+            width: calc(65vw - 150px);
+            max-width: 900px;
+            margin: auto;
 
+            .top {
+                position: relative;
+                margin-bottom: 80px;
+
+                .cancel,
+                .save {
+                    position: absolute;
+                    top: 2px;
+                    font-size: 18px;
+                }
+
+                .cancel {
+                    left: 0;
+                }
+
+                .save {
+                    right: 0;
+                }
+
+                .title {
+                    text-align: center;
+                    font-size: 22px;
+                }
+            }
+
+            .edit {
+                margin: auto;
+
+                input,
+                textarea {
+                    width: 400px;
+                    padding: 12px 12px;
+                    font-size: 18px;
+                    color: $normal-color;
+                    border: solid thin $normal-color;
+                    border-radius: 5px;
+                    display: block;
+                    margin: 0 auto 30px;
+                }
+
+                .open {
+                    .avatar-image {
+                        width: 120px;
+                        margin: 0 auto 50px;
+                        display: block;
+                    }
+                }
+            }
+        }
     }
 
 </style>

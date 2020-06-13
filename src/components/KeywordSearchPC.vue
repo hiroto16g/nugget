@@ -56,7 +56,7 @@
                     top: 0px;
                     background: #4D4D4D;
                     color: white;
-                    padding: 8px 15px 9px;
+                    padding: 8px 15px;
                     font-size: 15px;
                     border-radius: 0 5px 5px 0;
                     cursor: pointer;

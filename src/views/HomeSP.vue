@@ -62,7 +62,7 @@
             </div>
             <div class="input-area" v-show="$store.state.userInfo.log_in">
                 <AvatarImage></AvatarImage>
-                <textarea class="input-comment" placeholder="コメントを投稿" @keyup="keyup_comment"></textarea>
+                <textarea class="input-comment" id="h__c__input-area__input-comment" placeholder="コメントを投稿" @keyup="keyup_comment"></textarea>
                 <IconButton :class="{'can-send': comment}" icon="mdi-send" @click.native="post_comment"></IconButton>
             </div>
             <div class="comment" v-for="(c, i) in comments" :key="i">
@@ -374,7 +374,7 @@
                 },
                 fbText: 'フォローする',
                 comment: '',
-                show_detail: false
+                show_detail: false,
             }
         },
         computed: {
@@ -409,7 +409,7 @@
                     //その他
                     this.$store.commit('home/post_comment', this.comment)
                 }
-            },
+            }
             */
             post_comment() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
@@ -422,19 +422,24 @@
                     //その他
                     this.$store.commit('home/post_comment', this.comment)
                     this.comment = ''
+                    document.getElementById('h__c__input-area__input-comment').value = ''
                     document.getElementsByClassName('input-comment')[0].value = ''
                 }
             },
             keyup_comment() {
-                this.comment = document.getElementsByClassName('input-comment')[0].value
+                this.comment = document.getElementById('h__c__input-area__input-comment').value
             },
             click_like() {
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                     //統合モード
-                    this.$store.dispatch('home/click_like');
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.dispatch('home/click_like');
+                    }
                 } else{
                     //その他
-                    this.$store.commit('home/click_like');
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.commit('home/click_like');
+                    }
                 }
             },
             click_user(userID) {

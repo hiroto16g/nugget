@@ -3,7 +3,7 @@
         <div class="navs">
             <router-link to="/">ホーム</router-link>
             <router-link to="/trend">トレンド</router-link>
-            <router-link :to="this.$store.state.userInfo.log_in ? '/my-page/' + this.$store.state.userInfo.id : 'not-log-in'" @click="click_mypage">
+            <router-link :to="this.$store.state.userInfo.log_in ? '/my-page/' + this.$store.state.userInfo.id : 'not-log-in'" @click.native="click_mypage">
                 マイページ
             </router-link>
         </div>
@@ -30,7 +30,6 @@
                 font-weight: bold;
                 color: $light-color;
                 text-decoration: none;
-                vertical-align: middle;
                 display: block;
                 margin-bottom: 20px;
 

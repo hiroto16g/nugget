@@ -122,6 +122,7 @@
                 top: 98px;
                 left: calc(8vw + 300px);
                 width: calc(65vw - 150px);
+                max-width: 900px;
                 color: $normal-color;
                 
                 .recommend-name {
@@ -139,11 +140,12 @@
                         
                         img {
                             width: calc((65vw - 150px) / 3.02);
+                            max-width: calc(900px / 3.02);
                             height: calc((65vw - 150px) / 3.02 / 3 * 4);
+                            max-height: calc(900px / 3.02 / 3 * 4);
                         }
                     }
                 }
-                
             }
         }
     }

@@ -2,7 +2,7 @@
     <div class="my-page-child">
         <div class="user-info">
             <div class="top">
-                <AvatarImage></AvatarImage>
+                <AvatarImage :src="$store.state.mypage.image"></AvatarImage>
                 <router-link to="/edit-profile" v-show="this_is_me">
                     <TextButton name="プロフィールを変更"></TextButton>
                 </router-link>
@@ -19,12 +19,13 @@
                 <div class="bio">
                     {{ $store.state.mypage.bio }}
                 </div>
-<!--                <IconButton icon="mdi-chevron-down"></IconButton>-->
             </div>
         </div>
         <div class="switch-bar">
-            <div v-for="(c, i) in contents" :key="i" :class="{'show': $store.state.mypage.show_content == c}" @click="click_content(c)">
-                {{ c }}
+            <div v-for="(c, i) in contents" :key="i" @click="click_content(c)">
+                <div class="item" :class="{'show': $store.state.mypage.show_content == c}">
+                    {{ c }}
+                </div>
             </div>
         </div>
         <div class="contents">
@@ -288,7 +289,7 @@
     
     @media screen and (min-width: 768px) {
         .my-page-child {
-            padding: 0 10vw;
+            padding-left: 210px;
             position: relative;
             
             .user-info {
@@ -313,11 +314,14 @@
                 .middle {
                     position: absolute;
                     top: 10px;
-                    left: calc(10vw + 150px + 20px);
+                    left: calc(210px + 150px + 20px);
+                    white-space: nowrap;
                     
                     .user-name {
                         font-size: 25px;
                         color: $normal-color;
+                        text-overflow: ellipsis;
+                        -webkit-text-overflow: ellipsis;
                     }
                     
                     .user-id {
@@ -333,7 +337,160 @@
             }
             
             .switch-bar {
+                display: inline-block;
+                font-size: 18px;
+                padding: 0 30px 0 30px;
+                margin-top: 43px;
+                position: fixed;
+                top: 139px;
+                left: calc(8vw + 103px);
                 
+                .item {
+                    padding: 5px 15px;
+                    display: inline-block;
+                    color: $light-color;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    margin: 5px 0;
+                    
+                    &.show {
+                        background: $brand-color;
+                        color: white;
+                    }
+                }
+            }
+
+            .contents {
+                margin-top: 80px;
+                width: calc(65vw - 150px);
+                max-width: 900px;
+
+                .ntf-wrapper {
+                    .ntf {
+                        display: flex;
+                        margin-bottom: 30px;
+
+                        .left {
+                            .avatar-image {
+                                width: 60px;
+                            }
+                        }
+
+                        .right {
+                            margin-left: 10px;
+                            width: calc(65vw - 150px - 70px);
+                            max-width: 900px;
+
+                            .top {
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 3px;
+
+                                .date {
+                                    margin-left: auto;
+                                    font-size: 14px;
+                                    color: $light-color;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .follow-wrapper {
+                    .follow {
+                        display: flex;
+                        margin-bottom: 30px;
+
+                        .image {
+                            .avatar-image {
+                                width: 60px;
+                            }
+                        }
+
+                        .text {
+                            margin-left: 10px;
+                            width: calc(100% - 60px - 10px);
+
+                            .top {
+                                display: grid;
+                                grid: 
+                                    "name btn" 22px
+                                    "id   btn" 16px
+                                    / 1fr 155px;
+                                grid-row-gap: 3px;
+                                grid-column-gap: 10px;
+                                white-space: nowrap;
+
+                                .name {
+                                    grid-area: name;
+                                    font-size: 18px;
+                                    color: $normal-color;
+                                    font-weight: 400;
+                                    text-overflow: ellipsis;
+                                    -webkit-text-overflow: ellipsis;
+                                }
+
+                                .id {
+                                    grid-area: id;
+                                    font-size: 14px;
+                                    color: $light-color;
+                                }
+
+                                .btn {
+                                    grid-area: btn;
+                                    margin: auto;
+                                    background: $brand-color;
+                                    color: white;
+                                    width: 100%;
+                                    text-align: center;
+                                    border-radius: 5px;
+                                    padding: 8px 0;
+                                    font-size: 18px;
+
+                                    &.following {
+                                        background: white;
+                                        color: $normal-color;
+                                        border: solid thin $border;
+                                    }
+                                }
+                            }
+
+                            .bio {
+                                font-size: 18px;
+                                color: $normal-color;
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .thumbnail-wrapper {
+                    width: calc(65vw - 150px);
+                    max-width: 900px;
+                    color: $normal-color;
+                    
+                    .recommend-name {
+                        font-size: 18px;
+                    }
+                    
+                    .thumbnails {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 30px;
+                        
+                        .thumbnail {
+                            font-size: 15px;
+                            margin-bottom: 15px;
+                            
+                            img {
+                                width: calc((65vw - 150px) / 3.02);
+                                max-width: calc(900px / 3.02);
+                                height: calc((65vw - 150px) / 3.02 / 3 * 4);
+                                max-height: calc(900px / 3.02 / 3 * 4);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -14,7 +14,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         userInfo: {
-            log_in: true,
+            log_in: false,
             name: 'のび太さんのエッジ',
             id: 'nobitasedge',
             image: 'https://cdn.vuetifyjs.com/images/john.jpg',
