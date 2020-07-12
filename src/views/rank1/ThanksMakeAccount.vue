@@ -11,7 +11,7 @@
             <div class="main">
                 {{ user_info.mail_address }} にメールをお送りいたしました
             </div>
-            <router-link class="fix help" to="/make-account">
+            <router-link class="fix help" to="/edit-profile">
                 入力情報を修正する
             </router-link>
         </div>
