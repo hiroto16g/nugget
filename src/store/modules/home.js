@@ -2,9 +2,6 @@ import axios from 'axios'
 
 /* eslint-disable no-console */
 
-//仮置き
-var user_id = 'snack-pesto-clots';
-
 export default {
     namespaced: true,
     
@@ -87,7 +84,7 @@ export default {
             //POSTデータ
             var formData = new FormData();
             formData.append('ContentId', videoID);
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //動画の取得
             axios
             .post('http://localhost:8080/watch-content-json', formData)
@@ -105,7 +102,7 @@ export default {
         init_random_video(context){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //動画のID取得
             axios
             .post('http://localhost:8080/watch-random-content-json', formData)
@@ -122,7 +119,7 @@ export default {
             //POSTデータ
             var formData = new FormData();
             formData.append('ContentId', videoID);
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //コメントの取得
             axios
             .post('http://localhost:8080/get-comments', formData)
@@ -132,6 +129,8 @@ export default {
                 }
                 //コメントのセット
                 context.commit('init_comment', payload);
+                //フォロー関係を最新化
+                context.dispatch('refresh_follow', videoID);
             });
         },
         //コメントの送信
@@ -142,7 +141,7 @@ export default {
             //POSTデータ
             var formData = new FormData();
             formData.append('ContentId', videoID);
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             formData.append("Text", comment);
             //コメントの取得
             axios
@@ -155,6 +154,26 @@ export default {
                 context.commit('post_comment', payload);
             });
         },
+        //フォロー関係を最新化
+        refresh_follow(context, videoID){
+            var video_count = context.state.video_count;
+            //POSTデータ
+            var formData = new FormData();
+            formData.append('ContentId', videoID);
+            formData.append('UserId', this.state.userInfo.id);
+            //コールバック転送データ
+            var payload = {
+                video_count: video_count,
+            }
+            //フォロー関係の取得
+            axios
+            .post('http://localhost:8080/refresh-follow', formData)
+            .then(function (response) {
+                payload.data = response.data;
+                //フォロー関係のセット
+                context.commit('refresh_follow', payload);
+            });
+        },
         //ジーニアスの押下
         click_like(context){
             var videos = context.state.videos;
@@ -164,7 +183,7 @@ export default {
             //POSTデータ
             var formData = new FormData();
             formData.append('ContentId', videoID);
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //コールバック転送データ
             var payload = {
                 video_count: video_count,
@@ -189,12 +208,12 @@ export default {
         toggle_follow(context){
             var videos = context.state.videos;
             var video_count = context.state.video_count;
-            var userID = videos[video_count].userID;
+            var posterId = videos[video_count].userID;
             var followed = videos[video_count].this_audience.followed;
             //POSTデータ
             var formData = new FormData();
-            formData.append('PosterId', userID);
-            formData.append('UserId', user_id);
+            formData.append('PosterId', posterId);
+            formData.append('UserId', this.state.userInfo.id);
             //コールバック転送データ
             var payload = {
                 video_count: video_count,
@@ -223,7 +242,7 @@ export default {
             //POSTデータ
             var formData = new FormData();
             formData.append('ContentId', videoID);
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //コールバック転送データ
             var payload = {
                 video_count: video_count,
@@ -305,6 +324,13 @@ export default {
                 );
             });
         },
+        refresh_follow(state, payload){
+            var isFollow = payload.data;
+            var video_count = payload.video_count;
+            state.videos[video_count].this_audience.followed = isFollow;
+            console.log(this);
+            //this.fbText = isFollow ? 'フォロー中' : 'フォローする'
+        },
         next_slide(state) {
             state.video_count++
             state.video_count %= state.videos.length
@@ -320,7 +346,7 @@ export default {
         toggle_follow(state, payload) {
             if(this.state.config.RUN_SYSTEM_MODE == this.state.config.SYSTEM_MODE_BOTH){
                 //統合モード
-                var followed = payload.followed;
+                var followed = payload.data;
                 var video_count = payload.video_count;
                 state.videos[video_count].this_audience.followed = !followed;
             } else{

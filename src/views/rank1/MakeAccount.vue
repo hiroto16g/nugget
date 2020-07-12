@@ -30,6 +30,9 @@
                 <div class="hint">
                     半角英数字で8文字以上にしてください
                 </div>
+                <div class="error-text">
+                    {{ error_texts.password }}
+                </div>
             </div>
 
             <div class="mail-address content">
@@ -189,10 +192,25 @@
                     formData.append('Password', this.$store.state.mkacc.inputs.password);
                     formData.append('Email', this.$store.state.mkacc.inputs.mail_address);
                     //入力情報送信
+                    var callback_this = this;
                     axios
-                    .post('http://localhost:8080/pre-make-account', formData)
+                    .post('http://localhost:8080/make-account-json', formData)
                     .then(function (response) {
-                        console.log(response);
+                        var error_messages = response.data;
+
+                        if(error_messages.isError == false){
+                            //成功
+                            callback_this.$router.push('thanks-mkacc')
+                        }else{
+                            //失敗
+                            var error_texts = {
+                                name: error_messages.username,
+                                password: error_messages.password,
+                                mail: error_messages.email,
+                            };
+
+                            callback_this.$store.state.mkacc.error_texts = error_texts;
+                        }
                     });
                 } else{
                     //その他   

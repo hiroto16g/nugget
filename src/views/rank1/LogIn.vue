@@ -169,13 +169,27 @@
                 }
             },
             click_submit() {
-                this.$store.commit('login/click_submit')
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    var mail_address = this.$store.state.login.inputs.mail_address
+                    var password = this.$store.state.login.inputs.password
+                    var inputs = {
+                        mail_address: mail_address,
+                        password:password,
+                    }
+                    this.$store.dispatch('login/click_submit', inputs)
+                }else{
+                    //その他
+                    this.$store.commit('login/click_submit')
+                }
             }
         },
         watch: {
             submitting(new_val) {
-                if (!new_val) {
-                    if (this.login_state.error_text) {
+                if (new_val) {
+                //if (!new_val) {
+                    //if (this.login_state.error_text) {
+                    if (this.login_state.error_text == "") {
                         this.$router.push('my-page/' + this.$store.state.userInfo.id)
                     }
                 }

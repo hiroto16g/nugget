@@ -2,9 +2,6 @@ import axios from 'axios'
 
 /* eslint-disable no-console */
 
-//仮置き
-var user_id = 'snack-pesto-clots';
-
 export default {
     namespaced: true,
 
@@ -106,7 +103,7 @@ export default {
         get_user_recommend(context, now_category){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             formData.append('Category', now_category);
             //おすすめの取得
             axios
@@ -123,7 +120,7 @@ export default {
         get_popular(context, now_category){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             formData.append('Category', now_category);
             //人気の取得
             axios
@@ -140,7 +137,7 @@ export default {
         get_rapid_rise(context, now_category){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             formData.append('Category', now_category);
             //急上昇の取得
             axios
@@ -157,7 +154,7 @@ export default {
         get_search_history(context){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //検索履歴の取得
             axios
             .post('http://localhost:8080/get-search-history', formData)

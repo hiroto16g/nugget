@@ -417,7 +417,7 @@
                     this.$store.dispatch('home/post_comment', this.comment);
                     //コメント初期化
                     this.comment = ''
-                    document.getElementsByClassName('input-comment')[0].value = ''
+                    document.getElementById('h__c__input-area__input-comment').value = ''
                 } else{
                     //その他
                     this.$store.commit('home/post_comment', this.comment)
@@ -464,9 +464,11 @@
                     this.$store.commit('home/click_thumbnail', count);
                     //視聴回数の加算
                     this.$store.dispatch('home/add_watch');
-                    //コメントの初期化
+
                     var videoID = this.$store.state.home.videos[this.$store.state.home.video_count].videoID;
+                    //コメントの初期化
                     this.$store.dispatch('home/init_comment', videoID);
+                    this.fbText = this.video.this_audience.followed ? 'フォローする' : 'フォロー中'
                 } else{
                     //その他
                 }

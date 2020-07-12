@@ -2,9 +2,6 @@ import axios from 'axios'
 
 /* eslint-disable no-console */
 
-//仮置き
-var user_id = 'snack-pesto-clots';
-
 export default {
     namespaced: true,
     
@@ -12,6 +9,7 @@ export default {
         name: 'のび太さんのエッジ',
         id: 'nobitasedge',
         bio: '「素人質問で申し訳ない」の対偶は「お灸をすえる玄人回答」',
+        image: '',
         show_content: '通知',
         notif: [
             {
@@ -75,7 +73,7 @@ export default {
         get_profile(context){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //プロフィールの取得
             axios
             .post('http://localhost:8080/my-page-profile', formData)
@@ -92,7 +90,7 @@ export default {
         switch_content(context, content_name){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
 
             var action_name;
             switch(content_name){
@@ -134,7 +132,7 @@ export default {
             //POSTデータ
             var formData = new FormData();
             formData.append('PosterId', id);
-            formData.append('UserId', user_id);
+            formData.append('UserId', this.state.userInfo.id);
             //コールバック転送データ
             var payload = {
                 following: following,
@@ -248,6 +246,7 @@ export default {
             state.id = user.userid;
             state.name = user.username;
             state.bio = user.selfintro;
+            state.image = user.icon;
         }
     }
 }
