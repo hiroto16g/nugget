@@ -145,6 +145,7 @@
                 this.$store.dispatch('trend/get_user_recommend', now_category);
                 this.$store.dispatch('trend/get_popular', now_category);
                 this.$store.dispatch('trend/get_rapid_rise', now_category);
+                this.$store.dispatch('trend/get_tags_home');
             }
         }
     }

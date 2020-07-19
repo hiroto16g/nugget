@@ -15,11 +15,11 @@ export default new Vuex.Store({
     state: {
         userInfo: {
             log_in: false,
-            name: 'のび太さんのエッジ',
-            id: 'nobitasedge',
-            image: 'https://cdn.vuetifyjs.com/images/john.jpg',
-            bio: '「素人質問で申し訳ない」の対偶は「お灸をすえる玄人回答」',
-            mail_address: 'info@nuggets.tokyo'
+            name: '',
+            id: 'system_user',
+            image: '',
+            bio: '',
+            mail_address: ''
         },
         config: {
             SYSTEM_MODE_FRONTEND: 1,

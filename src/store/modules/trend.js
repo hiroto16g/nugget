@@ -23,17 +23,21 @@ export default {
             '芸術・美術'
         ],
         choiced_tags: [
-            'テスタグ',
-            '心理学', '教育学', 'ディープラーニング', '社会学', '理学', '英語', '哲学', '経済学', '工学'
+            /*'テスタグ',
+            '心理学', '教育学', 'ディープラーニング', '社会学', '理学', '英語', '哲学', '経済学', '工学'*/
         ],
         history: [
+            /*
             '心理学', '教育学', 'ディープラーニング', '社会学', '理学', '英語', '哲学', '経済学', '工学'
+            */
         ],
         pred_words: [
+            /*
             'apple',
             'gorilla',
             'rap',
             'りんご'
+            */
         ],
         recommends: [
             {
@@ -150,6 +154,22 @@ export default {
                 context.commit('get_rapid_rise', payload);
             });
         },
+        //初期表示タグの取得
+        get_tags_home(context){
+            //POSTデータ
+            var formData = new FormData();
+            //formData.append('UserId', this.state.userInfo.id);
+            //初期表示タグの取得
+            axios
+            .post('http://localhost:8080/get-tags-home', formData)
+            .then(function (response) {
+                var payload = {
+                    data:response.data,
+                }
+                //初期表示タグのセット
+                context.commit('get_tags_home', payload);
+            });
+        },
         //検索履歴の取得
         get_search_history(context){
             //POSTデータ
@@ -227,6 +247,14 @@ export default {
                 );
             });
             state.recommends[2].thumbSrc = thumbSrc;
+        },
+        //初期表示タグのセット
+        get_tags_home(state, payload){
+            var choiced_tags = [];
+            payload.data.forEach(function(tag){
+                choiced_tags.push(tag);
+            });
+            state.choiced_tags = choiced_tags;
         },
         //検索履歴のセット
         get_search_history(state, payload){

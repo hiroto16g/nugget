@@ -48,7 +48,6 @@ export default {
                 }
             },
         ],
-        followed: false,
         comments: [
             {
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',
@@ -169,7 +168,7 @@ export default {
             axios
             .post('http://localhost:8080/refresh-follow', formData)
             .then(function (response) {
-                payload.data = response.data;
+                payload.followed = response.data;
                 //フォロー関係のセット
                 context.commit('refresh_follow', payload);
             });
@@ -325,11 +324,10 @@ export default {
             });
         },
         refresh_follow(state, payload){
-            var isFollow = payload.data;
+            var followed = payload.followed;
             var video_count = payload.video_count;
-            state.videos[video_count].this_audience.followed = isFollow;
-            console.log(this);
-            //this.fbText = isFollow ? 'フォロー中' : 'フォローする'
+            state.videos[video_count].this_audience.followed = followed;
+            this.fbText = followed ? 'フォロー中' : 'フォローする'
         },
         next_slide(state) {
             state.video_count++
@@ -346,7 +344,7 @@ export default {
         toggle_follow(state, payload) {
             if(this.state.config.RUN_SYSTEM_MODE == this.state.config.SYSTEM_MODE_BOTH){
                 //統合モード
-                var followed = payload.data;
+                var followed = payload.followed;
                 var video_count = payload.video_count;
                 state.videos[video_count].this_audience.followed = !followed;
             } else{

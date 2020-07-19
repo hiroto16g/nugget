@@ -173,6 +173,7 @@
         },
         data() {
             return {
+                id: this.$store.state.userInfo.id,
                 name: this.$store.state.userInfo.name,
                 bio: this.$store.state.userInfo.bio,
                 mail: this.$store.state.userInfo.mail_address,
@@ -187,12 +188,10 @@
                 this.$router.go(-1)
             },
             click_save() {
-                //仮置き
-                var user_id = 'snack-pesto-clots';
 
                 //POSTデータ
                 var formData = new FormData();
-                formData.append('UserId', user_id);
+                formData.append('UserId', this.id);
                 formData.append('UserName', this.name);
                 formData.append('SelfIntro', this.bio);
                 formData.append('Email', this.mail);
