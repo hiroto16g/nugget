@@ -20,10 +20,7 @@
         padding: 2px 1em;
         position: relative;
         color: #fff;
-<<<<<<< HEAD
         font-size: 1rem;
-=======
->>>>>>> 94aad8c3e66f9e53d040704ddb4cd91453fe97b7
         background-color: #5bc0de;
         border-radius: 30px;
     }
