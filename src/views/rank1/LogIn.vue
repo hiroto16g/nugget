@@ -190,6 +190,7 @@
                 //if (!new_val) {
                     //if (this.login_state.error_text) {
                     if (this.login_state.error_text == "") {
+                        this.$store.state.clicked_userID = this.$store.state.userInfo.id;
                         this.$router.push('my-page/' + this.$store.state.userInfo.id)
                     }
                 }

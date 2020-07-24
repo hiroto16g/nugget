@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div hidden>
-      {{ $route.params.id }} 
-    </div>
     <HomePC class="pc"></HomePC>
     <HomeSP class="sp"></HomeSP>
   </div>

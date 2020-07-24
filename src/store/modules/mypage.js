@@ -73,7 +73,7 @@ export default {
         get_profile(context){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', this.state.userInfo.id);
+            formData.append('UserId', this.state.clicked_userID);
             //プロフィールの取得
             axios
             .post('http://localhost:8080/my-page-profile', formData)
@@ -90,7 +90,7 @@ export default {
         switch_content(context, content_name){
             //POSTデータ
             var formData = new FormData();
-            formData.append('UserId', this.state.userInfo.id);
+            formData.append('UserId', this.state.clicked_userID);
 
             var action_name;
             switch(content_name){

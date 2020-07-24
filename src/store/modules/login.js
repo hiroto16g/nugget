@@ -56,7 +56,7 @@ export default {
                 }else{
                     //ログイン失敗
 
-                    state.submitting = true
+                    //state.submitting = true
                 }
             }else{
                 //その他
