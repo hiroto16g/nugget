@@ -108,10 +108,13 @@
             .video-and-info {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                margin: 0 auto 80px;
+                max-width: 950px;
+                justify-content: space-around;
 
                 .video-wrapper {
-                    margin: 0 5vw 80px 0;
+                    // margin: 0 5vw 80px 0;
+                    margin-bottom: 25px;
 
                     video {
                         width: 450px;
@@ -122,7 +125,6 @@
 
                 .video-info-wrapper {
                     width: 450px;
-                    height: 600px;
 
                     .title {
                         font-size: 30px;
@@ -217,7 +219,9 @@
             .thumb-and-comment {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-around;
+                max-width: 950px;
+                margin: 0 auto;
                 
                 .wrapper-name {
                     font-size: 25px;
@@ -226,7 +230,6 @@
                 
                 .thumbnail-wrapper {
                     width: 450px;
-                    margin-right: 5vw;
                     
                     .thumbnails {
                         display: flex;

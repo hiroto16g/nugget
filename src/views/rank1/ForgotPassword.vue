@@ -99,8 +99,8 @@
                 width: 500px;
 
                 .title {
-                    margin-bottom: 0.7vw;
-                    font-size: 4vw;
+                    margin-bottom: 5px;
+                    font-size: 22px;
                 }
 
                 .input {
@@ -108,36 +108,38 @@
 
                     input {
                         border: solid thin $normal-color;
-                        border-radius: 1vw;
-                        padding: 3vw 3vw 2.8vw;
-                        width: calc(100% - 3vw * 2);
-                        font-size: 4.5vw;
+                        border-radius: 5px;
+                        padding: 15px 15px 10px;
+                        width: calc(500px - 15px * 2);
+                        font-size: 22px;
                     }
 
                     .td-button {
-                        font-size: 3.5vw;
+                        font-size: 18px;
                         position: absolute;
-                        top: 0.5vw;
-                        right: 3vw;
+                        top: 15px;
+                        right: 10px;
                         color: $normal-color;
-                        padding: 3vw 0;
+                        cursor: pointer;
                     }
                 }
 
                 .error-text {
-                    font-size: 3.2vw;
-                    margin-top: 1vw;
+                    font-size: 16px;
+                    margin-top: 8px;
                     color: $attention-color;
                 }
             }
 
             .submit {
                 text-align: center;
-                margin-top: 20vw;
 
                 .text-button {
-                    padding: 3vw 10vw;
-                    border-radius: 7vw;
+                    font-size: 22px;
+                    padding: 14px 30px 10px;
+                    border-radius: 30px;
+                    margin: 80px 0 50px;
+                    background: $normal-color;
 
                     &.with-color {
                         color: #fbfbfb;
@@ -145,7 +147,6 @@
                 }
             }
         }
-
     }
 </style>
 

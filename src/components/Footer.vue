@@ -88,7 +88,7 @@
                         name: 'トレンド'
                     },
                     {
-                        url: this.$store.state.userInfo.log_in ? '/my-page/' + this.$store.state.userInfo.id : 'not-log-in',
+                        url: this.$store.state.userInfo.log_in ? '/my-page/' + this.$store.state.userInfo.id : '/not-log-in',
                         icon: 'mdi-account',
                         name: 'マイページ'
                     }

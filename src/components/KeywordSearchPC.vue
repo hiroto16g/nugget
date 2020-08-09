@@ -1,21 +1,21 @@
 <template>
     <div class="keyword-search-pc" v-show="is_display">
         <div class="keyword-search">
-            <input class="ksp__input" type="ksp__search" placeholder="キーワードで検索" @keyup="keyup_input" @focus="focus_input" @blur.prevent="blur_input">
+            <input class="ksp__input" type="ksp__search" placeholder="キーワードで検索" @keyup="keyup_input" @focus="focus_input" @blur="blur_input">
             <div class="search-btn" @click="click_search_btn">
                 検索
             </div>
         </div>
         <div class="modal" :class="{'show-modal': show_modal}">
             <div class="pred" v-if="$store.state.trend.keywords">
-                <div class="word" v-for="(word, i) in $store.state.trend.pred_words" :key="i" @click="click_word(word)">
+                <div class="word" v-for="(word, i) in $store.state.trend.pred_words" :key="i" @click="click_word(word)" @mousedown="mousedown_word(word)">
                     {{ word }}
                 </div>
             </div>
             <div class="history" v-else>
                 検索履歴
                 <div class="words">
-                    <div class="word" v-for="(word, i) in $store.state.trend.history" :key="i" @click.stop="click_word(word)">
+                    <div class="word" v-for="(word, i) in $store.state.trend.history" :key="i" @mousedown="mousedown_word(word)">
                         {{ word }}
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                 
                 .history {
                     .words {
-                        margin: 10px 16px;
+                        margin: 10px 5px;
                         line-height: 1.8;
                     }
                 }
@@ -95,6 +95,11 @@
                 
                 .word {
                     cursor: pointer;
+                    padding: 3px 11px;
+
+                    &:hover {
+                        background: #eee;
+                    }
                 }
             }
         }
@@ -123,6 +128,10 @@
                     return false
                 } else if (path === '/not-log-in') {
                     return false
+                } else if (path === '/forgot-password') {
+                    return false
+                } else if (path === '/new-password') {
+                    return false
                 } else {
                     return true
                 }
@@ -131,9 +140,8 @@
         methods: {
             keyup_input() {
                 this.$store.commit('trend/input_keywords', document.getElementsByClassName('ksp__input')[0].value)
-                console.log(this.$store.state.trend.keywords)
             },
-            click_word(word) {
+            mousedown_word(word) {
                 this.$store.commit('trend/search_by_tag', word)
                 this.$router.push('tagged-screen')
             },
@@ -150,7 +158,14 @@
                 this.$router.go('/tagged-screen')
             }
         },
-
+        watch: {
+            '$route': function(to, from) {
+                if (to.path != from.path) {
+                    document.getElementsByClassName('ksp__input')[0].value = ''
+                    this.blur_input()
+                }
+            }
+        }
     }
 
 </script>
