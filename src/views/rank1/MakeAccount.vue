@@ -140,7 +140,82 @@
     }
 
     @media screen and (min-width: 768px) {
+        .make-account {
+            color: $normal-color;
 
+            .top {
+                background: white;
+                padding-left: 50px;
+                font-size: 25px;
+            }
+
+            .contents {
+                margin: 100px auto 0;
+                width: 500px;
+
+                .content {
+                    margin-top: 50px;
+
+                    .title {
+                        margin-bottom: 5px;
+                        font-size: 22px;
+                    }
+
+                    .input {
+                        position: relative;
+
+                        input {
+                            border: solid thin $normal-color;
+                            border-radius: 5px;
+                            padding: 15px 15px 10px;
+                            width: calc(500px - 15px * 2);
+                            font-size: 22px;
+                        }
+
+                        .td-button {
+                            font-size: 18px;
+                            position: absolute;
+                            top: 15px;
+                            right: 10px;
+                            color: $normal-color;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .hint {
+                        font-size: 16px;
+                        margin-top: 8px;
+                        color: $light-color;
+                    }
+
+                    .error-text {
+                        font-size: 16px;
+                        margin-top: 8px;
+                        color: $attention-color;
+                    }
+                }
+            }
+
+            .note {
+                font-size: 20px;
+                padding: 80px 0;
+                text-align: center;
+            }
+
+            .submit {
+                text-align: center;
+
+                .text-button {
+                    font-size: 22px;
+                    padding: 14px 30px 10px;
+                    border-radius: 5px;
+
+                    &.with-color {
+                        color: #fbfbfb;
+                    }
+                }
+            }
+        }
     }
 
 </style>

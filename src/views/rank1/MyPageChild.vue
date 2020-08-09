@@ -4,7 +4,7 @@
             <div class="top">
                 <AvatarImage :src="$store.state.mypage.image"></AvatarImage>
                 <router-link to="/edit-profile" v-show="this_is_me">
-                    <TextButton name="プロフィールを変更"></TextButton>
+                    プロフィールを変更
                 </router-link>
             </div>
             <div class="middle">
@@ -500,14 +500,12 @@
 
 <script>
     import AvatarImage from '@/components/AvatarImage.vue'
-    import TextButton from '@/components/TextButton.vue'
 //    import IconButton from '@/components/IconButton.vue'
     import Thumbnail from '@/components/Thumbnail.vue'
 
     export default {
         components: {
             AvatarImage,
-            TextButton,
 //            IconButton,
             Thumbnail
         },

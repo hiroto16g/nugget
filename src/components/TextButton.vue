@@ -26,7 +26,22 @@
     }
 
     @media screen and (min-width: 768px) {
+        .text-button {
+            text-align: center;
+            display: inline-block;
+            border: solid thin #ccc;
+            border-radius: 5px;
+            letter-spacing: 0.08em;
 
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.with-color {
+                border: none;
+                background-color: #ffc814;
+            }
+        }
     }
     
 </style>

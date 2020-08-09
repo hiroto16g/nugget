@@ -29,6 +29,10 @@
         #router-view {
             padding: 47px 3vw 0 calc(8vw + 93px);
         }
+        
+        a {
+            cursor: pointer;
+        }
     }
 
     @media screen and (max-width: 767px) {

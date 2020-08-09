@@ -1,5 +1,5 @@
 <template>
-    <div class="keyword-search-pc">
+    <div class="keyword-search-pc" v-show="is_display">
         <div class="keyword-search">
             <input class="ksp__input" type="ksp__search" placeholder="キーワードで検索" @keyup="keyup_input" @focus="focus_input" @blur.prevent="blur_input">
             <div class="search-btn" @click="click_search_btn">
@@ -108,6 +108,24 @@
         data() {
             return {
                 show_modal: false
+            }
+        },
+        computed: {
+            is_display() {
+                const path = this.$route.path;
+                if (path === '/make-account') {
+                    return false
+                } else if (path === '/log-in') {
+                    return false
+                } else if (path === '/thanks-mkacc') {
+                    return false
+                } else if (path === '/edit-profile') {
+                    return false
+                } else if (path === '/not-log-in') {
+                    return false
+                } else {
+                    return true
+                }
             }
         },
         methods: {

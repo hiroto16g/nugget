@@ -44,18 +44,18 @@ export default {
                 head: 'おすすめ',
                 thumbSrc: [
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                        title: 'ここにはスライドのタイトルが入ります',
+                        src: require('@/assets/thumbs/sonshi.jpg'),
+                        title: '孫氏はぶっちゃけどこがすごい！？',
                         videoID: '',
                     },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                        title: 'ここにはスライドのタイトルが入ります',
+                        src: require('../../assets/thumbs/yousho.png'),
+                        title: '幼少期の自然体験と科学への関心',
                         videoID: '',
                     },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
-                        title: 'ここにはスライドのタイトルが入ります',
+                        src: require('../../assets/thumbs/saigo.jpg'),
+                        title: '教えて！西郷さん',
                         videoID: '',
                     },
                 ]
@@ -64,17 +64,17 @@ export default {
                 head: '人気',
                 thumbSrc: [
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
+                        src: require('../../assets/thumbs/flow.png'),
                         title: 'ここにはスライドのタイトルが入ります',
                         videoID: '',
                      },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
+                        src: require('../../assets/thumbs/shizensu.png'),
                         title: 'ここにはスライドのタイトルが入ります',
                         videoID: '',
                     },
                     {
-                        src: 'https://cdn.vuetifyjs.com/images/cards/store.jpg',
+                        src: require('../../assets/thumbs/napo.jpg'),
                         title: 'ここにはスライドのタイトルが入ります',
                         videoID: '',
                     },

@@ -18,7 +18,7 @@
         
         <div class="mail-check text">
             <div class="main">
-                <span class="top">届いたメールを確認して<br></span>
+                <span class="top">届いたメールを確認して</span><br>
                 <span class="bottom">サクッと知識を身につけましょう！</span>
             </div>
             <div class="resend help" @click="click_resend">
@@ -79,6 +79,56 @@
     }
 
     @media screen and (min-width: 768px) {
+        .thanks-make-account {
+            text-align: center;
+            line-height: 1.7;
+            letter-spacing: 0.08em;
+            color: $normal-color;
+
+            .welcome {
+                font-size: 30px;
+                margin-top: 100px;
+
+                .name span {
+                    font-size: 20px;
+                }
+            }
+
+            .text {
+                font-size: 20px;
+                margin-top: 20px;
+
+                .help {
+                    font-size: 16px;
+                    margin-top: 20px;
+                    color: $light-color;
+                    border-bottom: solid thin $border;
+                    display: inline-block;
+                    text-decoration: none;
+                }
+            }
+
+            .mail-check {
+                margin-top: 50px;
+                
+                .main span {
+                    background: $brand-color;
+                    display: inline-block;
+                    font-size: 22px;
+
+                    &.top {
+                        padding: 15px 30px 8px;
+                        border-radius: 8px 8px 3px 3px;
+                    }
+
+                    &.bottom {
+                        padding: 15px 30px 14px;
+                        border-radius: 8px;
+                        margin-bottom: 20px;
+                    }
+                }
+            }   
+        }
 
     }
 </style>
