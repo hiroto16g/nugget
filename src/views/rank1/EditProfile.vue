@@ -172,6 +172,7 @@
             InputImage,
         },
         data() {
+            console.log(this.$store.state.userInfo);
             return {
                 id: this.$store.state.userInfo.id,
                 name: this.$store.state.userInfo.name,
