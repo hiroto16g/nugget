@@ -38,7 +38,8 @@ export default {
         click_submit(state,payload) {
             if(this.state.config.RUN_SYSTEM_MODE == this.state.config.SYSTEM_MODE_BOTH){
                 //統合モード
-                var user = payload.data;
+                var user = payload.data.user;
+                var message = payload.data.message;
                 if(user != null){
                     //ログイン成功
 
@@ -55,9 +56,9 @@ export default {
                     state.submitting = true
                 }else{
                     //ログイン失敗
-
                     //state.submitting = true
                 }
+                this.error_text = message;
             }else{
                 //その他
                 state.submitting = true
