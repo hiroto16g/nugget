@@ -2,7 +2,7 @@
     <div class="home-pc container">
         <div class="video-and-info">
             <div class="video-wrapper">
-                <video :src="video.src"></video>
+                <video :src="video.src" controls playsinline webkit-playsinline></video>
             </div>
 
             <div class="video-info-wrapper">
@@ -21,8 +21,9 @@
                         {{ video.name }}
                     </router-link>
                     <TextButton :class="{'with-color': !video.this_audience.followed}" @tbClick='click_follow' :name="fbText"></TextButton>
+                    <PromoteLoginModal v-show="show_follow_modal" do_text="このユーザーをフォロー"></PromoteLoginModal>
                 </div>
-                <div class="video-detail" :class="{show: show_detail}">
+                <div class="video-detail" v-show="show_detail">
                     <div class="video-category">
                         カテゴリー：
                         <span class="category-link" @click="click_c_link(video.category)">
@@ -83,6 +84,24 @@
 
 <style lang="scss">
     @media screen and (min-width: 768px) {
+        @keyframes rotate_0_180 {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+        
+        @keyframes rotate_180_0 {
+            0% {
+                transform: rotate(180deg);
+            }
+            100% {
+                transform: rotate(0);
+            }
+        }
+        
         .home-pc {
             margin: 0 20px;
 
@@ -116,6 +135,13 @@
                             position: absolute;
                             right: -45px;
                             top: 0;
+                            cursor: pointer;
+                            animation: rotate_180_0 0.3s;
+                            
+                            &.rotate {
+                                transform: rotate(180deg);
+                                animation: rotate_0_180 0.3s;
+                            }
                         }
                     }
                     
@@ -158,6 +184,7 @@
                             span {
                                 border-bottom: solid thin $light-color;
                                 color: $light-color;
+                                cursor: pointer;
                             }
                         }
                         
@@ -179,6 +206,7 @@
                                     align-items: center;
                                     color: $normal-color;
                                     margin-right: 5px;
+                                    cursor: pointer;
                                 }
                             }
                         }
@@ -287,6 +315,7 @@
     import TextButton from '@/components/TextButton.vue'
     import AvatarImage from '@/components/AvatarImage.vue'
     import Thumbnail from '@/components/Thumbnail.vue'
+    import PromoteLoginModal from '@/components/PromoteLoginModal.vue'
 
     export default {
         name: 'home_sp',
@@ -295,6 +324,7 @@
             TextButton,
             AvatarImage,
             Thumbnail,
+            PromoteLoginModal
         },
         data() {
             return {
@@ -312,7 +342,8 @@
                 },
                 fbText: 'フォローする',
                 comment: '',
-                show_detail: false
+                show_detail: false,
+                show_follow_modal: false
             }
         },
         computed: {
@@ -329,6 +360,8 @@
                 if (this.$store.state.userInfo.log_in) {
                     this.$store.commit('home/toggle_follow')
                     this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
+                } else {
+                    this.show_follow_modal = !this.show_follow_modal
                 }
             },
             keyup_comment() {

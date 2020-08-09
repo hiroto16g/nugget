@@ -35,6 +35,7 @@
             display: flex;
             align-items: center;
             color: $normal-color;
+            cursor: pointer;
         }
     }
 </style>
