@@ -94,11 +94,6 @@
                 text-align: center;
                 font-size: 3.2vw;
                 color: $attention-color;
-                display: none;
-
-                &.error {
-                    display: block;
-                }
             }
 
             .submit {

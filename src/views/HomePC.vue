@@ -21,7 +21,7 @@
                         {{ video.name }}
                     </router-link>
                     <TextButton :class="{'with-color': !video.this_audience.followed}" @tbClick='click_follow' :name="fbText"></TextButton>
-                    <PromoteLoginModal v-show="show_follow_modal" do_text="このユーザーをフォロー"></PromoteLoginModal>
+                    <PromoteLoginModal v-show="show_follow_modal" do_text="このユーザーをフォロー" @click_PLM_close="toggle_SFM"></PromoteLoginModal>
                 </div>
                 <div class="video-detail" v-show="show_detail">
                     <div class="video-category">
@@ -361,7 +361,7 @@
                     this.$store.commit('home/toggle_follow')
                     this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
                 } else {
-                    this.show_follow_modal = !this.show_follow_modal
+                    this.toggle_SFM();
                 }
             },
             keyup_comment() {
@@ -388,6 +388,9 @@
             click_c_link(category) {
                 this.$router.push('trend')
                 this.$store.commit('trend/switch_category', category)
+            },
+            toggle_SFM() {
+                this.show_follow_modal = !this.show_follow_modal
             }
         }
     }

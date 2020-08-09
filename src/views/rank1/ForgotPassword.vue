@@ -85,6 +85,66 @@
     }
 
     @media screen and (min-width: 768px) {
+        .forgot-password {
+            color: $normal-color;
+
+            .top {
+                background: white;
+                padding-left: 50px;
+                font-size: 25px;
+            }
+
+            .content {
+                margin: 100px auto 0;
+                width: 500px;
+
+                .title {
+                    margin-bottom: 0.7vw;
+                    font-size: 4vw;
+                }
+
+                .input {
+                    position: relative;
+
+                    input {
+                        border: solid thin $normal-color;
+                        border-radius: 1vw;
+                        padding: 3vw 3vw 2.8vw;
+                        width: calc(100% - 3vw * 2);
+                        font-size: 4.5vw;
+                    }
+
+                    .td-button {
+                        font-size: 3.5vw;
+                        position: absolute;
+                        top: 0.5vw;
+                        right: 3vw;
+                        color: $normal-color;
+                        padding: 3vw 0;
+                    }
+                }
+
+                .error-text {
+                    font-size: 3.2vw;
+                    margin-top: 1vw;
+                    color: $attention-color;
+                }
+            }
+
+            .submit {
+                text-align: center;
+                margin-top: 20vw;
+
+                .text-button {
+                    padding: 3vw 10vw;
+                    border-radius: 7vw;
+
+                    &.with-color {
+                        color: #fbfbfb;
+                    }
+                }
+            }
+        }
 
     }
 </style>

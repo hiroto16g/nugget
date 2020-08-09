@@ -1,7 +1,7 @@
 <template>
     <div class="promote-login-modal">
         <div class="modal">
-            <div class="modal__close"></div>
+            <div class="modal__close" @click="click_close"></div>
             <img src="" alt="" class="modal__illustration">
             <div class="modal__main">
                 <div class="m__main__explain">
@@ -47,15 +47,16 @@
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
+                    cursor: pointer;
 
                     &::after, &::before {
                         content: '';
                         position: absolute;
-                        width: 25px;
+                        width: 21px;
                         height: 2px;
                         background: white;
-                        top: 25px;
-                        right: 15px;
+                        top: 17px;
+                        right: 7px;
                     }
                     
                     &::after {
@@ -80,9 +81,9 @@
                     
                     .m__main__btns {
                         a {
-                            width: 300px;
+                            width: 250px;
                             border-radius: 30px;
-                            font-size: 20px;
+                            font-size: 18px;
                             padding: 10px 0;
                             text-align: center;
                             display: block;
@@ -114,6 +115,11 @@ export default {
             require: true,
             default: '',
             type: String
+        }
+    },
+    methods: {
+        click_close() {
+            this.$emit('click_PLM_close')
         }
     }
 }
