@@ -48,7 +48,7 @@ export default {
                         name: user.username,
                         id: user.userid,
                         image: user.icon,
-                        bio: user.selfIntro,
+                        bio: user.selfintro,
                         mail_address: user.email,
                     };
                     this.state.userInfo = userInfo;
@@ -58,7 +58,7 @@ export default {
                     //ログイン失敗
                     //state.submitting = true
                 }
-                this.error_text = message;
+                state.error_text = message;
             }else{
                 //その他
                 state.submitting = true
