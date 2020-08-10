@@ -73,7 +73,6 @@ export default {
         get_profile(context){
             //POSTデータ
             var formData = new FormData();
-            console.log(this.state.clicked_userID);
             formData.append('UserId', this.state.clicked_userID);
             //プロフィールの取得
             axios

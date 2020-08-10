@@ -559,8 +559,8 @@
         created() {
             if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
                 //統合モード
-                //this.$store.dispatch('mypage/get_profile');
-                //this.$store.dispatch('mypage/switch_content', "通知")
+                this.$store.dispatch('mypage/get_profile');
+                this.$store.dispatch('mypage/switch_content', "通知")
             }else{
                 //その他
                 this.$store.commit('mypage/switch_content', this.contents[0])
@@ -575,13 +575,6 @@
             }
             */
         },
-        beforeRouteUpdate () {
-           if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
-                //統合モード
-                this.$store.dispatch('mypage/get_profile');
-                this.$store.dispatch('mypage/switch_content', "通知")
-            }
-        }
     }
 
 </script>
