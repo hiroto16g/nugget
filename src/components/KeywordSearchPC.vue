@@ -43,6 +43,7 @@
                     color: $normal-color;
                     border-radius: 5px;
                     width: 400px;
+                    margin: 0;
 
                     ::placeholder {
                         font-size: 15px;
