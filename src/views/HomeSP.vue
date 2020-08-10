@@ -61,7 +61,7 @@
                 コメント：{{ video.n_comments }}
             </div>
             <div class="input-area" v-show="$store.state.userInfo.log_in">
-                <AvatarImage></AvatarImage>
+                <AvatarImage :src="$store.state.userInfo.image"></AvatarImage>
                 <textarea class="input-comment" id="h__c__input-area__input-comment" placeholder="コメントを投稿" @keyup="keyup_comment"></textarea>
                 <IconButton :class="{'can-send': comment}" icon="mdi-send" @click.native="post_comment"></IconButton>
             </div>

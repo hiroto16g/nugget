@@ -49,7 +49,7 @@
                 <div class="wrapper-name">おすすめ</div>
                 <div class="thumbnails">
                     <div v-for="(t, i) in $store.state.home.recommend_thumbs" :key="i" class="item">
-                        <Thumbnail :src="t.src" :title="t.title"></Thumbnail>
+                        <Thumbnail :src="t.src" :title="t.title" @click.native="click_thumbnail(t.count)"></Thumbnail>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     コメント：{{ video.n_comments }}
                 </div>
                 <div class="input-area" v-show="$store.state.userInfo.log_in">
-                    <AvatarImage></AvatarImage>
+                    <AvatarImage :src="$store.state.userInfo.image"></AvatarImage>
                     <textarea class="input-comment" placeholder="コメントを投稿" @keyup="keyup_comment"></textarea>
                     <IconButton :class="{'can-send': comment}" icon="mdi-send" @click.native="post_comment"></IconButton>
                 </div>
@@ -360,6 +360,22 @@
         },
         methods: {
             click_follow() {
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.dispatch('home/toggle_follow');
+                        this.fbText = this.video.this_audience.followed ? 'フォローする' : 'フォロー中'
+                    }
+                } else{
+                    //その他
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.commit('home/toggle_follow')
+                        this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
+                    }
+                }
+            },
+            /*
+            click_follow() {
                 if (this.$store.state.userInfo.log_in) {
                     this.$store.commit('home/toggle_follow')
                     this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
@@ -367,17 +383,50 @@
                     this.toggle_SFM();
                 }
             },
+            */
             keyup_comment() {
                 this.comment = document.getElementsByClassName('input-comment')[0].value
             },
+            post_comment() {
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    this.$store.dispatch('home/post_comment', this.comment);
+                    //コメント初期化
+                    this.comment = ''
+                    document.getElementById('h__c__input-area__input-comment').value = ''
+                } else{
+                    //その他
+                    this.$store.commit('home/post_comment', this.comment)
+                    this.comment = ''
+                    document.getElementById('h__c__input-area__input-comment').value = ''
+                    document.getElementsByClassName('input-comment')[0].value = ''
+                }
+            },
+            /*
             post_comment() {
                 this.$store.commit('home/post_comment', this.comment)
                 this.comment = ''
                 document.getElementsByClassName('input-comment')[0].value = ''
             },
+            */
+           click_like() {
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.dispatch('home/click_like');
+                    }
+                } else{
+                    //その他
+                    if (this.$store.state.userInfo.log_in) {
+                        this.$store.commit('home/click_like');
+                    }
+                }
+            },
+            /*
             click_like() {
                 this.$store.commit('home/click_like')
             },
+            */
             click_user(userID) {
                 this.$store.commit('click_user', userID)
             },
@@ -394,6 +443,25 @@
             },
             toggle_SFM() {
                 this.show_follow_modal = !this.show_follow_modal
+            },
+            click_thumbnail(count){
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+
+                    //表示動画の指定
+                    this.$store.commit('home/click_thumbnail', count);
+                    //視聴回数の加算
+                    this.$store.dispatch('home/add_watch');
+
+                    var videoID = this.$store.state.home.videos[this.$store.state.home.video_count].videoID;
+                    //コメントの初期化
+                    this.$store.dispatch('home/init_comment', videoID);
+                    if (this.$store.state.userInfo.log_in) {
+                        this.fbText = this.video.this_audience.followed ? 'フォローする' : 'フォロー中'
+                    }
+                } else{
+                    //その他
+                }
             }
         }
     }
