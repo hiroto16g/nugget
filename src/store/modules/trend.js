@@ -111,7 +111,7 @@ export default {
             formData.append('Category', now_category);
             //おすすめの取得
             axios
-            .post('http://localhost:8080/get-user-recommend', formData)
+            .post(this.state.config.SECOND_SERVER + '/get-user-recommend', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -128,7 +128,7 @@ export default {
             formData.append('Category', now_category);
             //人気の取得
             axios
-            .post('http://localhost:8080/get-popular', formData)
+            .post(this.state.config.SECOND_SERVER + '/get-popular', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -145,7 +145,7 @@ export default {
             formData.append('Category', now_category);
             //急上昇の取得
             axios
-            .post('http://localhost:8080/get-rapid-rise', formData)
+            .post(this.state.config.SECOND_SERVER + '/get-rapid-rise', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -161,7 +161,7 @@ export default {
             //formData.append('UserId', this.state.userInfo.id);
             //初期表示タグの取得
             axios
-            .post('http://localhost:8080/get-tags-home', formData)
+            .post(this.state.config.SECOND_SERVER + '/get-tags-home', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -177,7 +177,7 @@ export default {
             formData.append('UserId', this.state.userInfo.id);
             //検索履歴の取得
             axios
-            .post('http://localhost:8080/get-search-history', formData)
+            .post(this.state.config.SECOND_SERVER + '/get-search-history', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -194,7 +194,7 @@ export default {
             formData.append('Filter', 0);
             //予想タグの取得
             axios
-            .post('http://localhost:8080/search-tag', formData)
+            .post(this.state.config.SECOND_SERVER + '/search-tag', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,

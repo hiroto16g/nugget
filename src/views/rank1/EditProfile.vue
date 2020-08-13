@@ -200,7 +200,7 @@
                 var self = this;
                 //プロフィールの変更
                 axios
-                .post('http://localhost:8080/change-profile-json', formData)
+                .post(this.state.config.SECOND_SERVER + '/change-profile-json', formData)
                 .then(function (response) {
                     console.log(response);
                     

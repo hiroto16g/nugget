@@ -76,7 +76,7 @@ export default {
             formData.append('UserId', this.state.clicked_userID);
             //プロフィールの取得
             axios
-            .post('http://localhost:8080/my-page-profile', formData)
+            .post(this.state.config.SECOND_SERVER + '/my-page-profile', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -95,27 +95,27 @@ export default {
             var action_name;
             switch(content_name){
                 case "通知":
-                    action_name = "my-page-news";
+                    action_name = "/my-page-news";
                     break;
                 case "投稿":
-                    action_name = "my-page-post-content-list";
+                    action_name = "/my-page-post-content-list";
                     break;
                 case "ナルホド":
-                    action_name = "my-page-genius-content-list";
+                    action_name = "/my-page-genius-content-list";
                     break;
                 case "履歴":
-                    action_name = "my-page-watch-content-list";
+                    action_name = "/my-page-watch-content-list";
                     break;
                 case "フォロー中":
-                    action_name = "my-page-follow";
+                    action_name = "/my-page-follow";
                     break;
                 case "フォロワー":
-                    action_name = "my-page-follower";
+                    action_name = "/my-page-follower";
                     break;
             }
             //詳細の取得
             axios
-            .post('http://localhost:8080/'+action_name, formData)
+            .post(this.state.config.SECOND_SERVER + action_name, formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -141,13 +141,13 @@ export default {
 
             if(following){
                 axios
-                .post('http://localhost:8080/cancel-follow-json', formData)
+                .post(this.state.config.SECOND_SERVER + '/cancel-follow-json', formData)
                 .then(function(){
                     context.commit('toggle_follow', payload);
                 });
             }else{
                 axios
-                .post('http://localhost:8080/follow-json', formData)
+                .post(this.state.config.SECOND_SERVER + '/follow-json', formData)
                 .then(function(){
                     context.commit('toggle_follow', payload);
                 });

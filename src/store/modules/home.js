@@ -86,7 +86,7 @@ export default {
             formData.append('UserId', this.state.userInfo.id);
             //動画の取得
             axios
-            .post('http://localhost:8080/watch-content-json', formData)
+            .post(this.state.config.SECOND_SERVER + '/watch-content-json', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -104,7 +104,7 @@ export default {
             formData.append('UserId', this.state.userInfo.id);
             //動画のID取得
             axios
-            .post('http://localhost:8080/watch-random-content-json', formData)
+            .post(this.state.config.SECOND_SERVER + '/watch-random-content-json', formData)
             .then(function (response) {
                 var videoID = response.data;
                 //動画の取得
@@ -121,7 +121,7 @@ export default {
             formData.append('UserId', this.state.userInfo.id);
             //コメントの取得
             axios
-            .post('http://localhost:8080/get-comments', formData)
+            .post(this.state.config.SECOND_SERVER + '/get-comments', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -144,7 +144,7 @@ export default {
             formData.append("Text", comment);
             //コメントの取得
             axios
-            .post('http://localhost:8080/post-comment', formData)
+            .post(this.state.config.SECOND_SERVER + '/post-comment', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -166,7 +166,7 @@ export default {
             }
             //フォロー関係の取得
             axios
-            .post('http://localhost:8080/refresh-follow', formData)
+            .post(this.state.config.SECOND_SERVER + '/refresh-follow', formData)
             .then(function (response) {
                 payload.followed = response.data;
                 //フォロー関係のセット
@@ -191,13 +191,13 @@ export default {
 
             if(liked){
                 axios
-                .post('http://localhost:8080/remove-genius', formData)
+                .post(this.state.config.SECOND_SERVER + '/remove-genius', formData)
                 .then(function(){
                     context.commit('click_like', payload);
                 });
             }else{
                 axios
-                .post('http://localhost:8080/add-genius', formData)
+                .post(this.state.config.SECOND_SERVER + '/add-genius', formData)
                 .then(function(){
                     context.commit('click_like', payload);
                 });
@@ -221,13 +221,13 @@ export default {
 
             if(followed){
                 axios
-                .post('http://localhost:8080/cancel-follow-json', formData)
+                .post(this.state.config.SECOND_SERVER + '/cancel-follow-json', formData)
                 .then(function(){
                     context.commit('toggle_follow', payload);
                 });
             }else{
                 axios
-                .post('http://localhost:8080/follow-json', formData)
+                .post(this.state.config.SECOND_SERVER + '/follow-json', formData)
                 .then(function(){
                     context.commit('toggle_follow', payload);
                 });
@@ -248,7 +248,7 @@ export default {
             }
             //加算
             axios
-                .post('http://localhost:8080/add-watch', formData)
+                .post(this.state.config.SECOND_SERVER + '/add-watch', formData)
                 .then(function(){
                     context.commit('add_watch', payload);
                 });

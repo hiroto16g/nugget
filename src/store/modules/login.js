@@ -23,7 +23,7 @@ export default {
             formData.append('Password', inputs.password);
             //ログイン
             axios
-            .post('http://localhost:8080/login-json', formData)
+            .post(this.state.config.SECOND_SERVER + '/login-json', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,

@@ -269,7 +269,7 @@
                     //入力情報送信
                     var callback_this = this;
                     axios
-                    .post('http://localhost:8080/make-account-json', formData)
+                    .post(this.state.config.SECOND_SERVER + '/make-account-json', formData)
                     .then(function (response) {
                         var error_messages = response.data;
 

@@ -25,6 +25,7 @@ export default new Vuex.Store({
             SYSTEM_MODE_FRONTEND: 1,
             SYSTEM_MODE_BOTH: 2,
             RUN_SYSTEM_MODE: 2,
+            SECOND_SERVER: "http://localhost:8081",
         },
         clicked_userID: ''
     },

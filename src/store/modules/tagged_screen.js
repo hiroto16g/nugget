@@ -61,7 +61,7 @@ export default {
             formData.append('Tag', tag);
             //タグ検索
             axios
-            .post('http://localhost:8080/search-by-tag', formData)
+            .post(this.state.config.SECOND_SERVER + '/search-by-tag', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
@@ -78,7 +78,7 @@ export default {
             formData.append('UserId', user_id);
             //検索結果の取得
             axios
-            .post('http://localhost:8080/search-content-json', formData)
+            .post(this.state.config.SECOND_SERVER + '/search-content-json', formData)
             .then(function (response) {
                 var payload = {
                     data:response.data,
