@@ -14,12 +14,12 @@
                     再生回数：{{ video.n_views }} 回
                 </div>
                 <div class="account-info">
-                    <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)">
+                    <div @click="click_user(video.userID)" class="btn">
                         <AvatarImage :src="video.image"></AvatarImage>
-                    </router-link>
-                    <router-link :to="'/my-page/' + video.userID" @click.native="click_user(video.userID)" class="account-name">
+                    </div>
+                    <div @click="click_user(video.userID)" class="account-name btn">
                         {{ video.name }}
-                    </router-link>
+                    </div>
                     <TextButton :class="{'with-color': !video.this_audience.followed}" @tbClick='click_follow' :name="fbText"></TextButton>
                     <PromoteLoginModal v-show="show_follow_modal" do_text="このユーザーをフォロー" @click_PLM_close="toggle_SFM"></PromoteLoginModal>
                 </div>
@@ -65,14 +65,14 @@
                 </div>
                 <div class="comment" v-for="(c, i) in comments" :key="i">
                     <div class="left">
-                        <router-link :to="'/my-page/' + c.id" @click.native="click_user(c.id)">
+                        <div @click="click_user(c.id)" class="btn">
                             <AvatarImage :src="c.image"></AvatarImage>
-                        </router-link>
+                        </div>
                     </div>
                     <div class="right">
-                        <router-link :to="'/my-page/' + c.id" @click.native="click_user(c.id)">
+                        <div @click="click_user(c.id)" class="btn">
                             <div class="commentator">{{ c.name }}</div>
-                        </router-link>
+                        </div>
                         <div class="text">{{ c.comment }}</div>
                     </div>
                 </div>
@@ -104,6 +104,10 @@
         
         .home-pc {
             margin: 0 20px;
+            
+            .btn {
+                cursor: pointer;
+            }
 
             .video-and-info {
                 display: flex;
@@ -429,6 +433,7 @@
             */
             click_user(userID) {
                 this.$store.commit('click_user', userID)
+                this.$router.push('/my-page/' + userID)
             },
             click_detail_btn() {
                 this.show_detail = !this.show_detail

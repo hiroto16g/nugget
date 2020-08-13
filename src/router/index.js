@@ -12,6 +12,7 @@ import TaggedScreen from '../views/rank1/TaggedScreen.vue'
 import MyPageChild from '../views/rank1/MyPageChild.vue'
 import ThanksMakeAccount from '../views/rank1/ThanksMakeAccount.vue'
 import ForgotPassword from '../views/rank1/ForgotPassword.vue'
+import NewPassword from '../views/NewPassword.vue'
 
 Vue.use(VueRouter)
 
@@ -79,6 +80,11 @@ const routes = [
         component: ForgotPassword,
         path: '/forgot-password',
         name: 'forgot-password'
+    },
+    {
+        component: NewPassword,
+        path: '/new-password',
+        name: 'new-password'
     }
 ]
 
