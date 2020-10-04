@@ -135,6 +135,7 @@
 
 
 <script>
+    import axios from 'axios'
     export default {
         computed: {
             user_info() {
@@ -143,7 +144,23 @@
         },
         methods: {
             click_resend() {
-                alert('メールを送信しました！\n届かない場合はメールアドレスや迷惑設定を確認してください')
+                if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){
+                    //統合モード
+                    //POSTデータ
+
+                    var formData = new FormData();
+                    formData.append('Email', this.user_info.mail_address);
+                    formData.append('UserName', this.user_info.name);
+                    //プロフィールの変更
+                    axios
+                    .post(this.$store.state.config.SECOND_SERVER + '/respend-email-create-user', formData)
+                    .then(function () {
+                         alert('メールを送信しました！\n届かない場合はメールアドレスや迷惑設定を確認してください')
+                    });
+                }else{
+                    //その他
+                    alert('メールを送信しました！\n届かない場合はメールアドレスや迷惑設定を確認してください')
+                }
             }
         }
     }

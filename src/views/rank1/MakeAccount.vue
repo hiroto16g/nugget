@@ -10,7 +10,7 @@
                     表示名
                 </div>
                 <div class="input">
-                    <input type="text" class="ep__name" @keyup="keyup_name">
+                    <input type="text" class="ep__name" @keyup="keyup_name" v-model="$store.state.mkacc.inputs.name">
                 </div>
                 <div class="error-text">
                     {{ error_texts.name }}
@@ -270,7 +270,7 @@
                     //入力情報送信
                     var callback_this = this;
                     axios
-                    .post(this.state.config.SECOND_SERVER + '/make-account-json', formData)
+                    .post(this.$store.state.config.SECOND_SERVER + '/make-account-json', formData)
                     .then(function (response) {
                         var error_messages = response.data;
 

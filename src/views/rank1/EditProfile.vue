@@ -17,10 +17,10 @@
                     <div class="user-image">
                         <AvatarImage :src="icon.src"></AvatarImage>
                     </div>
-                    <div class="input">
-<!--                        <input type="file">-->
-                        <InputImage @iiChange="onFileChange"></InputImage>
-                    </div>
+                </div>
+                <div class="content">
+                    <!--<input type="file">-->
+                    <InputImage @iiChange="onFileChange"></InputImage>
                 </div>
                 <div class="content">
                     <input class="name" type="text" @keyup="keyup_name" :value="name">
@@ -173,7 +173,6 @@
             InputImage,
         },
         data() {
-            console.log(this.$store.state.userInfo);
             return {
                 id: this.$store.state.userInfo.id,
                 name: this.$store.state.userInfo.name,
@@ -201,9 +200,8 @@
                 var self = this;
                 //プロフィールの変更
                 axios
-                .post(this.state.config.SECOND_SERVER + '/change-profile-json', formData)
-                .then(function (response) {
-                    console.log(response);
+                .post(this.$store.state.config.SECOND_SERVER + '/change-profile-json', formData)
+                .then(function (/* response */) {
                     
                     self.$store.state.userInfo.name = self.name
                     self.$store.state.userInfo.bio = self.bio

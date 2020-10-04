@@ -12,7 +12,10 @@
 
 <style lang="scss">
     .imgContent{
-        margin-top:10px;
+        margin-top:0;
+        padding-top:0;
+        margin-bottom:2.5rem;
+        text-align:center;
     }
     .originalFileBtn {
         border: 2px solid;
