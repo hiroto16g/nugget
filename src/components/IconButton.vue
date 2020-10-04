@@ -37,7 +37,9 @@
     }
 
     @media screen and (min-width: 768px) {
-
+        .icon-button {
+            cursor: pointer;
+        }
     }
     
 </style>

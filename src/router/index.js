@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MyPage from '../views/MyPage.vue'
+import UploadVideo from '../views/UploadVideo.vue'
 import NotLogIn from '../views/NotLogIn.vue'
 import ErrorPage from '../views/ErrorPage.vue'
 
@@ -40,6 +41,11 @@ const routes = [
                 component: MyPageChild
             }
         ]
+    },
+    {
+        path: '/upload-video',
+        name: 'upload-video',
+        component: UploadVideo
     },
     {
         path: '/not-log-in',

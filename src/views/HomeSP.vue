@@ -1,5 +1,6 @@
 <template>
     <div class="home-sp container">
+        <PromoteLoginModal v-show="show_PLM" :do_text="PLM_do_text" @click_PLM_close="toggle_show_PLM"></PromoteLoginModal>
         <div class="slide-wrapper">
             <VideoShow :src="video.src"></VideoShow>
             <div class="icon-wrapper">
@@ -348,6 +349,7 @@
     import AvatarImage from '@/components/AvatarImage.vue'
     import Thumbnail from '@/components/Thumbnail.vue'
     import VideoShow from '@/components/VideoShow.vue'
+    import PromoteLoginModal from '@/components/PromoteLoginModal.vue'
 
     export default {
         name: 'home_sp',
@@ -356,7 +358,8 @@
             TextButton,
             AvatarImage,
             Thumbnail,
-            VideoShow
+            VideoShow,
+            PromoteLoginModal
         },
         data() {
             return {
@@ -375,6 +378,8 @@
                 fbText: 'フォローする',
                 comment: '',
                 show_detail: false,
+                show_PLM: false,
+                PLM_do_text: ''
             }
         },
         computed: {
@@ -392,13 +397,19 @@
                     //統合モード
                     if (this.$store.state.userInfo.log_in) {
                         this.$store.dispatch('home/toggle_follow');
-                        this.fbText = this.video.this_audience.followed ? 'フォローする' : 'フォロー中'
+                        this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
+                    } else {
+                        this.PLM_do_text = 'このユーザーをフォロー'
+                        this.toggle_show_PLM();
                     }
                 } else{
                     //その他
                     if (this.$store.state.userInfo.log_in) {
                         this.$store.commit('home/toggle_follow')
                         this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
+                    } else {
+                        this.PLM_do_text = 'このユーザーをフォロー'
+                        this.toggle_show_PLM();
                     }
                 }
             },
@@ -436,11 +447,22 @@
                     //統合モード
                     if (this.$store.state.userInfo.log_in) {
                         this.$store.dispatch('home/click_like');
+                    } else {
+                        this.PLM_do_text = 'この動画にナルホド'
+                        this.toggle_show_PLM();
                     }
                 } else{
                     //その他
+                    /*
                     if (this.$store.state.userInfo.log_in) {
                         this.$store.commit('home/click_like');
+                    }
+                    */
+                    if (this.$store.state.userInfo.log_in) {
+                    this.$store.commit('home/click_like')
+                    } else {
+                        this.PLM_do_text = 'この動画にナルホド'
+                        this.toggle_show_PLM();
                     }
                 }
             },
@@ -477,6 +499,9 @@
                 } else{
                     //その他
                 }
+            },
+            toggle_show_PLM() {
+                this.show_PLM = !this.show_PLM
             }
         }
     }

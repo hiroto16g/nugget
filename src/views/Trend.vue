@@ -19,7 +19,7 @@
         .trend {
             .search-wrapper {
                 padding-top: 5vw;
-                background-color: #FAFAFA;
+                background-color: $tabbar;
 
                 .head {
                     display: flex;

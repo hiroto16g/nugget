@@ -1,9 +1,11 @@
 <template>
     <div id="footer">
-        <div class="link" v-for="(i, j) in icons" :key="j" @[get_event(i)]="click_mypage">
-            <router-link :to="i.url">
-                <IconButton :icon="i.icon" :name="i.name"></IconButton>
-            </router-link>
+        <div class="wrapper">
+            <div class="link" v-for="(i, j) in icons" :key="j" @[get_event(i)]="click_mypage">
+                <router-link :to="i.url">
+                    <IconButton :icon="i.icon" :name="i.name"></IconButton>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -11,41 +13,47 @@
 
 <style lang="scss">
     #footer {
-        width: 100%;
-        background-color: #fafafa;
+        width: 100vw;
+        
+        background-color: $tabbar;
         position: fixed;
         bottom: 0;
         border-top: solid thin #ccc;
         text-align: center;
-
-        .link {
-            display: contents;
-        }
-
-        a {
-            margin: 0 2.8vw;
-            font-weight: bold;
-            color: $light-color;
-            text-decoration: none;
-
-            &.router-link-exact-active {
-                .icon-button {
-                    .mdi {
-                        color: $normal-color;
-                    }
-                    
-                    .text {
-                        color: $normal-color;
-                    }
-                }
+        
+        .wrapper {
+            display: flex;
+            justify-content: space-evenly;
+/*            margin: 0 10vw;*/
+            
+            .link {
+                display: contents;
             }
 
-            .icon-button {
+            a {
+                font-weight: bold;
+                color: $light-color;
+                text-decoration: none;
                 width: 20vw;
-                font-size: 2.5vw;
 
-                .mdi {
-                    margin-bottom: -1.2vw;
+                &.router-link-exact-active {
+                    .icon-button {
+                        .mdi {
+                            color: $normal-color;
+                        }
+
+                        .text {
+                            color: $normal-color;
+                        }
+                    }
+                }
+
+                .icon-button {
+                    font-size: 2.5vw;
+
+                    .mdi {
+                        margin-bottom: -1.2vw;
+                    }
                 }
             }
         }
@@ -87,6 +95,11 @@
                         icon: 'mdi-magnify',
                         name: 'トレンド'
                     },
+//                    {
+//                        url: '/upload-video',
+//                        icon: 'mdi-plus-circle-outline',
+//                        name: '投稿'
+//                    },
                     {
                         url: this.$store.state.userInfo.log_in ? '/my-page/' + this.$store.state.userInfo.id : '/not-log-in',
                         icon: 'mdi-account',

@@ -7,7 +7,7 @@
                 </div>
             </div>
         </div>
-        <div class="tag-wrapper sp" v-if="$store.state.trend.now_category === 'おすすめ'">
+        <div class="tag-wrapper" v-if="$store.state.trend.now_category === 'おすすめ'">
             <div class="wrapper-name">
                 タグ
             </div>
@@ -42,6 +42,12 @@
                 overflow-x: scroll;
                 display: flex;
                 background: $tabbar;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                
+                &::-webkit-scrollbar {
+                    display: none;
+                }
 
                 .category {
                     display: inline-block;
@@ -101,6 +107,8 @@
                 font-size: 18px;
                 padding: 0 30px 0 30px;
                 margin-top: 43px;
+                position: absolute;
+                left: calc(8vw + 103px);
                 
                 .item {
                     padding: 5px 15px;
@@ -116,17 +124,44 @@
                     }
                 }
             }
+
+            .tag-wrapper {
+                margin: 0 auto 30px;
+                width: calc(65vw - 150px);
+                max-width: 900px;
+
+                .wrapper-name {
+                    margin-bottom: 10px;
+                    color: $normal-color;
+                    font-size: 20px;
+                }
+
+                .tags {
+                    margin: 0 10px 0 15px;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .tag {
+                        margin: 0 5px 10px 0;
+                        display: inline-block;
+                            
+                        a {
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+            }
             
             .thumbnail-wrapper {
-                position: absolute;
-                top: 98px;
-                left: calc(8vw + 300px);
                 width: calc(65vw - 150px);
                 max-width: 900px;
                 color: $normal-color;
+                margin: auto;
                 
                 .recommend-name {
-                    font-size: 18px;
+                    font-size: 20px;
+                    margin-bottom: 10px;
                 }
                 
                 .thumbnails {

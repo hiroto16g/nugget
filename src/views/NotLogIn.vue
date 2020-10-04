@@ -46,6 +46,7 @@
                     margin: 5vw auto 0;
                     color: $normal-color;
                     border-radius: 7vw;
+                    font-size: 3.6vw;
 
                     &.with-color {
                         color: white;

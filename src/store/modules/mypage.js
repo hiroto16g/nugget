@@ -15,24 +15,28 @@ export default {
             {
                 image: "https://cdn.vuetifyjs.com/images/john.jpg",
                 name: '食べられそうなラー油',
+                id: 'rayu',
                 date: '2020/3/16(月)',
                 content: '辛そうで辛くない、ちょっと辛いコメント'
             },
             {
                 image: "https://cdn.vuetifyjs.com/images/john.jpg",
                 name: '食べられそうなラー油',
+                id: 'rayu',
                 date: '2020/3/16(月)',
                 content: '辛そうで辛くない、ちょっと辛いコメント'
             },
             {
                 image: "https://cdn.vuetifyjs.com/images/john.jpg",
                 name: '食べられそうなラー油',
+                id: 'rayu',
                 date: '2020/3/16(月)',
                 content: '辛そうで辛くない、ちょっと辛いコメント'
             },
             {
                 image: "https://cdn.vuetifyjs.com/images/john.jpg",
                 name: '食べられそうなラー油',
+                id: 'rayu',
                 date: '2020/3/16(月)',
                 content: '辛そうで辛くない、ちょっと辛いコメント'
             },
@@ -55,14 +59,14 @@ export default {
             {
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 name: '生き様辣油の如し',
-                id: '@rayu',
+                id: 'rayu',
                 bio: '花粉のように舞い、カプサイシンのように刺す',
                 following: false
             },
             {
                 image: 'https://cdn.vuetifyjs.com/images/john.jpg',
                 name: '生き様辣油の如し',
-                id: '@rayu',
+                id: 'rayu',
                 bio: '花粉のように舞い、カプサイシンのように刺す',
                 following: false
             }

@@ -1,8 +1,14 @@
 <template>
     <div class="home-pc container">
+        <PromoteLoginModal v-show="show_PLM" :do_text="PLM_do_text" @click_PLM_close="toggle_show_PLM"></PromoteLoginModal>
         <div class="video-and-info">
             <div class="video-wrapper">
                 <video :src="video.src" controls playsinline webkit-playsinline></video>
+                <div class="icon-wrapper">
+                    <IconButton class="like" :icon="icons.like.icon" :value="video.n_likes" @ib_click="click_like" :class="{'with-color': video.this_audience.liked}"></IconButton>
+                    <!--                <IconButton class="comment" :icon="icons.comments.icon" :value="video.n_comments"></IconButton>-->
+                    <IconButton class="share" :icon="icons.share.icon" :name="icons.share.name"></IconButton>
+                </div>
             </div>
 
             <div class="video-info-wrapper">
@@ -21,7 +27,6 @@
                         {{ video.name }}
                     </div>
                     <TextButton :class="{'with-color': !video.this_audience.followed}" @tbClick='click_follow' :name="fbText"></TextButton>
-                    <PromoteLoginModal v-show="show_follow_modal" do_text="このユーザーをフォロー" @click_PLM_close="toggle_SFM"></PromoteLoginModal>
                 </div>
                 <div class="video-detail" v-show="show_detail">
                     <div class="video-category">
@@ -125,6 +130,33 @@
                         height: 600px;
                         object-fit: cover;
                     }
+                    
+                    .icon-wrapper {
+                        font-size: 16px;
+                        margin: 10px 0 0;
+                        color: $light-color;
+                        display: flex;
+                        text-align: center;
+                        justify-content: space-around;
+
+                        .icon-button {
+                            width: 50px;
+                            vertical-align: top;
+                            
+                            .mdi {
+                                font-size: 40px;
+                            }
+                            
+                            &.share .mdi {
+                                margin-bottom: -4px;
+                                display: block;
+                            }
+                            
+                            &.with-color .mdi {
+                                color: $brand-color;
+                            }
+                        }
+                    }
                 }
 
                 .video-info-wrapper {
@@ -136,6 +168,7 @@
                         width: 400px;
                         line-height: 1.2;
                         margin-bottom: 5px;
+                        color: $normal-color;
                         
                         .detail-btn {
                             position: absolute;
@@ -172,13 +205,18 @@
 
                         .text-button {
                             margin-left: auto;
-                            background: $brand-color;
+                            background: white;
                             border-radius: 5px;
-                            color: white;
+                            color: $normal-color;
                             align-self: center;
                             padding: 6px 0 5px;
                             text-align: center;
                             width: 140px;
+                            
+                            &.with-color {
+                                background: $brand-color;
+                                color: white;
+                            }
                         }
                     }
                     
@@ -230,6 +268,7 @@
                 .wrapper-name {
                     font-size: 25px;
                     margin-bottom: 10px;
+                    color: $normal-color;
                 }
                 
                 .thumbnail-wrapper {
@@ -350,7 +389,8 @@
                 fbText: 'フォローする',
                 comment: '',
                 show_detail: false,
-                show_follow_modal: false
+                show_PLM: false,
+                PLM_do_text: ''
             }
         },
         computed: {
@@ -384,7 +424,8 @@
                     this.$store.commit('home/toggle_follow')
                     this.fbText = this.video.this_audience.followed ? 'フォロー中' : 'フォローする'
                 } else {
-                    this.toggle_SFM();
+                    this.PLM_do_text = 'このユーザーをフォロー'
+                    this.toggle_show_PLM();
                 }
             },
             */
@@ -428,7 +469,12 @@
             },
             /*
             click_like() {
-                this.$store.commit('home/click_like')
+                if (this.$store.state.userInfo.log_in) {
+                    this.$store.commit('home/click_like')
+                } else {
+                    this.PLM_do_text = 'この動画にナルホド'
+                    this.toggle_show_PLM();
+                }
             },
             */
             click_user(userID) {
@@ -448,6 +494,9 @@
             },
             toggle_SFM() {
                 this.show_follow_modal = !this.show_follow_modal
+            },
+            toggle_show_PLM() {
+                this.show_PLM = !this.show_PLM
             },
             click_thumbnail(count){
                 if(this.$store.state.config.RUN_SYSTEM_MODE == this.$store.state.config.SYSTEM_MODE_BOTH){

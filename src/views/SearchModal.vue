@@ -27,6 +27,7 @@
 <style lang="scss">
     @media screen and (max-width: 767px) {
         .search-modal {
+            
             .history-wrapper {
                 margin-top: 8vw;
 

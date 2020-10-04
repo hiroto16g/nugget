@@ -2,7 +2,7 @@
     <div class="promote-login-modal">
         <div class="modal">
             <div class="modal__close" @click="click_close"></div>
-            <img src="" alt="" class="modal__illustration">
+            <img src="@/assets/gold.png" alt="" class="modal__illustration">
             <div class="modal__main">
                 <div class="m__main__explain">
                     アカウントを作ると、{{ do_text }}できます！
@@ -22,14 +22,100 @@
 
 
 <style lang="scss">
-    @media screen and (min-width: 768px) {
+    @media screen and (max-width: 767px) {
         .promote-login-modal {
             background: rgba(0, 0, 0, 0.2);
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+            z-index: 99999;
+
+            .modal {
+                background: white;
+                width: 90vw;
+                margin: 20vh auto 0;
+                color: $normal-color;
+                position: relative;
+                border-radius: 5px;
+
+                .modal__close {
+                    position: absolute;
+                    background: rgba(0, 0, 0, 0.4);
+                    right: 3vw;
+                    top: 2vw;
+                    width: 8vw;
+                    height: 8vw;
+                    border-radius: 50%;
+                    cursor: pointer;
+
+                    &::after, &::before {
+                        content: '';
+                        position: absolute;
+                        width: 5vw;
+                        height: 0.5vw;
+                        background: white;
+                        top: 47%;
+                        left: 20%;
+                    }
+
+                    &::after {
+                        transform: rotate(45deg);
+                    }
+
+                    &::before {
+                        transform: rotate(-45deg);
+                    }
+                }
+
+                .modal__illustration {
+                    width: 100%;
+                }
+
+                .modal__main {
+                    padding: 3vw 5vw 1vw;
+
+                    .m__main__explain {
+                        font-size: 4vw;
+                    }
+
+                    .m__main__btns {
+                        a {
+                            width: 50vw;
+                            border-radius: 10vw;
+                            font-size: 3.6vw;
+                            padding: 2.5vw 0;
+                            text-align: center;
+                            display: block;
+                            margin: 5vw auto;
+                            text-decoration: none;
+
+                            &.make-acc {
+                                background: $brand-color;
+                                color: white;
+                            }
+
+                            &.log-in {
+                                border: solid thin $light-color;
+                                color: $normal-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and (min-width: 767px) {
+        .promote-login-modal {
+            background: rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
             
             .modal {
                 background: white;
@@ -41,7 +127,7 @@
                 
                 .modal__close {
                     position: absolute;
-                    background: rgba(0, 0, 0, 0.2);
+                    background: rgba(0, 0, 0, 0.4);
                     right: 2px;
                     top: 2px;
                     width: 35px;
